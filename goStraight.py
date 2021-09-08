@@ -1,4 +1,5 @@
 from time import sleep
+import math
 
 import ARLO.robot
 
@@ -8,13 +9,13 @@ arlo = ARLO.robot.Robot()
 print("Running ...")
 
 # send a go_diff command to drive forward
-leftSpeed = 100
+leftSpeed = math.floor(100 * 0.97)
 rightSpeed = 100
 
 
 # Go straight
 print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-sleep(3)
+sleep(0.803)
 
 print(arlo.stop())
 
