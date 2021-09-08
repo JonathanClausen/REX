@@ -3,7 +3,7 @@ from time import sleep
 import ARLO.robot
 
 # Create a robot object and initialize
-arlo = robot.Robot()
+arlo = ARLO.robot.Robot()
 
 print("Running ...")
 
