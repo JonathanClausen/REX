@@ -14,7 +14,7 @@ def Circle(r,outerSpeed):
 
     innerSpeed = inner / 0.622 * outerTime
 
-    print(arlo.go_diff(outerSpeed, math.floor(innerSpeed * 0.97), 1, 1))
+    print(arlo.go_diff(math.floor(outerSpeed * 0.97), innerSpeed, 1, 1))
 
 
 Circle(50,100)
