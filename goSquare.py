@@ -21,8 +21,10 @@ for x in range(4):
 # turn
     print(arlo.stop())
     sleep(0.5)
+
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
     sleep(0.392)
+    
     print(arlo.stop())
     sleep(0.5)
 
