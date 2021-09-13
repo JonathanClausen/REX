@@ -9,22 +9,24 @@ arlo = ARLO.robot.Robot()
 print("Running ...")
 
 # send a go_diff command to drive forward
-leftSpeed = math.floor(100 * 0.97)
-rightSpeed = 100
+leftSpeed = math.floor(64 * 0.97)
+rightSpeed = 64
 
 for x in range(4):
 
 # Go straight
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-    sleep(1.55)
+    sleep(2)
+
 
 # turn
     print(arlo.stop())
     sleep(0.5)
 
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
-    sleep(0.392)
-    
+#    sleep(0.396) with speed 100
+#    sleep(0.755) with continout turning
+    sleep(0.727)
     print(arlo.stop())
     sleep(0.5)
 
