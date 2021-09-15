@@ -23,5 +23,6 @@ while (sensFront > goalDist):
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
     sleep((((sensFront - goalDist)/1000)*0.66)*secMeter)
     arlo.stop()
+    sleep(0.5)
 
 arlo.stop()
