@@ -27,6 +27,7 @@ right45Clear = False
 safeFrontDist = 500
 safeSideDist = 200
 
+#Updating distance variables 
 def update_dists():
     global frontDist
     global rightDist
@@ -36,6 +37,7 @@ def update_dists():
     rightDist = arlo.read_right_ping_sensor()
     leftDist= arlo.read_left_ping_sensor()
 
+# Checking we are to close - Thus we have to change direction
 def dists_safe():
     global left45Clear
     global right45Clear
