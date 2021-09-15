@@ -22,7 +22,7 @@ sensLeft      = 0
 sensRight     = 0
 emergencyStop = False
 
-sensInterval = 0.08
+sensInterval = 0.01
 leftSpeed = math.floor(64 * 0.97)
 rightSpeed = 64
 lock = Lock()
@@ -59,10 +59,10 @@ go = True
 
 while go:
     lock.acquire()
-    print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-    lock.release()
-    sleep(0.01)
-    lock.acquire()
+    arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
+#    lock.release()
+#    sleep(0.01)
+#    lock.acquire()
     go = not emergencyStop
     lock.release()
 
