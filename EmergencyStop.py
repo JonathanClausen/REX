@@ -28,7 +28,7 @@ rightSpeed = 64
 emLock = Lock()
 roboLock = Lock()
 
-def measure(emLock, roboLock):
+def measure(roboLock, emLock):
     measure = True
     while measure:
         global sensFront
@@ -57,7 +57,7 @@ def measure(emLock, roboLock):
     return
 
 
-measureThread = Thread(target=measure, args=(roboLock,emLock))
+measureThread = Thread(target=measure, args=(roboLock, emLock,))
 measureThread.start()
 
 
