@@ -29,18 +29,21 @@ lock = Lock()
 
 def measure(lock):
     measure = True
-    while(measure):
+    while measure:
         global sensFront
         global sensLeft
         global sensRight
         global emergencyStop
-        safeDist = 1000
+        safeDist = 300
+        safeDistSide = 150
         # kontinuerte målinger her
         lock.acquire()
         sensFront = arlo.read_front_ping_sensor()
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
-        if (sensFront < safeDist or sensLeft < safeDist or sensRight < safeDist):
+        if (sensFront < safeDist or
+            sensLeft < safeDistSide or
+            sensRight < safeDistSide):
             emergencyStop = True
             measure = False
         lock.release()
@@ -58,7 +61,7 @@ while go:
     lock.acquire()
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
     lock.release()
-    sleep(0.1)
+    sleep(0.01)
     lock.acquire()
     go = not emergencyStop
     lock.release()
