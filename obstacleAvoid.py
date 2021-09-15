@@ -62,26 +62,21 @@ def turn_x_degree(x, r):
     sleeptime = 0.005555 * x
     print(arlo.go_diff(leftSpeed, rightSpeed, leftDir, rightDir))
     sleep(sleeptime)
-    
 
-def obstacle(): 
-    print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
+def obstacle():
     update_dists()
     dists_safe()
     while(not(frontClear)):
         if (right45Clear or left45Clear):
-            arlo.stop()
             if (right45Clear):
                 turn_x_degree(10, 0)
-                print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
             else: 
                 turn_x_degree(10, 1)
-                print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
         else:
             turn_x_degree(90,0)
-            print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
         update_dists()
         dists_safe()
+    arlo.stop()
                 
                 
            
