@@ -6,28 +6,29 @@ arlo = robot.Robot()
 from threading import Thread, Lock
 import math
 
-
-
-# kør ligeud hvis der ikke er nogen forhindringer
-# hvis forhindring kontroler om der er plads til højre og venstre
-# 45 grader drejning til ledig retning
-# 90 grader drej for at se om man kan komme tilbage på kurs
-#   hvis ja kør frem til den linje du var på
-#   hvis nej drej 45 grader tilbage for at fortsætte i ny akse
-# hvis der ikke er ledigt hverken hæjre eller venstre så drejning 90 grader og kontrol af fri bane
-
 # changable
 sensFront     = 0
 sensLeft      = 0
 sensRight     = 0
 emergencyStop = False
 
-sensInterval = 0.001
-leftSpeed = math.floor(64 * 0.97)
-rightSpeed = 64
-emLock = Lock()
-roboLock = Lock()
+# static
+secMeter      = 2.55
+leftSpeed     = math.floor(64 * 0.97)
+rightSpeed    = 64
+sensInterval  = 0.01
 
+safeDist      = 300
+safeDistSide  = 150
+
+stopDist      = 500
+stopDistSide  = 200
+
+emLock        = Lock()
+roboLock      = Lock()
+
+
+# thread for Emergency logic
 def measure(roboLock, emLock):
     measure = True
     while measure:
@@ -35,8 +36,8 @@ def measure(roboLock, emLock):
         global sensLeft
         global sensRight
         global emergencyStop
-        safeDist = 300
-        safeDistSide = 150
+        global safeDist
+        global safeDistSide
         # kontinuerte målinger her
         roboLock.acquire()
         sensFront = arlo.read_front_ping_sensor()
@@ -60,15 +61,19 @@ def measure(roboLock, emLock):
 measureThread = Thread(target=measure, args=(roboLock, emLock,))
 measureThread.start()
 
+goDist = 0
 
-go = True
 roboLock.acquire()
-print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-roboLock.release()
-while go:
-    emLock.acquire()
-    go = not emergencyStop
-    emLock.release()
+while (not emergencyStop
+       and sensFront > stopDist
+       and sensLeft > stopDistSide
+       and sensRight > stopDistSide
+       and goDist < 0.1):
+    print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
+    goDist = (((sensFront - stopDist)/1000)*0.66)*secMeter
+    roboLock.release()
+    sleep(0.1)
+
 
 roboLock.acquire()
 print(arlo.stop())
