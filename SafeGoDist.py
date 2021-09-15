@@ -18,10 +18,12 @@ rightSpeed = 64
 goalDist = 500
 
 sensFront = arlo.read_front_ping_sensor()
-while (sensFront > goalDist):
+while (sensFront > goalDist+5):
     sensFront = arlo.read_front_ping_sensor()
+    print(sensFront)
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-    sleep((((sensFront - goalDist)/1000)*0.66)*secMeter)
+    goDist = (((sensFront - goalDist)/1000)*0.66)*secMeter
+    sleep(goDist)
     arlo.stop()
     sleep(0.5)
 
