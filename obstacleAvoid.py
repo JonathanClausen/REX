@@ -77,7 +77,9 @@ def obstacle():
         update_dists()
         dists_safe()
     arlo.stop()
-                
-                
-           
-            
+                       
+while(True):
+    arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
+    sleep(0.1)
+    if arlo.read_front_ping_sensor() < 500 or arlo.read_right_ping_sensor() < 200 or arlo.read_left_ping_sensor() < 200:
+        obstacle()
