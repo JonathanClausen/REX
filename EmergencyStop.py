@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
-#!/usr/bin/env python3
-
 from time import sleep
-import robot
+import ARLO.robot as robot
 arlo = robot.Robot()
 from threading import Thread, Lock
 import math
@@ -24,7 +22,7 @@ sensLeft      = 0
 sensRight     = 0
 emergencyStop = False
 
-sensInterval = 0.1
+sensInterval = 0.08
 leftSpeed = math.floor(64 * 0.97)
 rightSpeed = 64
 lock = Lock()
@@ -39,16 +37,18 @@ def measure(lock):
         # kontinuerte målinger her
         lock.acquire()
         sensFront = arlo.read_front_ping_sensor()
-        sensLeft = arlo.read_back_ping_sensor()
+        sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
+        print(sensFront)
         if (sensFront < safeDist or sensLeft < safeDist or sensRight < safeDist):
+            print("loop", sensFront)
             emergencyStop = True
         lock.release()
         sleep(sensInterval)
     return
 
 
-measureThread = Thread(target=measure, args=(lock))
+measureThread = Thread(target=measure, args=(lock,))
 measureThread.start()
 
 
@@ -60,9 +60,11 @@ go = True
 while go:
     # køre logik her
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-    sleep(0.2)
+    sleep(0.1)
     lock.acquire()
-    go = emergencyStop
+    go = arlo.read_front_ping_sensor() > 500
+    print("es ", emergencyStop)
     lock.release()
 
 print(arlo.stop())
+measureThread.join()
