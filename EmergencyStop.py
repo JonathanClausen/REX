@@ -28,7 +28,8 @@ rightSpeed = 64
 lock = Lock()
 
 def measure(lock):
-    while(True):
+    measure = True
+    while(measure):
         global sensFront
         global sensLeft
         global sensRight
@@ -39,10 +40,9 @@ def measure(lock):
         sensFront = arlo.read_front_ping_sensor()
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
-        print(sensFront)
         if (sensFront < safeDist or sensLeft < safeDist or sensRight < safeDist):
-            print("loop", sensFront)
             emergencyStop = True
+            measure = False
         lock.release()
         sleep(sensInterval)
     return
@@ -52,18 +52,15 @@ measureThread = Thread(target=measure, args=(lock,))
 measureThread.start()
 
 
-
-
-
 go = True
 
 while go:
-    # køre logik her
+    lock.acquire()
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
+    lock.release()
     sleep(0.1)
     lock.acquire()
-    go = arlo.read_front_ping_sensor() > 500
-    print("es ", emergencyStop)
+    go = not emergencyStop
     lock.release()
 
 print(arlo.stop())
