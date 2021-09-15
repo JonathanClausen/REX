@@ -12,9 +12,6 @@ print("Running ...")
 leftSpeed = math.floor(64 * 0.97)
 rightSpeed = 64
 
-# Distance before it start to inch closer
-awareDist = 300
-
 # Loop here
 frontDist = arlo.read_front_ping_sensor()
 rightDist = arlo.read_right_ping_sensor()
@@ -59,6 +56,7 @@ def dists_safe():
 def turn_x_degree(x, r):
     rightDir = r
     leftDir = 1 - rightDir
+    # 0.2 in time is good for small changes
     sleeptime = 0.005555 * x
     print(sleeptime)
     print(arlo.go_diff(leftSpeed, rightSpeed, leftDir, rightDir))

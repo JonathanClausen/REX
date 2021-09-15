@@ -25,8 +25,9 @@ for x in range(4):
 
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
 #    sleep(0.396) with speed 100
+#    sleep(0.727) at low battery with speed 64
 #    sleep(0.755) with continout turning
-    sleep(0.727)
+    sleep(0.396)
     print(arlo.stop())
     sleep(0.5)
 
