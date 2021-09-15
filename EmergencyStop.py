@@ -22,7 +22,7 @@ sensLeft      = 0
 sensRight     = 0
 emergencyStop = False
 
-sensInterval = 0.01
+sensInterval = 0.001
 leftSpeed = math.floor(64 * 0.97)
 rightSpeed = 64
 emLock = Lock()
