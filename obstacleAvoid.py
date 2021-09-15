@@ -58,11 +58,10 @@ def turn_x_degree(x, r):
     leftDir = 1 - rightDir
     # 0.2 in time is good for small changes
     sleeptime = 0.005555 * x
-    print(sleeptime)
     print(arlo.go_diff(leftSpeed, rightSpeed, leftDir, rightDir))
-    sleep(sleeptime)
+    sleep(0.2)
     arlo.stop()
-    sleep(0.02)
+    sleep(0.2)
 
 def obstacle():
     update_dists()
