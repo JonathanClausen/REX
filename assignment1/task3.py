@@ -95,9 +95,9 @@ def make_Uni_plot(k, title):
     plt.show()
 
 
-make_Uni_plot(20, "20 partickels, Uniform distribution")
-make_Uni_plot(100, "100 partickels, uniform distribution")
-make_Uni_plot(1000, "1000 partickels, Uniform distribution")
+make_Uni_plot(20, "20 particles, Uniform distribution")
+make_Uni_plot(100, "100 particles, uniform distribution")
+make_Uni_plot(1000, "1000 particles, Uniform distribution")
 
 # ----------------
 #   END Plotting spgørgsmål 1
@@ -133,6 +133,6 @@ def make_norm_plot(k, title):
 # ----------------
 #   MAIN
 # ----------------
-make_norm_plot(20, "20 partickels, normal distributed")
-make_norm_plot(100, "100 partickels, normal distributed")
-make_norm_plot(1000, "1000 partickels, normal distributed")
+make_norm_plot(20, "20 particles, normal distributed")
+make_norm_plot(100, "100 particles, normal distributed")
+make_norm_plot(1000, "1000 particles, normal distributed")
