@@ -80,17 +80,24 @@ def make_Uni_plot(k, title):
     res = uni_Sampler(k, proposal)
     #Plotting
     plt.figure(1)
+
+    #Plotting the histograms
     ax1 = plt.subplot(211)
     plt.hist(proposal, label='Uniform distribution', color='red')
-    plt.hist(res, label='Nye samples', color='blue')
+    plt.hist(res, label='New samples', color='blue')
     plt.legend()
     plt.title(title)
+
+    #Plotting the graph
     plt.subplot(212, sharex=ax1)
     y = np.zeros(100)
     x = np.linspace(0,15,100)
     for i in range(100):
         y[i] = p(x[i])
-    plt.plot(x,y, label='Robottens potentielle position')
+    plt.plot(x,y, label='The robots potential position')
+    for i in range(100):
+        y[i] = 1/16
+    plt.plot(x,y, label='The robots pose according to prior')
     plt.legend()
     plt.show()
 
@@ -114,15 +121,18 @@ def make_norm_plot(k, title):
     plt.figure(1)
     ax1 = plt.subplot(211)
     plt.hist(proposal, label='Normal distribution', color='red')
-    plt.hist(res, label='Nye samples', color='blue')
+    plt.hist(res, label='New samples', color='blue')
     plt.legend()
     plt.title(title)
     plt.subplot(212, sharex=ax1)
     y = np.zeros(100) 
     x = np.linspace(-10,20,100)
     for i in range(100):
+        y[i] = p(x[i])
+    plt.plot(x,y, label='The Robots potential position')
+    for i in range(100):
         y[i] = n(x[i], 5, 4) 
-    plt.plot(x,y, label='Robottens potentielle position')
+    plt.plot(x,y, label='The robots pose according to prior')
     plt.legend()
     plt.show()
 
