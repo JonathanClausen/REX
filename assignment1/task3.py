@@ -72,7 +72,7 @@ def norm_Sampler(k, proposal):
 # ----------------
 
 # ----------------
-#   Plotting spgørgsmål 1
+#   Plotting spørgsmål 1
 # ----------------
 def make_Uni_plot(k, title):
     #Selecting positions from the uniform distribution
@@ -100,11 +100,11 @@ make_Uni_plot(100, "100 particles, uniform distribution")
 make_Uni_plot(1000, "1000 particles, Uniform distribution")
 
 # ----------------
-#   END Plotting spgørgsmål 1
+#   END Plotting spørgsmål 1
 # ----------------
 
 # ----------------
-#   Plotting spgørgsmål 2
+#   Plotting spørgsmål 2
 # ----------------
 def make_norm_plot(k, title):
     #Selecting positions from normal distribution
