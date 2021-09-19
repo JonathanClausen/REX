@@ -27,10 +27,10 @@ def cum_Normalize(w, k):
 def sampler(k, proposal):
     w   = np.zeros(k)
     res = np.zeros(k)
-    
+
     #Importance
     for i in range(k):
-        w[i] = p(proposal[i])/q(i)  
+        w[i] = p(proposal[i])/q(i)
     w_norm = cum_Normalize(w, k)
 
     #Resampling
@@ -44,7 +44,7 @@ def sampler(k, proposal):
     return res
 
 ##################Plotting Spørgsmål 1#######################
-def make_Uni_plot(k):
+def make_Uni_plot(k, title):
     #Selecting positions from the uniform distribution
     proposal = np.random.uniform(low=0.0, high=15.0, size = k)
     res = sampler(k, proposal)
@@ -54,21 +54,23 @@ def make_Uni_plot(k):
     plt.hist(proposal, label='Uniform distribution', color='red')
     plt.hist(res, label='Nye samples', color='blue')
     plt.legend()
+    plt.title(title)
     plt.subplot(212, sharex=ax1)
-    y = np.zeros(100) 
+    y = np.zeros(100)
     x = np.linspace(0,15,100)
     for i in range(100):
-        y[i] = p(x[i]) 
+        y[i] = p(x[i])
     plt.plot(x,y, label='Robottens potentielle position')
     plt.legend()
     plt.show()
 
-make_Uni_plot(20)
-make_Uni_plot(100)
-make_Uni_plot(1000)
+
+make_Uni_plot(20, "20 partickels, Uniform distribution")
+make_Uni_plot(100, "100 partickels, uniform distribution")
+make_Uni_plot(1000, "1000 partickels, Uniform distribution")
 
 ##################Plotting Spørgsmål 2#######################
-def make_norm_plot(k):
+def make_norm_plot(k, title):
     #Selecting positions from normal distribution
     proposal = np.random.normal(5, 4, size = k)
     res = sampler(k, proposal)
@@ -85,8 +87,10 @@ def make_norm_plot(k):
         y[i] = n(x[i], 5, 4) 
     plt.plot(x,y, label='Robottens potentielle position')
     plt.legend()
+    plt.title(title)
     plt.show()
 
-make_norm_plot(20)
-make_norm_plot(100)
-make_norm_plot(1000)
+
+make_norm_plot(20, "20 partickels, normal distributed")
+make_norm_plot(100, "100 partickels, normal distributed")
+make_norm_plot(1000, "1000 partickels, normal distributed")
