@@ -51,7 +51,7 @@ def dists_safe():
     if rightDist > safeSideDist:
         right45Clear = True
 
-# if r = 1 turn left, 0 turn right
+# if r = 1 turn left, 0 = right.   (0 = R, 
 # r can only be 1 or 0
 def turn_x_degree(x, r):
     rightDir = r
@@ -69,14 +69,17 @@ def obstacle():
     go = False
     turn = 0
 
+    # 0 = turn right
     while (not go):
         update_dists()
         dists_safe()
         if (not frontClear):
             turn_x_degree(10,turn)
         elif (not left45Clear):
+            turn = 0
             turn_x_degree(10,turn)
         elif (not right45Clear):
+            turn = 1
             turn_x_degree(10,turn)
         else:
             go = True
@@ -121,6 +124,5 @@ while(True):
     sleep(0.1)
     print("L:", arlo.read_left_ping_sensor(), "    F:", arlo.read_front_ping_sensor(), "    C:", arlo.read_right_ping_sensor())
     if arlo.read_front_ping_sensor() < 600 or arlo.read_right_ping_sensor() < 500 or arlo.read_left_ping_sensor() < 500:
-        print("to close")
         arlo.stop()
         obstacle()
