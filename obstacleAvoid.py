@@ -83,9 +83,10 @@ while(True):
     dists_safe()
     update_dists()
     print("Left_clear",left45Clear, "Front_clear", frontClear, "Right_clear", right45Clear)
-    sleep(1)
-    #print("L", arlo.read_left_ping_sensor(), "F", arlo.read_front_ping_sensor(), "C", arlo.read_right_ping_sensor())
-    if arlo.read_front_ping_sensor() < 500 or arlo.read_right_ping_sensor() < 300 or arlo.read_left_ping_sensor() < 300:
+    print("\n\n")
+    sleep(0.1)
+    print("L", arlo.read_left_ping_sensor(), "F", arlo.read_front_ping_sensor(), "C", arlo.read_right_ping_sensor())
+    if arlo.read_front_ping_sensor() < 700 or arlo.read_right_ping_sensor() < 500 or arlo.read_left_ping_sensor() < 500:
         print("to close")
         arlo.stop()
         obstacle()
