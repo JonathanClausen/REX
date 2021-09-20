@@ -30,7 +30,7 @@ def goDist():
     sensLeft = arlo.read_left_ping_sensor()
     sensRight = arlo.read_right_ping_sensor()
     distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
-    while (distTime > 0.1):
+    while (distTime > 0.01):
         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
         sleep(distTime)
         arlo.stop()
@@ -39,5 +39,6 @@ def goDist():
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
     return
+
 
 goDist()
