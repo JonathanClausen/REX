@@ -13,7 +13,7 @@ sensRight     = 0
 emergencyStop = False
 
 # static
-secMeter      = 2.55
+secMeter      = 2.6
 leftSpeed     = math.floor(64 * 0.97)
 rightSpeed    = 64
 sensInterval  = 0.1
@@ -129,6 +129,8 @@ def angleTjek():
 # forward()
     # turn
     # angleTjek()
+
+
 arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
 sleep(secMeter)
 arlo.stop()
