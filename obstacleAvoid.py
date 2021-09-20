@@ -66,7 +66,7 @@ def turn_x_degree(x, r):
 def obstacle():
     update_dists()
     dists_safe()
-    while((frontClear)):
+    while((not frontClear)):
         if (right45Clear or left45Clear):
             if (not right45Clear):
                 turn_x_degree(10, 0)
