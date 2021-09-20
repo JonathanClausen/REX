@@ -69,9 +69,9 @@ def obstacle():
     while((not frontClear)):
         if (right45Clear or left45Clear):
             if (not right45Clear):
-                turn_x_degree(10, 0)
-            else: 
                 turn_x_degree(10, 1)
+            else: 
+                turn_x_degree(10, 0)
         else:
             turn_x_degree(10,0)
         update_dists()
@@ -84,7 +84,7 @@ while(True):
     update_dists()
     print("Left_clear",left45Clear, "Front_clear", frontClear, "Right_clear", right45Clear)
     sleep(1)
-    print("L", arlo.read_left_ping_sensor(), "F", arlo.read_front_ping_sensor(), "C", arlo.read_right_ping_sensor())
+    #print("L", arlo.read_left_ping_sensor(), "F", arlo.read_front_ping_sensor(), "C", arlo.read_right_ping_sensor())
     if arlo.read_front_ping_sensor() < 500 or arlo.read_right_ping_sensor() < 200 or arlo.read_left_ping_sensor() < 200:
         print("to close")
         arlo.stop()
