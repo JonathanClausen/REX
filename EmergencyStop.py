@@ -61,11 +61,15 @@ def measure(roboLock, emLock):
 
 
 def forward():
-    measureThread = Thread(target=measure, args=(roboLock, emLock,))
-    measureThread.start()
+
 #    roboLock.acquire()
+    sensFront = arlo.read_front_ping_sensor()
+    sensLeft = arlo.read_left_ping_sensor()
+    sensRight = arlo.read_right_ping_sensor()
     goDist = (((sensFront - stopDist)/1000)*0.66)*secMeter
 #    roboLock.release()
+    measureThread = Thread(target=measure, args=(roboLock, emLock,))
+    measureThread.start()
     while (not emergencyStop
            and sensFront > stopDist
            and sensLeft > stopDistSide
