@@ -75,8 +75,8 @@ def forward():
     sensRight = arlo.read_right_ping_sensor()
     goDist = (((sensFront - stopDist)/1000)*0.66)*secMeter
 #    roboLock.release()
-    measureThread = Thread(target=measure, args=(roboLock, emLock,))
-    measureThread.start()
+#    measureThread = Thread(target=measure, args=(roboLock, emLock,))
+#    measureThread.start()
     while (not emergencyStop
            and sensFront > stopDist
            and sensLeft > stopDistSide
@@ -93,7 +93,7 @@ def forward():
     emLock.acquire()
     emergencyStop = True
     emLock.release()
-    measureThread.join()
+#    measureThread.join()
     return
 
 def angleTjek():
@@ -113,24 +113,26 @@ def angleTjek():
         if DangerSide:
             angOK = (sensLeft < sensLeftNew and sensRightNew > stopDistSide)
             if not angOK:
-                # drive a little left
-                print("")
+                arlo.go_diff(leftSpeed, rightSpeed, 0, 1)
+                sleep(0.02)
+                arlo.stop
         else:
             angOK = (sensRight < sensRightNew and sensLeftNew > stopDistSide)
             if not angOK:
-                # drive a little right
-                print("")
+                arlo.go_diff(leftSpeed, rightSpeed, 1, 0)
+                sleep(0.02)
+                arlo.stop
     return
 
 
 
 
 # while True:
-# forward()
+forward()
     # turn
     # angleTjek()
 
 
-arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
-sleep(secMeter)
-arlo.stop()
+# arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
+# sleep(secMeter)
+# arlo.stop()
