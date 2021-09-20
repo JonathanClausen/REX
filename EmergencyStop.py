@@ -62,6 +62,12 @@ def measure(roboLock, emLock):
 
 def forward():
 
+    global sensFront
+    global sensLeft
+    global sensRight
+    global emergencyStop
+    global safeDist
+    global safeDistSide
 #    roboLock.acquire()
     sensFront = arlo.read_front_ping_sensor()
     sensLeft = arlo.read_left_ping_sensor()
@@ -115,7 +121,7 @@ def angleTjek():
 
 
 
-while True:
-    forward()
+# while True:
+forward()
     # turn
     # angleTjek()
