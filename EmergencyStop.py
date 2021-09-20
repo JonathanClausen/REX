@@ -94,13 +94,15 @@ def angleTjek():
         sensLeftNew  = arlo.read_left_ping_sensor()
         sensRightNew = arlo.read_right_ping_sensor()
         if DangerSide:
-            angOK = sensLeft < sensLeftNew and sensRightNew > stopDistSide
+            angOK = (sensLeft < sensLeftNew and sensRightNew > stopDistSide)
             if not angOK:
                 # drive a little left
+                print("")
         else:
-            angOK = sensright < sensRightNew and sensLeftNew > stopDistSide
+            angOK = (sensright < sensRightNew and sensLeftNew > stopDistSide)
             if not angOK:
                 # drive a little right
+                print("")
     return
 
 
