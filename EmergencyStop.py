@@ -62,16 +62,16 @@ def measure(roboLock, emLock):
 
 def forward():
     measureThread.start()
+    roboLock.acquire()
     goDist = (((sensFront - stopDist)/1000)*0.66)*secMeter
     while (not emergencyStop
            and sensFront > stopDist
            and sensLeft > stopDistSide
            and sensRight > stopDistSide
            and goDist > 0.1):
-        roboLock.acquire()
         print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
         roboLock.release()
-        sleep(0.1)
+        sleep(goDist)
 
 
     roboLock.acquire()
