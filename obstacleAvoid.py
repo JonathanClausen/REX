@@ -69,6 +69,7 @@ def obstacle():
     go = False
     turn = 0
 
+    # 0 = turn right
     while (not go):
         update_dists()
         dists_safe()
