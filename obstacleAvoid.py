@@ -51,7 +51,7 @@ def dists_safe():
     if rightDist > safeSideDist:
         right45Clear = True
 
-# if r = 1 turn left, else turn right
+# if r = 1 turn left, 0 turn right
 # r can only be 1 or 0
 def turn_x_degree(x, r):
     rightDir = r
@@ -66,7 +66,38 @@ def turn_x_degree(x, r):
 def obstacle():
     update_dists()
     dists_safe()
-    while((not frontClear)):
+    go = False
+    turn = 0
+
+    while (not go):
+        if (not frontClear):
+            turn_x_degree(10,turn)
+        elif (not left45Clear):
+            turn_x_degree(10,turn)
+        elif (not right45Clear):
+            turn_x_degree(10,turn)
+        else:
+            go = True
+
+
+    # while (not go):
+    #     #All blocked = Turn right 
+    #     if (not frontClear and not right45Clear and not left45Clear):
+    #         turn_x_degree(10,0)
+    #     #Left blocked = turn right 
+    #     while (not frontClear and not left45Clear):
+    #         update_dists()
+    #         dists_safe()
+    #         turn_x_degree(10, 1)
+        
+    #     while (not frontClear and not left45Clear):
+    #         turn_x_degree(10, 1)
+    #     if (not frontClear and not )
+    #     else:
+    #         go = True 
+    
+    '''
+    while((not frontClear and not right45Clear) or (not frontClear and not left45Clear)):       
         if (right45Clear or left45Clear):
             if (right45Clear):
                 turn_x_degree(10, 1)
@@ -77,16 +108,17 @@ def obstacle():
         update_dists()
         dists_safe()
     arlo.stop()
+    '''
                        
 while(True):
     arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
     dists_safe()
     update_dists()
-    print("Left_clear",left45Clear, "Front_clear", frontClear, "Right_clear", right45Clear)
+    print("Left_clear:",left45Clear, "     Front_clear:", frontClear, "     Right_clear", right45Clear)
     print("\n\n")
     sleep(0.1)
-    print("L", arlo.read_left_ping_sensor(), "F", arlo.read_front_ping_sensor(), "C", arlo.read_right_ping_sensor())
-    if arlo.read_front_ping_sensor() < 700 or arlo.read_right_ping_sensor() < 500 or arlo.read_left_ping_sensor() < 500:
+    print("L:", arlo.read_left_ping_sensor(), "    F:", arlo.read_front_ping_sensor(), "    C:", arlo.read_right_ping_sensor())
+    if arlo.read_front_ping_sensor() < 600 or arlo.read_right_ping_sensor() < 500 or arlo.read_left_ping_sensor() < 500:
         print("to close")
         arlo.stop()
         obstacle()
