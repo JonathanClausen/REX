@@ -31,7 +31,7 @@ def goSafe(time):
     global sensRight
     global safeDist
     global safeDistSide
-    print("goSafe")
+    print("goSafe for sec: ", time)
     while (time > 0.1):
         print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
         sleep(0.1)
@@ -70,6 +70,7 @@ def forward():
         if goSafe(goDist):
             break
         goDist = (((sensFront - stopDist)/1000)*0.66)*secMeter
+    print("forward done")
     return
 
 
@@ -90,7 +91,7 @@ def angleTjek():
         if DangerSide:
             angOK = (sensLeft < sensLeftNew and sensRightNew > stopDistSide)
             if not angOK:
-                # drive a little left
+
                 print("")
         else:
             angOK = (sensRight < sensRightNew and sensLeftNew > stopDistSide)
