@@ -61,6 +61,7 @@ def measure(roboLock, emLock):
 
 
 def forward():
+    measureThread = Thread(target=measure, args=(roboLock, emLock,))
     measureThread.start()
     roboLock.acquire()
     goDist = (((sensFront - stopDist)/1000)*0.66)*secMeter
@@ -72,7 +73,6 @@ def forward():
         print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
         roboLock.release()
         sleep(goDist)
-
 
     roboLock.acquire()
     print(arlo.stop())
@@ -108,7 +108,6 @@ def angleTjek():
 
 
 
-measureThread = Thread(target=measure, args=(roboLock, emLock,))
 
 while True:
     forward()
