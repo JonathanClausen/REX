@@ -73,7 +73,7 @@ def forward():
         roboLock.release()
         sleep(0.1)
 
-    roboLock.acquire()k
+    roboLock.acquire()
     print(arlo.stop())
     roboLock.release()
     measureThread.join()
