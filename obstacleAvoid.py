@@ -79,7 +79,7 @@ def obstacle():
     arlo.stop()
                        
 while(True):
-    #arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
+    arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
     dists_safe()
     update_dists()
     print("Left_clear",left45Clear, "Front_clear", frontClear, "Right_clear", right45Clear)
