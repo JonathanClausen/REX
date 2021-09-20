@@ -32,10 +32,10 @@ def goSafe(time):
     global safeDist
     global safeDistSide
     print("goSafe for sec: ", time)
-    while (time > 0.1):
+    while (time > 0.01):
         print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
-        sleep(0.1)
-        time = time - 0.1
+        sleep(0.01)
+        time = time - 0.01
         sensFront = arlo.read_front_ping_sensor()
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
@@ -66,7 +66,7 @@ def forward():
     while (sensFront > stopDist
            and sensLeft > stopDistSide
            and sensRight > stopDistSide
-           and goDist > 0.1):
+           and goDist > 0.01):
         if goSafe(goDist):
             break
         goDist = (((sensFront - stopDist)/1000)*0.66)*secMeter
