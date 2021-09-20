@@ -16,7 +16,7 @@ emergencyStop = False
 secMeter      = 2.55
 leftSpeed     = math.floor(64 * 0.97)
 rightSpeed    = 64
-sensInterval  = 0.01
+sensInterval  = 0.1
 
 safeDist      = 300
 safeDistSide  = 150
