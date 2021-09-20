@@ -68,6 +68,8 @@ def obstacle():
     dists_safe()
     while(not(frontClear)):
         if (right45Clear or left45Clear):
+            print("RightClear:", right45Clear)
+            print("LeftClear:", left45Clear)
             if (right45Clear):
                 turn_x_degree(10, 0)
             else: 
