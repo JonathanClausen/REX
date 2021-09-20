@@ -70,6 +70,8 @@ def obstacle():
     turn = 0
 
     while (not go):
+        update_dists()
+        dists_safe()
         if (not frontClear):
             turn_x_degree(10,turn)
         elif (not left45Clear):
