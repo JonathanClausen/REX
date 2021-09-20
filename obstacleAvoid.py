@@ -81,7 +81,8 @@ def obstacle():
 while(True):
     arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
     sleep(0.1)
-    print(arlo.read_left_ping_sensor(), arlo.read_front_ping_sensor(), arlo.read_right_ping_sensor())
+    print("L", arlo.read_left_ping_sensor(), "F", arlo.read_front_ping_sensor(), "C", arlo.read_right_ping_sensor())
     if arlo.read_front_ping_sensor() < 500 or arlo.read_right_ping_sensor() < 200 or arlo.read_left_ping_sensor() < 200:
+        print("to close")
         arlo.stop()
         obstacle()
