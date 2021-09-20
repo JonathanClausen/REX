@@ -73,7 +73,7 @@ def obstacle():
             else: 
                 turn_x_degree(10, 0)
         else:
-            turn_x_degree(10,0)
+            turn_x_degree(10,1)
         update_dists()
         dists_safe()
     arlo.stop()
