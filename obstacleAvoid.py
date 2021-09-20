@@ -51,7 +51,7 @@ def dists_safe():
     if rightDist > safeSideDist:
         right45Clear = True
 
-# if r = 1 turn left, 0 turn right
+# if r = 1 turn left, 0 = right.   (0 = R, 
 # r can only be 1 or 0
 def turn_x_degree(x, r):
     rightDir = r
@@ -75,8 +75,10 @@ def obstacle():
         if (not frontClear):
             turn_x_degree(10,turn)
         elif (not left45Clear):
+            turn = 0
             turn_x_degree(10,turn)
         elif (not right45Clear):
+            turn = 1
             turn_x_degree(10,turn)
         else:
             go = True
