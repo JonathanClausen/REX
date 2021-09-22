@@ -57,6 +57,7 @@ def turn(deg):
         print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
     sleep(deg * degSec)
     print(arlo.stop())
+    print("amount of degrees to go", deg * degSec)
 
 print(getAng())
 turn(getAng())
