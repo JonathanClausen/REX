@@ -65,5 +65,5 @@ def turn(deg):
 
 print(getAng())
 while (picPos() == []):
-    turn(getAng)
+    turn(getAng())
 goDist.goDist()
