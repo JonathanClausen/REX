@@ -73,6 +73,3 @@ def go():
 #         sensRight = arlo.read_right_ping_sensor()
 #         distTime = (((sensFront - stopDist)/1000)*(2/3))*secMeter
 #     return
-
-
-goDist()
