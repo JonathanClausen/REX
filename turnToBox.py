@@ -23,8 +23,7 @@ def picPos():
 #Grabbing dictionary
     arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_250)
     arucoParams = cv2.aruco.DetectorParameters_create()
-    corners, ids, rejected = cv2.aruco.detectMarkers(frame, arucoDict,
-	                                                 parameters=arucoParams)
+    corners, ids, rejected = cv2.aruco.detectMarkers(frame, arucoDict, parameters=arucoParams)
 
     rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, cameraMatrix, distCoeffs)
     return tvec
