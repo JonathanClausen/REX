@@ -6,10 +6,9 @@ import numpy as np
 #Output vector (e.g. cv::Mat) corresponding to the translation vector of the board
 
 markerLength = 0.145
-cameraMatrix =[[506.94,0,640/2],
+cameraMatrix =np.array([[506.94,0,640/2],
                [0,506.94,480/2],
-               [0,0,1],
-            ]
+               [0,0,1],])
 distCoeffs = 0
 
 #distCoeffs[, rvecs[, tvecs[, _objPoints]]]
