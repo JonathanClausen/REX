@@ -6,6 +6,7 @@ import ARLO.robot as robot
 arlo = robot.Robot()
 from threading import Thread, Lock
 import math
+import turnToBox
 
 # changable
 sensFront     = 0
@@ -26,49 +27,52 @@ stopDist      = 500
 stopDistSide  = 200
 
 
-# def goDist():
-#     sensFront = arlo.read_front_ping_sensor()
-#     sensLeft = arlo.read_left_ping_sensor()
-#     sensRight = arlo.read_right_ping_sensor()
-#     distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
-#     while (distTime > 0.1):
-#         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
-#         sleep(distTime)
-#         arlo.stop()
-#         sensFront = arlo.read_front_ping_sensor()
-#         sensLeft = arlo.read_left_ping_sensor()
-#         sensRight = arlo.read_right_ping_sensor()
-#         distTime = (((sensFront - stopDist)/1000)*(2/3))*secMeter
-#     return
 def goDist():
     sensFront = arlo.read_front_ping_sensor()
     sensLeft = arlo.read_left_ping_sensor()
     sensRight = arlo.read_right_ping_sensor()
     distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
     while (distTime > 0.1):
-        start = process_time()
-        t = start
-        print("time to go", distTime)
         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
-        while ((t - start) < distTime):
-            sensFront = arlo.read_front_ping_sensor()
-            sensLeft = arlo.read_left_ping_sensor()
-            sensRight = arlo.read_right_ping_sensor()
-            if (sensFront < safeDist or
-                sensRight < safeDistSide or
-                sensLeft  < safeDistSide):
-                print("Emercency stop!!! sensors :\nR ", sensRight,
-                      ",\n L ", sensLeft,
-                      ",\n F ", sensFront,
-                      "\n time traveled = ", t)
-                break
-            t = process_time()
+        sleep(distTime)
         arlo.stop()
         sensFront = arlo.read_front_ping_sensor()
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((sensFront - stopDist)/1000)*(2/3))*secMeter
+        turnToBox.turn(turnToBox.getAng())
     return
+
+
+# def goDist():
+#     sensFront = arlo.read_front_ping_sensor()
+#     sensLeft = arlo.read_left_ping_sensor()
+#     sensRight = arlo.read_right_ping_sensor()
+#     distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
+#     while (distTime > 0.1):
+#         start = process_time()
+#         t = start
+#         print("time to go", distTime)
+#         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
+#         while ((t - start) < distTime):
+#             sensFront = arlo.read_front_ping_sensor()
+#             sensLeft = arlo.read_left_ping_sensor()
+#             sensRight = arlo.read_right_ping_sensor()
+#             if (sensFront < safeDist or
+#                 sensRight < safeDistSide or
+#                 sensLeft  < safeDistSide):
+#                 print("Emercency stop!!! sensors :\nR ", sensRight,
+#                       ",\n L ", sensLeft,
+#                       ",\n F ", sensFront,
+#                       "\n time traveled = ", t)
+#                 break
+#             t = process_time()
+#         arlo.stop()
+#         sensFront = arlo.read_front_ping_sensor()
+#         sensLeft = arlo.read_left_ping_sensor()
+#         sensRight = arlo.read_right_ping_sensor()
+#         distTime = (((sensFront - stopDist)/1000)*(2/3))*secMeter
+#     return
 
 
 goDist()

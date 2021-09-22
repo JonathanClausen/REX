@@ -5,6 +5,7 @@ import numpy as np
 from time import sleep
 import math
 import ARLO.robot
+import goDist
 
 arlo = ARLO.robot.Robot()
 
@@ -28,14 +29,17 @@ def picPos():
     arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_250)
     arucoParams = cv2.aruco.DetectorParameters_create()
     corners, ids, rejected = cv2.aruco.detectMarkers(frame, arucoDict, parameters=arucoParams)
-
-    rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, cameraMatrix, distCoeffs)
+    tvec = []
+    if (ids.length != 0):
+        rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, cameraMatrix, distCoeffs)
     return tvec
 
 
 # få sider
 def getAng():
     tvec = picPos()
+    if (tvec == []):
+        return 45
     a = tvec[0][0][0]
     c = tvec[0][0][2]
     print("a = ", a, "c = ", c)
@@ -60,4 +64,6 @@ def turn(deg):
     print("amount of degrees to go", deg * degSec)
 
 print(getAng())
-turn(getAng())
+while (picPos() == []):
+    turn(getAng)
+goDist.goDist()
