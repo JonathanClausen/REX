@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from time import sleep
-from time import process_time
+from time import perf_counter
 import ARLO.robot as robot
 arlo = robot.Robot()
 from threading import Thread, Lock
@@ -50,7 +50,7 @@ def go():
 #     sensRight = arlo.read_right_ping_sensor()
 #     distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
 #     while (distTime > 0.1):
-#         start = process_time()
+#         start = perf_counter()
 #         t = start
 #         print("time to go", distTime)
 #         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
@@ -66,7 +66,7 @@ def go():
 #                       ",\n F ", sensFront,
 #                       "\n time traveled = ", t)
 #                 break
-#             t = process_time()
+#             t = perf_counter()
 #         arlo.stop()
 #         sensFront = arlo.read_front_ping_sensor()
 #         sensLeft = arlo.read_left_ping_sensor()
