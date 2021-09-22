@@ -32,9 +32,9 @@ def picPos():
 
 # få sider
 def getAng():
-    rvec = picPos()
-    a = rvec[0]
-    c = rvec[2]
+    tvec = picPos()
+    a = tvec[0][0][0]
+    c = tvec[0][0][2]
     return  math.sin((a/c)**(-1))
 
 print(getAng())
