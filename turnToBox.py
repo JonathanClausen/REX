@@ -5,7 +5,7 @@ import numpy as np
 from time import sleep
 import math
 import ARLO.robot
-from goDist import go
+# from goDist import go
 
 arlo = ARLO.robot.Robot()
 
