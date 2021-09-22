@@ -62,7 +62,6 @@ def measure(roboLock, emLock):
 
 
 def forward():
-
     global sensFront
     global sensLeft
     global sensRight
@@ -86,6 +85,7 @@ def forward():
         print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
         roboLock.release()
         sleep(0.1)
+        goDist = goDist - 0.1
 
     roboLock.acquire()
     print(arlo.stop())

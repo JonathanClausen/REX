@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from time import sleep
+from time import process_time
 import ARLO.robot as robot
 arlo = robot.Robot()
 from threading import Thread, Lock
@@ -25,6 +26,20 @@ stopDist      = 500
 stopDistSide  = 200
 
 
+# def goDist():
+#     sensFront = arlo.read_front_ping_sensor()
+#     sensLeft = arlo.read_left_ping_sensor()
+#     sensRight = arlo.read_right_ping_sensor()
+#     distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
+#     while (distTime > 0.1):
+#         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
+#         sleep(distTime)
+#         arlo.stop()
+#         sensFront = arlo.read_front_ping_sensor()
+#         sensLeft = arlo.read_left_ping_sensor()
+#         sensRight = arlo.read_right_ping_sensor()
+#         distTime = (((sensFront - stopDist)/1000)*(2/3))*secMeter
+#     return
 def goDist():
     sensFront = arlo.read_front_ping_sensor()
     sensLeft = arlo.read_left_ping_sensor()
@@ -32,12 +47,24 @@ def goDist():
     distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
     while (distTime > 0.1):
         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
-        sleep(distTime)
+        start = process_time()
+        t = process_time()
+        while (t - start < distTime):
+            sensFront = arlo.read_front_ping_sensor()
+            sensLeft = arlo.read_left_ping_sensor()
+            sensRight = arlo.read_right_ping_sensor()
+            if (sensFront < safeDist or
+                sensRight < safeDistSide or
+                sensLeft  < safeDistSide):
+                print("Emercency stop!!! sensors :\nR %i,\n L %i,\n F %i\n time traveled = %d",
+                      sensRight, sensLeft, sensFront, t)
+                break
+            t = process_time()
         arlo.stop()
         sensFront = arlo.read_front_ping_sensor()
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
-        distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
+        distTime = (((sensFront - stopDist)/1000)*(2/3))*secMeter
     return
 
 
