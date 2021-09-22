@@ -2,11 +2,15 @@
 
 import cv2
 import numpy as np
+from time import sleep
 import math
-#cv.aruco.estimatePoseSingleMarkers(corners, markerLength, cameraMatrix, distCoeffs[, rvecs[, tvecs[, _objPoints]]] ) ->  rvecs, tvecs, _objPoints
-#rvec = Output vector (e.g. cv::Mat) corresponding to the rotation vector of the board
-#Output vector (e.g. cv::Mat) corresponding to the translation vector of the board
+import ARLO.robot
 
+arlo = ARLO.robot.Robot()
+
+leftSpeed     = math.floor(64 * 0.97)
+rightSpeed    = 64
+degSec = 0.005
 
 def picPos():
     markerLength = 0.145
@@ -37,4 +41,15 @@ def getAng():
     print("a = ", a, "c = ", c)
     return  math.degrees(math.asin(a/c))
 
+# turn
+def turn(deg):
+    isLeft = deg < 0
+    if (isLeft):
+        deg = deg * (-1)
+    print("Turning to box")
+    arlo.go_diff(leftSpeed, rightSpeed, isLeft, not isLeft)
+    sleep(deg * degSec)
+    arlo.stop()
+
 print(getAng())
+turn()
