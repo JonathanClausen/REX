@@ -46,12 +46,13 @@ def turn(deg):
     global rightSpeed
     global LeftSpeed
     global degSec
-    isLeft = deg < 0
-    if (isLeft):
+    isRight = deg < 0
+    if (isRight):
+        print("Advusting to pos")
         deg = deg * (-1)
-    print("isLeft ", isLeft, "Degrees to turn ", deg)
+    print("isLeft ", isRight, "Degrees to turn ", deg)
     print("Turning to box")
-    print(arlo.go_diff(leftSpeed, rightSpeed, isLeft, not isLeft))
+    print(arlo.go_diff(leftSpeed, rightSpeed, isRight, not isRight))
     sleep(deg * degSec)
     print(arlo.stop())
 
