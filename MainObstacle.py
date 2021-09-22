@@ -37,10 +37,10 @@ def goSafe(time):
         sleep(0.01)
         time = time - 0.01
         sensFront = arlo.read_front_ping_sensor()
-        sensLeft = arlo.read_left_ping_sensor()
+        sensLeft  = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         if (sensFront < safeDist or
-            sensLeft < safeDistSide or
+            sensLeft  < safeDistSide or
             sensRight < safeDistSide):
             print("EMERGENCY STOP")
             return 1
