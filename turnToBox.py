@@ -10,7 +10,7 @@ arlo = ARLO.robot.Robot()
 
 leftSpeed     = math.floor(64 * 0.97)
 rightSpeed    = 64
-degSec = 0.002
+degSec = 0.005
 
 def picPos():
     markerLength = 0.145
