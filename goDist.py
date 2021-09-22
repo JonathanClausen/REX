@@ -48,14 +48,18 @@ def goDist():
     while (distTime > 0.1):
         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
         start = process_time()
-        while (process_time() - start < distTime):
+        t = process_time()
+        while (t - start < distTime):
             sensFront = arlo.read_front_ping_sensor()
             sensLeft = arlo.read_left_ping_sensor()
             sensRight = arlo.read_right_ping_sensor()
             if (sensFront < safeDist or
                 sensRight < safeDistSide or
                 sensLeft  < safeDistSide):
+                print("Emercency stop!!! sensors :\nR %i,\n L %i,\n F %i\n time traveled = %d",
+                      sensRight, sensLeft, sensFront, t)
                 break
+            t = process_time()
         arlo.stop()
         sensFront = arlo.read_front_ping_sensor()
         sensLeft = arlo.read_left_ping_sensor()
