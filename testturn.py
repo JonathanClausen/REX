@@ -7,8 +7,10 @@ arlo = ARLO.robot.Robot()
 
 leftSpeed     = math.floor(64 * 0.97)
 rightSpeed    = 64
-degSec = 0.009
+degSec90 = 0.005
+degSec10 = 0.005
+
 
 print(arlo.go_diff(leftSpeed, rightSpeed, 0, not 0))
-sleep(90 * degSec)
+sleep(10 * degSec10)
 print(arlo.stop())
