@@ -34,7 +34,7 @@ def picPos():
 def getAng():
     rvec = picPos()
     a = rvec[0]
-    c = rvec[3]
+    c = rvec[2]
     return  math.sin((a/c)**(-1))
 
 print(getAng())
