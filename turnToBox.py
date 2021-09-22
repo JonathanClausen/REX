@@ -68,6 +68,8 @@ def turn(deg):
 safeDist      = 300
 safeDistSide  = 150
 
+secMeter      = 2.55
+
 stopDist      = 500
 stopDistSide  = 200
 
