@@ -52,4 +52,6 @@ def turn(deg):
     arlo.stop()
 
 print(getAng())
-turn()
+turn(getAng())
+turn(getAng())
+turn(getAng())
