@@ -60,7 +60,7 @@ def goDist():
                 print("Emercency stop!!! sensors :\nR ", sensRight,
                       ",\n L ", sensLeft,
                       ",\n F ", sensFront,
-                      "\n time traveled = %d ", t)
+                      "\n time traveled = ", t)
                 break
             t = process_time()
         arlo.stop()
