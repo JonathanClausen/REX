@@ -43,6 +43,9 @@ def getAng():
 
 # turn
 def turn(deg):
+    global rightSpeed
+    global LeftSpeed
+    global degSec
     isLeft = deg < 0
     if (isLeft):
         deg = deg * (-1)
