@@ -48,6 +48,7 @@ def goDist():
     while (distTime > 0.1):
         start = process_time()
         t = start
+        print("time to go", distTime)
         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
         while ((t - start) < distTime):
             sensFront = arlo.read_front_ping_sensor()
