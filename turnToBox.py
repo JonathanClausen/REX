@@ -35,6 +35,6 @@ def getAng():
     a = tvec[0][0][0]
     c = tvec[0][0][2]
     print("a = ", a, "c = ", c)
-    return  math.asin(a/c)
+    return  math.degrees(math.asin(a/c))
 
 print(getAng())
