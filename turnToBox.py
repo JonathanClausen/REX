@@ -49,12 +49,11 @@ def turn(deg):
     isLeft = deg < 0
     if (isLeft):
         deg = deg * (-1)
+    print(deg)
     print("Turning to box")
-    arlo.go_diff(leftSpeed, rightSpeed, isLeft, not isLeft)
+    print(arlo.go_diff(leftSpeed, rightSpeed, isLeft, not isLeft))
     sleep(deg * degSec)
-    arlo.stop()
+    print(arlo.stop())
 
 print(getAng())
-turn(getAng())
-turn(getAng())
 turn(getAng())
