@@ -34,6 +34,6 @@ def getAng():
     tvec = picPos()
     a = tvec[0][0][0]
     c = tvec[0][0][2]
-    return  math.sin((a/c)**(-1))
+    return  math.asin(a/c)
 
 print(getAng())
