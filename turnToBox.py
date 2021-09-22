@@ -10,7 +10,7 @@ arlo = ARLO.robot.Robot()
 
 leftSpeed     = math.floor(64 * 0.97)
 rightSpeed    = 64
-degSec = 0.005
+degSec = 0.05
 
 def picPos():
     markerLength = 0.145
@@ -46,12 +46,15 @@ def turn(deg):
     global rightSpeed
     global LeftSpeed
     global degSec
-    isLeft = deg < 0
-    if (isLeft):
-        deg = deg * (-1)
-    print("isLeft ", isLeft, "Degrees to turn ", deg)
+    isRight = deg > 0
+    print("isRight", isRight, "Degrees to turn ", deg)
     print("Turning to box")
-    print(arlo.go_diff(leftSpeed, rightSpeed, isLeft, not isLeft))
+    if (not isRight):
+        print("Advusting to left deg")
+        deg = deg * (-1)
+        print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
+    else:
+        print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
     sleep(deg * degSec)
     print(arlo.stop())
 
