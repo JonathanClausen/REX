@@ -10,5 +10,5 @@ rightSpeed    = 64
 degSec = 0.005
 
 print(arlo.go_diff(leftSpeed, rightSpeed, 0, not 0))
-sleep(45 * degSec)
+sleep(90 * degSec)
 print(arlo.stop())
