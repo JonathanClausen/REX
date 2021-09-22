@@ -10,7 +10,7 @@ arucoParams = cv2.aruco.DetectorParameters_create()
 	parameters=arucoParams)
 
 print(corners)
-
+print(ids)
 while(True):
     cv2.imshow('img1',frame) #display the captured image
     if cv2.waitKey(1) & 0xFF == ord('y'): #save on pressing 'y' 
