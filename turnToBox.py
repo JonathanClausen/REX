@@ -5,7 +5,7 @@ import numpy as np
 from time import sleep
 import math
 import ARLO.robot
-import goDist
+from goDist import go
 
 arlo = ARLO.robot.Robot()
 
@@ -66,4 +66,4 @@ def turn(deg):
 print(getAng())
 while (picPos() == []):
     turn(getAng())
-goDist.go()
+go()

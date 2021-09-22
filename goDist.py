@@ -6,7 +6,7 @@ import ARLO.robot as robot
 arlo = robot.Robot()
 from threading import Thread, Lock
 import math
-import turnToBox
+from turnToBox import getAng, turn
 
 # changable
 sensFront     = 0
@@ -40,7 +40,7 @@ def go():
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((sensFront - stopDist)/1000)*(2/3))*secMeter
-        turnToBox.turn(turnToBox.getAng())
+        turn(getAng())
     return
 
 
