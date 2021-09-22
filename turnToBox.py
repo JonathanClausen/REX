@@ -63,6 +63,32 @@ def turn(deg):
     print(arlo.stop())
     print("amount of degrees to go", deg * degSec)
 
+
+
+safeDist      = 300
+safeDistSide  = 150
+
+stopDist      = 500
+stopDistSide  = 200
+
+
+def go():
+    sensFront = arlo.read_front_ping_sensor()
+    sensLeft = arlo.read_left_ping_sensor()
+    sensRight = arlo.read_right_ping_sensor()
+    distTime = (((sensFront - stopDist)/1000)*0.66)*secMeter
+    while (distTime > 0.1):
+        arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
+        sleep(distTime)
+        arlo.stop()
+        sensFront = arlo.read_front_ping_sensor()
+        sensLeft = arlo.read_left_ping_sensor()
+        sensRight = arlo.read_right_ping_sensor()
+        distTime = (((sensFront - stopDist)/1000)*(2/3))*secMeter
+        turn(getAng())
+    return
+
+
 print(getAng())
 while (picPos() == []):
     turn(getAng())
