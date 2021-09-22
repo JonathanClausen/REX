@@ -1,7 +1,7 @@
 import math
 import numpy as np
 from time import sleep
-import ARLO
+import ARLO.robot
 
 arlo = ARLO.robot.Robot()
 
