@@ -40,7 +40,7 @@ def picPos():
 def getAng():
     tvec = picPos()
     if (tvec == []):
-        return 45
+        return (45, 10000)
     a = tvec[0][0][0]
     b = tvec[0][0][2]
     dist = math.sqrt(a**2+b**2)
