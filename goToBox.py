@@ -73,7 +73,7 @@ safeDistSide  = 150
 
 secMeter      = 2.55
 
-stopDist      = 500
+stopDist      = 400
 stopDistSide  = 200
 
 
