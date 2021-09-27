@@ -45,6 +45,7 @@ def getAng():
     b = tvec[0][0][2]
     dist = math.sqrt(a**2+b**2)
     print("a = ", a, "b = ", b, "dist = ", dist)
+    print("ang  with minus = ", math.degrees(math.asin(a/dist)), "ang -a = ", math.degrees(math.asin(-a/dist)))
     return (math.degrees(math.asin(a/dist)), dist)
 
 # turn
