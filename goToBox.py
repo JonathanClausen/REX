@@ -45,7 +45,8 @@ def getAng():
     b = tvec[0][0][2]
     dist = math.sqrt(a**2+b**2)
     print("a = ", a, "b = ", b, "dist = ", dist)
-    return (math.degrees(math.asin(a/dist)), dist)
+    print("ang  with minus = ", math.degrees(math.asin(a/dist)), "ang -a = ", math.degrees(math.asin(-a/dist)))
+    return (round(math.degrees(math.asin(a/dist)), 5), dist)
 
 # turn
 def turn(deg):
@@ -72,17 +73,18 @@ safeDistSide  = 150
 
 secMeter      = 2.55
 
-stopDist      = 500
+stopDist      = 400
 stopDistSide  = 200
 
 
 def go():
+    emStop = False
     sensFront = arlo.read_front_ping_sensor()
     picDist = getAng()[1]*1000
     sensLeft = arlo.read_left_ping_sensor()
     sensRight = arlo.read_right_ping_sensor()
     distTime = (((min(sensFront, picDist) - stopDist)/1000)*0.66)*secMeter
-    while (distTime > 0.1):
+    while (distTime > 0.1 and (not emStop)):
         print("time to go", distTime)
         start = perf_counter()
         t = start
@@ -98,9 +100,12 @@ def go():
                       ",\n L ", sensLeft,
                       ",\n F ", sensFront,
                       "\n time traveled = ", t)
+                emStop = True
                 break
             t = perf_counter()
         arlo.stop()
+        if not emStop:
+            turn(getAng()[0])
         sensFront = arlo.read_front_ping_sensor()
         picDist = getAng()[1]*1000
         sensLeft = arlo.read_left_ping_sensor()
@@ -129,4 +134,5 @@ def go():
 print(getAng()[0])
 while (picPos() == []):
     turn(getAng()[0])
+turn(getAng()[0])
 go()
