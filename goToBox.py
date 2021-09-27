@@ -107,7 +107,7 @@ def go():
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((min(sensFront, picDist) - stopDist)/1000)*(2/3))*secMeter
-        turn(getAng())
+        turn(getAng()[0])
     return
 
 # def go():
