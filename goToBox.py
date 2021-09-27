@@ -134,4 +134,5 @@ def go():
 print(getAng()[0])
 while (picPos() == []):
     turn(getAng()[0])
+turn(getAng()[0])
 go()
