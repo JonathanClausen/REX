@@ -4,6 +4,7 @@ import camera
 import numpy as np
 import time
 import math
+import random
 from timeit import default_timer as timer
 import sys
 
@@ -18,6 +19,15 @@ def isRunningOnArlo():
       You can use this flag to switch the code from running on you laptop to Arlo - you need to do the programming here!
     """
     return onRobot
+
+# a is a uniform number between 0 and 1
+def chooseSample(particles, a):
+    for i in range(len(particles)):
+        w = particles[i].getWeight()
+        a = a - w
+        if a <= 0.0:
+            return i
+    return len(particles)-1
 
 
 if isRunningOnArlo():
@@ -204,17 +214,25 @@ try:
                     pWeight =  1/math.sqrt(2*math.pi * var**2) * math.exp(- ((dists[i] - pDist )**2) / (2 * var**2))
                     sumWeight += pWeight
                     p.setWeight(pWeight)
-                # Normalize weights
-                for p in particles:
-                    p.setWeight((p.getWeight()/sumWeight))
-                    print(round(p.getWeight(),5))
+                # Normalize weights and resampling
+                newParticles = particles
+                for p in range(len(particles)):
+                    a = random.uniform(0, 1)
+                    particles[p].setWeight((particles[p].getWeight()/sumWeight))
+                    print(round(particles[p].getWeight(),5))
+                    i = chooseSample(particles, a)
+                    print("i=",i)
+                    print("her")
+                    newParticles[p] = particles[i]
+                particles = newParticles
+                    
 
                 
 
-            # Resampling
-            # XXX: You do this 
-            uni = np.random.uniform(0, 1, 1000)
-            for ()
+            # Resampling ^^Look above 
+            # XXX: You do this
+            
+            
 
 
 
