@@ -3,13 +3,14 @@ import particle
 import camera
 import numpy as np
 import time
+import math
 from timeit import default_timer as timer
 import sys
 
 
 # Flags
 showGUI = True  # Whether or not to open GUI windows
-onRobot = True # Whether or not we are running on the Arlo robot
+onRobot = False # Whether or not we are running on the Arlo robot
 
 
 def isRunningOnArlo():
@@ -21,7 +22,8 @@ def isRunningOnArlo():
 
 if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
-    sys.path.append("../../../../Arlo/python")
+    # Check!
+    sys.path.append("../../../../ARLO/")
 
 
 try:
@@ -44,10 +46,10 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [1, 2]
+landmarkIDs = [1]
 landmarks = {
     1: (0.0, 0.0),  # Coordinates for landmark 1
-    2: (300.0, 0.0)  # Coordinates for landmark 2
+    #2: (300.0, 0.0)  # Coordinates for landmark 2
 }
 landmark_colors = [CRED, CGREEN] # Colors used when drawing the landmarks
 
@@ -192,12 +194,24 @@ try:
             for i in range(len(objectIDs)):
                 print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
                 # XXX: Do something for each detected object - remember, the same ID may appear several times
-
-            # Compute particle weights
-            # XXX: You do this
+                lx = (landmarks[objectIDs[i]])[0]
+                ly = (landmarks[objectIDs[i]])[1]
+                sumWeight = 0.0
+                print(lx,ly)
+                for p in particles:
+                    pDist = math.sqrt( ( lx - p.getX() )**2 + ( ly - p.getY() )**2 )
+                    var = 15
+                    pWeight =  1/math.sqrt(2*math.pi * var**2) * math.exp(- ((dists[i] - pDist )**2) / (2 * var**2))
+                    sumWeight += pWeight
+                    p.setWeight(pWeight)
+                # Normalize weights
+                for p in particles:
+                    p.setWeight((p.getWeight()/sumWeight))
+                    print(round(p.getWeight(),5))
+                
 
             # Resampling
-            # XXX: You do this
+            # XXX: You do this 
 
             # Draw detected objects
             cam.draw_aruco_objects(colour)
@@ -205,8 +219,7 @@ try:
             # No observation - reset weights to uniform distribution
             for p in particles:
                 p.setWeight(1.0/num_particles)
-
-    
+                
         est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
 
         if showGUI:
