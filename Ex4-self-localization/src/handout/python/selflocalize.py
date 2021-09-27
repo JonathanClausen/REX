@@ -49,7 +49,7 @@ CBLACK = (0, 0, 0)
 landmarkIDs = [1]
 landmarks = {
     1: (0.0, 0.0),  # Coordinates for landmark 1
-    #2: (300.0, 0.0)  # Coordinates for landmark 2
+    4: (300.0, 0.0)  # Coordinates for landmark 2
 }
 landmark_colors = [CRED, CGREEN] # Colors used when drawing the landmarks
 
@@ -208,10 +208,15 @@ try:
                 for p in particles:
                     p.setWeight((p.getWeight()/sumWeight))
                     print(round(p.getWeight(),5))
+
                 
 
             # Resampling
             # XXX: You do this 
+            uni = np.random.uniform(0, 1, 1000)
+            for ()
+
+
 
             # Draw detected objects
             cam.draw_aruco_objects(colour)
