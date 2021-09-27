@@ -46,7 +46,7 @@ def getAng():
     dist = math.sqrt(a**2+b**2)
     print("a = ", a, "b = ", b, "dist = ", dist)
     print("ang  with minus = ", math.degrees(math.asin(a/dist)), "ang -a = ", math.degrees(math.asin(-a/dist)))
-    return (math.degrees(math.asin(a/dist)), dist)
+    return (round(math.degrees(math.asin(a/dist)),5), dist)
 
 # turn
 def turn(deg):
@@ -107,6 +107,7 @@ def go():
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((min(sensFront, picDist) - stopDist)/1000)*(2/3))*secMeter
+        turn(getAng())
     return
 
 # def go():
