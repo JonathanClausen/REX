@@ -1,0 +1,15 @@
+%YAML:1.0
+---
+ImageSize: [ 640, 480 ]
+reprojection_error: 1.1339298078322971e-01
+camera_matrix: !!opencv-matrix
+   rows: 3
+   cols: 3
+   dt: d
+   data: [ 6.0727040957659040e+02, 0., 3.0757300398967601e+02, 0.,
+       6.0768864690145904e+02, 2.8935674612358201e+02, 0., 0., 1. ]
+distortion_coefficients: !!opencv-matrix
+   rows: 5
+   cols: 1
+   dt: d
+   data: [ 0., 0., 2.0546093607192093e-02, -3.5538453075048249e-03, 0. ]
