@@ -40,7 +40,7 @@ time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 	# grab the raw NumPy array representing the image
 	image = frame.array
- 
+	
 	# show the frame
 	cv2.imshow(WIN_RF, image)
 	key = cv2.waitKey(4) & 0xFF

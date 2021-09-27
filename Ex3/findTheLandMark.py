@@ -4,7 +4,7 @@ import numpy as np
 #cv.aruco.estimatePoseSingleMarkers(corners, markerLength, cameraMatrix, distCoeffs[, rvecs[, tvecs[, _objPoints]]] ) ->  rvecs, tvecs, _objPoints
 #rvec = Output vector (e.g. cv::Mat) corresponding to the rotation vector of the board
 #Output vector (e.g. cv::Mat) corresponding to the translation vector of the board
-
+#tvec = [x,y,z]: x =  horizontal drejning, y= vertical, z= vineklret afstand 
 markerLength = 0.145
 cameraMatrix =np.array([[506.94,0,640/2],
                [0,506.94,480/2],
