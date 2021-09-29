@@ -16,7 +16,7 @@ def localization_turn():
 
     for i in range(timesToTurn):
         print(robot.Robot().go_diff(leftSpeed, rightSpeed, 0, 1))
-        sleep(round(50 * degSec,5))
+        sleep(2)
         print(robot.Robot().stop())
 
         ## Check surroundings for box
