@@ -21,3 +21,4 @@ def localization_turn():
         ## Check surroundings for box
         ## Update samples to turn 20 degrees.
 
+localization_turn()
