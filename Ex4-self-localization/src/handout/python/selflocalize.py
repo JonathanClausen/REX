@@ -7,6 +7,8 @@ import math
 import random
 from timeit import default_timer as timer
 import sys
+import copy
+
 
 
 # Flags
@@ -23,11 +25,18 @@ def isRunningOnArlo():
 # a is a uniform number between 0 and 1
 def chooseSample(particles, a):
     for i in range(len(particles)):
-        a -= particles[i]
+        a -= particles[i].getWeight()
         if (a <= 0.0):
             return i
     return len(particles)-1
 
+#Simple Randomizer    
+def randomizer(particles, p):
+    n = len(particles)
+    nRandom = math.floor((len(particles)/100*p))
+    for p in range(nRandom):
+        particles[p] = particle.Particle(600.0*np.random.ranf() - 100.0, 600.0*np.random.ranf() - 250.0,
+                                             np.mod(2.0*np.pi*np.random.ranf(), 2.0*np.pi), 0.1/n)
 
 if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
@@ -200,9 +209,10 @@ try:
         # Detect objects
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
 
-        varNorm = 10
-        varPos = 0.5
-        varOri = 10
+        varNorm = 30
+        varTheta = 0.1
+        varPos = 3
+        varOri = 0.1
         if not isinstance(objectIDs, type(None)):
             # List detected objects
             for i in range(len(objectIDs)):
@@ -212,27 +222,41 @@ try:
                 ly = (landmarks[objectIDs[i]])[1]
                 sumWeight = 0
                 for p in particles:
+                    # Calculating coordinate weights
                     pDist = math.sqrt( ( lx - p.getX() )**2 + ( ly - p.getY() )**2 )
-                    pWeight =  1/math.sqrt(2*math.pi * varNorm**2) * math.exp(- ((dists[i] - pDist )**2) / (2 * varNorm**2))
-                    sumWeight = pWeight + sumWeight
+                    pPosWeight =  1/math.sqrt(2*math.pi * varNorm**2) * math.exp(- ((dists[i] - pDist )**2) / (2 * varNorm**2))
+
+                    # Calculating orientation weight
+                    
+                    e0 = np.array([ [ math.cos(p.getTheta()) ],[ math.sin(p.getTheta())]])
+                    el = (np.array([ [ lx - p.getX() ],[ ly - p.getY() ] ])) / pDist
+                    eHat = np.array([[ - math.sin( p.getTheta() )], [ math.cos( p.getTheta() )]])
+                   
+                    pPhi = (np.sign(el.T @ eHat)) * (np.arccos(el.T @ e0))
+
+                    pOrientWeight = 1/math.sqrt(2*math.pi * varTheta**2) * math.exp(- ((angles[i] - pPhi )**2) / (2 * varTheta**2))
+
+
+                    pWeight = pPosWeight * pOrientWeight
+
+                    sumWeight += pWeight
                     p.setWeight(pWeight)
 
+
                 # Normalize weights
-                newParticles = particles
-                normWeight = np.zeros(num_particles)
+                newParticles = copy.deepcopy(particles)
+                #normWeight = np.zeros(num_particles)
                 for p in range(len(particles)):
-                    normWeight[p] = (particles[p].getWeight()/sumWeight)
+                    newParticles[p].setWeight((particles[p].getWeight()/sumWeight))
 
                 #Resampling
-                sum = 0
                 for p in range(len(particles)):
                     a = random.uniform(0.0, 1.0)
-                    i = chooseSample(normWeight, a)
-                    newParticles[p] = particles[i]
-                print("SUM:",sum)
+                    i = chooseSample(newParticles, a)
+                    newParticles[p] = copy.copy(particles[i])
                 particle.add_uncertainty(newParticles, varPos, varOri)
-                particles = newParticles
-    
+                particles = copy.deepcopy(newParticles)
+                #randomizer(particles,0.5)
 
                 
 
