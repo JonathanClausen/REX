@@ -260,7 +260,7 @@ try:
                     newParticles[p] = copy.copy(particles[i])
                 particle.add_uncertainty(newParticles, varPos, varOri)
                 particles = copy.deepcopy(newParticles)
-                randomizer(particles,0.1)
+                randomizer(particles,0.5)
 
                 
 
