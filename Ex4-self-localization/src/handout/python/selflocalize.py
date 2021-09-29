@@ -196,6 +196,15 @@ try:
                 angular_velocity -= 0.2
 
 
+        for p in particles:
+            c = velocity
+            C = 90.0
+            B = p.getTheta()
+
+            y = c * np.sin(B) / np.sin(C)
+            x = np.sqrt((c**2) - (y**2))
+
+            particle.move_particle(p, x, y, B)
 
         
         # Use motor controls to update particles
