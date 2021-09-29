@@ -23,9 +23,8 @@ def isRunningOnArlo():
 # a is a uniform number between 0 and 1
 def chooseSample(particles, a):
     for i in range(len(particles)):
-        w = particles[i].getWeight()
-        a = a - w
-        if a <= 0.0:
+        a -= particles[i].getWeight()
+        if (a <= 0.0):
             return i
     return len(particles)-1
 
@@ -199,33 +198,41 @@ try:
         
         # Detect objects
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
+
+        varNorm = 15
+        varPos = 0.5
+        varOri = 10
         if not isinstance(objectIDs, type(None)):
             # List detected objects
             for i in range(len(objectIDs)):
-                print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
+                #print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
                 # XXX: Do something for each detected object - remember, the same ID may appear several times
                 lx = (landmarks[objectIDs[i]])[0]
                 ly = (landmarks[objectIDs[i]])[1]
-                sumWeight = 0.0
-                print(lx,ly)
+                sumWeight = 0
                 for p in particles:
                     pDist = math.sqrt( ( lx - p.getX() )**2 + ( ly - p.getY() )**2 )
-                    var = 15
-                    pWeight =  1/math.sqrt(2*math.pi * var**2) * math.exp(- ((dists[i] - pDist )**2) / (2 * var**2))
+                    pWeight =  1/math.sqrt(2*math.pi * varNorm**2) * math.exp(- ((dists[i] - pDist )**2) / (2 * varNorm**2))
                     sumWeight += pWeight
                     p.setWeight(pWeight)
-                # Normalize weights and resampling
+                print("sumWeight = ", sumWeight)
+                # Normalize weights 
                 newParticles = particles
+                for p in particles:
+                    p.setWeight((p.getWeight()/sumWeight))
+                #Resampling    
+                sum = 0
                 for p in range(len(particles)):
-                    a = random.uniform(0, 1)
-                    particles[p].setWeight((particles[p].getWeight()/sumWeight))
-                    print(round(particles[p].getWeight(),5))
+                    a = random.uniform(0.0, 1.0)
+                    print("Particle Weight:", particles[p].getWeight())
+                    sum += particles[p].getWeight()
                     i = chooseSample(particles, a)
                     print("i=",i)
-                    print("her")
                     newParticles[p] = particles[i]
+                print("SUM:",sum)
+                particle.add_uncertainty(newParticles, varPos, varOri)
                 particles = newParticles
-                    
+    
 
                 
 
