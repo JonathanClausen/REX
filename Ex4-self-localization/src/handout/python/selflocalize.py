@@ -36,7 +36,7 @@ def randomizer(particles, p):
     nRandom = math.floor((len(particles)/100*p))
     for p in range(nRandom):
         particles[p] = particle.Particle(600.0*np.random.ranf() - 100.0, 600.0*np.random.ranf() - 250.0,
-                                             np.mod(2.0*np.pi*np.random.ranf(), 2.0*np.pi), 0.1/n)
+                                             np.mod(2.0*np.pi*np.random.ranf(), 2.0*np.pi), 0.01/n)
 
 if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
@@ -256,7 +256,7 @@ try:
                     newParticles[p] = copy.copy(particles[i])
                 particle.add_uncertainty(newParticles, varPos, varOri)
                 particles = copy.deepcopy(newParticles)
-                #randomizer(particles,0.5)
+                randomizer(particles,0.5)
 
                 
 
