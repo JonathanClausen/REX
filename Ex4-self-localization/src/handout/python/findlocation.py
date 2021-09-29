@@ -5,7 +5,7 @@ from time import sleep
 
 # Get ARLO.Robot
 sys.path.append("../../../../ARLO/")
-import ARLO.robot as arlo
+import robot as arlo
 
 def localization_turn():
     leftSpeed = math.floor(64 * 0.97)
