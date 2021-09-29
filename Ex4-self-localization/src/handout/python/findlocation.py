@@ -3,6 +3,7 @@ import math
 from time import sleep
 
 
+
 # Get ARLO.Robot
 sys.path.append("../../../../ARLO/")
 import robot
@@ -15,7 +16,7 @@ def localization_turn():
 
     for i in range(timesToTurn):
         print(robot.Robot().go_diff(leftSpeed, rightSpeed, 0, 1))
-        sleep(50 * degSec)
+        sleep(round(50 * degSec,5))
         print(robot.Robot().stop())
 
         ## Check surroundings for box
