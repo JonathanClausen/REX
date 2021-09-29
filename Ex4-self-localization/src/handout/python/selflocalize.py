@@ -23,7 +23,7 @@ def isRunningOnArlo():
 # a is a uniform number between 0 and 1
 def chooseSample(particles, a):
     for i in range(len(particles)):
-        a -= particles[i].getWeight()
+        a -= particles[i]
         if (a <= 0.0):
             return i
     return len(particles)-1
@@ -55,8 +55,9 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [1]
+landmarkIDs = [1, 4]
 landmarks = {
+
     1: (0.0, 0.0),  # Coordinates for landmark 1
     4: (300.0, 0.0)  # Coordinates for landmark 2
 }
@@ -199,7 +200,7 @@ try:
         # Detect objects
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
 
-        varNorm = 15
+        varNorm = 10
         varPos = 0.5
         varOri = 10
         if not isinstance(objectIDs, type(None)):
@@ -213,21 +214,20 @@ try:
                 for p in particles:
                     pDist = math.sqrt( ( lx - p.getX() )**2 + ( ly - p.getY() )**2 )
                     pWeight =  1/math.sqrt(2*math.pi * varNorm**2) * math.exp(- ((dists[i] - pDist )**2) / (2 * varNorm**2))
-                    sumWeight += pWeight
+                    sumWeight = pWeight + sumWeight
                     p.setWeight(pWeight)
-                print("sumWeight = ", sumWeight)
-                # Normalize weights 
+
+                # Normalize weights
                 newParticles = particles
-                for p in particles:
-                    p.setWeight((p.getWeight()/sumWeight))
-                #Resampling    
+                normWeight = np.zeros(num_particles)
+                for p in range(len(particles)):
+                    normWeight[p] = (particles[p].getWeight()/sumWeight)
+
+                #Resampling
                 sum = 0
                 for p in range(len(particles)):
                     a = random.uniform(0.0, 1.0)
-                    print("Particle Weight:", particles[p].getWeight())
-                    sum += particles[p].getWeight()
-                    i = chooseSample(particles, a)
-                    print("i=",i)
+                    i = chooseSample(normWeight, a)
                     newParticles[p] = particles[i]
                 print("SUM:",sum)
                 particle.add_uncertainty(newParticles, varPos, varOri)
