@@ -10,12 +10,12 @@ import robot
 def localization_turn():
     leftSpeed = math.floor(64 * 0.97)
     rightSpeed = 64
-    degSec10 = 0.005
+    degSec = 0.005
     timesToTurn = 16
 
     for i in range(timesToTurn):
         print(robot.Robot().go_diff(leftSpeed, rightSpeed, 1, 0))
-        sleep(2 * degSec10)
+        sleep(20 * degSec)
         print(robot.Robot().stop())
 
         ## Check surroundings for box
