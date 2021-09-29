@@ -36,7 +36,7 @@ def randomizer(particles, p):
     nRandom = math.floor((len(particles)/100*p))
     for p in range(nRandom):
         particles[p] = particle.Particle(600.0*np.random.ranf() - 100.0, 600.0*np.random.ranf() - 250.0,
-                                             np.mod(2.0*np.pi*np.random.ranf(), 2.0*np.pi), 0.1/n)
+                                             np.mod(2.0*np.pi*np.random.ranf(), 2.0*np.pi), 0.01/n)
 
 if isRunningOnArlo():
     # XXX: You need to change this path to point to where your robot.py file is located
@@ -197,14 +197,9 @@ try:
 
 
         for p in particles:
-            c = velocity
-            C = 90.0
-            B = p.getTheta()
-
-            y = c * np.sin(B) / np.sin(C)
-            x = np.sqrt((c**2) - (y**2))
-
-            particle.move_particle(p, x, y, B)
+            x = math.cos(p.getTheta())*velocity
+            y = math.sin(p.getTheta())*velocity
+            particle.move_particle(p, x, y, angular_velocity)
 
         
         # Use motor controls to update particles
@@ -265,7 +260,7 @@ try:
                     newParticles[p] = copy.copy(particles[i])
                 particle.add_uncertainty(newParticles, varPos, varOri)
                 particles = copy.deepcopy(newParticles)
-                #randomizer(particles,0.5)
+                randomizer(particles,0.1)
 
                 
 
