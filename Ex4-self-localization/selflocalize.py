@@ -200,7 +200,6 @@ try:
 
         for p in particles:
             x = math.cos(p.getTheta())*velocity
-            print("x =", x)
             y = math.sin(p.getTheta())*velocity
             particle.move_particle(p, x, y, angular_velocity)
 
