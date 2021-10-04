@@ -21,6 +21,7 @@ def localization_turn():
         print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
         sleep(round(deg * degSec, 5) )
         print(arlo.stop())
+        sleep(1)
 
         ## Check surroundings for box
         ## Update samples to turn 20 degrees.
