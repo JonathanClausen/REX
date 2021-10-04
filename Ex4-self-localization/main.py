@@ -21,12 +21,16 @@ particles = selflocalize.initialize_particles(num_particles)
 
 
 # check location.
+print("meanParticle")
 meanParticle = localize.localize(10, particles, 0)
+print("estimatetarget")
 vecLength, targetOri = findlocation.estimate_target(0,300, meanParticle)
+print("disttotarget")
 distToTarget = math.sqrt(( target[0] - meanParticle.getX() )**2 + ( target[1] - meanParticle.getY() )**2)
 
 #Moving
 #move.turnAll(targetOri, particles) 
+print("moveall")
 move.moveAll(vecLength, particles)
 if (distToTarget < 10):
     finished = True
