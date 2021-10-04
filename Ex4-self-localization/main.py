@@ -9,7 +9,7 @@ import localize
 target = np.array([150,0])
 # Initialize particles
 num_particles = 1000
-particles = selflocalize.initialize_particles(num_particles)
+particles = localize.initialize_particles(num_particles)
 
 # Turn 360 until we find boxes (findlocation.py)
 #initial_location = findlocation.localization_turn(particles)
