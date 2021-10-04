@@ -1,3 +1,4 @@
+from numpy.linalg.linalg import norm
 import cv2
 import particle
 import camera
@@ -24,12 +25,21 @@ def isRunningOnArlo():
     return onRobot
 
 # a is a uniform number between 0 and 1
-def chooseSample(particles, a):
-    for i in range(len(particles)):
-        a -= particles[i].getWeight()
-        if (a <= 0.0):
-            return i
-    return len(particles)-1
+def chooseSample(Weights, a):
+    i = 0
+    j = len(Weights)-1
+
+    while (True):
+        b = math.ceil(((j - i) / 2) + i)
+        if (a == Weights[b]):
+            return b
+        elif (a > Weights[b]):
+            i = b
+        else:
+            if j == b:
+                return b
+            else:
+                j = b
 
 #Simple Randomizer    
 def randomizer(particles, p):
@@ -250,14 +260,22 @@ try:
 
                 # Normalize weights
                 newParticles = copy.deepcopy(particles)
+                cumNormWeights = np.zeros(len(particles)-1)
+
                 #normWeight = np.zeros(num_particles)
                 for p in range(len(particles)):
-                    newParticles[p].setWeight((particles[p].getWeight()/sumWeight))
+                    normWeight = (particles[p].getWeight()/sumWeight)
+                    newParticles[p].setWeight(normWeight)
+                    if p == 0:
+                        cumNormWeights[p] = normWeight
+                    else:
+                        cumNormWeights[p] = normWeight + cumNormWeights[p-1]
+
 
                 #Resampling
                 for p in range(len(particles)):
                     a = random.uniform(0.0, 1.0)
-                    i = chooseSample(newParticles, a)
+                    i = chooseSample(cumNormWeights, a)
                     newParticles[p] = copy.copy(particles[i])
                 particle.add_uncertainty(newParticles, varPos, varOri)
                 particles = copy.deepcopy(newParticles)
