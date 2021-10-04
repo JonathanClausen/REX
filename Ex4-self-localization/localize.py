@@ -68,9 +68,6 @@ def localize(numResample, particles, debug):
     est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
     num_particles = len(particles)
 
-
-    world = np.zeros((500,500,3), dtype=np.uint8)
-
     cam = camera.Camera(0)
     varNorm = 30
     varTheta = 0.1
@@ -152,9 +149,9 @@ def initialize_particles(num_particles):
         # Random starting points.
         p = particle.Particle(600.0*np.random.ranf() - 100.0, 600.0*np.random.ranf() - 250.0, np.mod(2.0*np.pi*np.random.ranf(), 2.0*np.pi), 1.0/num_particles)
         particles.append(p)
-
     return particles
 
-particles = initialize_particles(100)
+
+particles = initialize_particles(1000)
 pos = localize(10, particles, 0)
 print("X = ", pos.getX(), " - Y = ", pos.getY(), " - Theta = ", pos.getTheta())
