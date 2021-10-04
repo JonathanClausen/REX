@@ -8,6 +8,7 @@ import random
 from timeit import default_timer as timer
 import sys
 import copy
+import camera
 
 
 
@@ -64,11 +65,12 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [1, 4]
+landmarkIDs = [1, 3 ]
 landmarks = {
 
     1: (0.0, 0.0),  # Coordinates for landmark 1
-    4: (300.0, 0.0)  # Coordinates for landmark 2
+    3: (300.0, 0.0)   # Coordinates for landmark 2
+    #4: (300.0, 0.0)  # Coordinates for landmark 2
 }
 landmark_colors = [CRED, CGREEN] # Colors used when drawing the landmarks
 
@@ -198,6 +200,7 @@ try:
 
         for p in particles:
             x = math.cos(p.getTheta())*velocity
+            print("x =", x)
             y = math.sin(p.getTheta())*velocity
             particle.move_particle(p, x, y, angular_velocity)
 
@@ -240,7 +243,6 @@ try:
 
                     pOrientWeight = 1/math.sqrt(2*math.pi * varTheta**2) * math.exp(- ((angles[i] - pPhi )**2) / (2 * varTheta**2))
 
-
                     pWeight = pPosWeight * pOrientWeight
 
                     sumWeight += pWeight
@@ -260,7 +262,7 @@ try:
                     newParticles[p] = copy.copy(particles[i])
                 particle.add_uncertainty(newParticles, varPos, varOri)
                 particles = copy.deepcopy(newParticles)
-                randomizer(particles,0.5)
+                #randomizer(particles,0.5)
 
                 
 
