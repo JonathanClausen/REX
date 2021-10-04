@@ -14,7 +14,7 @@ def localization_turn():
     leftSpeed = math.floor(64 * 0.97)
     rightSpeed = 64
     degSec = 0.005
-    deg = 10
+    deg = 30
     timesToTurn = 36
 
     for i in range(timesToTurn):
