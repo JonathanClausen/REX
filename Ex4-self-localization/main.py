@@ -1,7 +1,6 @@
 import findlocation
 import numpy as np
 import particle
-import selflocalize
 import math
 import move
 import localize
