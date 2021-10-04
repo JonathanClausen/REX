@@ -19,7 +19,7 @@ def localization_turn():
 
     for i in range(timesToTurn):
         print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
-        sleep(10)
+        sleep(round(deg * degSec, 5) )
         print(arlo.stop())
 
         ## Check surroundings for box
