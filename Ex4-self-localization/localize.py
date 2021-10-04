@@ -150,6 +150,6 @@ def initialize_particles(num_particles):
     return particles
 
 
-particles = initialize_particles(1000)
-pos = localize(10, particles, 0)
-print("X = ", pos.getX(), " - Y = ", pos.getY(), " - Theta = ", pos.getTheta())
+#particles = initialize_particles(1000)
+#pos = localize(10, particles, 0)
+#print("X = ", pos.getX(), " - Y = ", pos.getY(), " - Theta = ", pos.getTheta())
