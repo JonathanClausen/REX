@@ -15,7 +15,7 @@ def localization_turn():
     rightSpeed = 64
     degSec = 0.005
     deg = 30
-    timesToTurn = 21
+    timesToTurn = 19
 
     for i in range(timesToTurn):
         print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
