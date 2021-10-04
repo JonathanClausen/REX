@@ -260,7 +260,7 @@ try:
 
                 # Normalize weights
                 newParticles = copy.deepcopy(particles)
-                cumNormWeights = np.zeros(len(particles)-1)
+                cumNormWeights = np.zeros(len(particles))
 
                 #normWeight = np.zeros(num_particles)
                 for p in range(len(particles)):
