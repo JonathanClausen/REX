@@ -57,7 +57,7 @@ landmarkIDs = [1, 3 ]
 landmarks = {
 
     1: (0.0, 0.0),  # Coordinates for landmark 1
-    3: (300.0, 0.0)   # Coordinates for landmark 2
+    3: (150.0, 0.0)   # Coordinates for landmark 2
     #4: (300.0, 0.0)  # Coordinates for landmark 2
 }
 
@@ -82,7 +82,7 @@ def localize(numResample, particles, debug):
         if not isinstance(objectIDs, type(None)):
             # List detected objects
             for i in range(len(objectIDs)):
-                #print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
+                print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
                 # XXX: Do something for each detected object - remember, the same ID may appear several times
                 lx = (landmarks[objectIDs[i]])[0]
                 ly = (landmarks[objectIDs[i]])[1]
