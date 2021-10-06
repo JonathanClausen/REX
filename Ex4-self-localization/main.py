@@ -6,6 +6,7 @@ import move
 import localize
 import sys
 import camera
+from time import sleep
 
 #Import arlo robot
 sys.path.append("../")
@@ -40,10 +41,10 @@ try:
 
 
     move.turnAll(targetOri, particles, arlo) 
-    print("moveall")
+    print("turning degrees= ",targetOri)
+    sleep(10.0)
     move.moveAll(distToTarget, particles, arlo)
-    if (distToTarget < 10):
-        finished = True
+    
 
 finally:
     cam.terminateCaptureThread()

@@ -56,7 +56,8 @@ def goTurn(deg, arlo):
         print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
     else:
         print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
-    sleep(round(deg * degSec, 5) )
+        
+    sleep(round(abs(deg) * degSec, 5) )
     print(arlo.stop())
     ## sample
 
