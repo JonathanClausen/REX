@@ -44,7 +44,7 @@ try:
 
         move.turnAll((targetOri), particles, arlo) 
         sleep(1)
-        move.moveAll(round(distToTarget * 10, 5), particles, arlo)
+        move.moveAll(round(distToTarget * 1.10, 5), particles, arlo)
     
 
 finally:
