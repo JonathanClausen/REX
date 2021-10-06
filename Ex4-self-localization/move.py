@@ -61,7 +61,7 @@ def goTurn(deg):
     ## sample
 
 def moveAll(length, particles):
-    go_straight()
+    go_straight(length)
     for p in particles: 
         x = math.cos(p.getTheta())*length
         y = math.sin(p.getTheta())*length
