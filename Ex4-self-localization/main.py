@@ -15,7 +15,7 @@ import ARLO.robot
 
 try:
     arlo = ARLO.robot.Robot()
-    cam = camera.Camera(0, 'arlo', useCaptureThread = True, matrix)
+    cam = camera.Camera(0, 'arlo', useCaptureThread = True)
 
     target = np.array([150,0])
     # Initialize particles
