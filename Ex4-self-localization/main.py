@@ -25,7 +25,7 @@ try:
     particles = localize.initialize_particles(num_particles)
     distToTarget = 100
     # Turn 360 until we find boxes (findlocation.py)
-    while (distToTarget > 5):
+    while (distToTarget > 15):
         particles = copy.deepcopy(findlocation.localization_turn(particles, arlo, cam))
         
         # check location. Keep spinning
@@ -44,7 +44,7 @@ try:
 
         move.turnAll((targetOri), particles, arlo) 
         sleep(1)
-        move.moveAll(distToTarget, particles, arlo)
+        move.moveAll(round(distToTarget * 10, 5), particles, arlo)
     
 
 finally:
