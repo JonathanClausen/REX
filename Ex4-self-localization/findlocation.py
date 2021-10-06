@@ -25,10 +25,10 @@ def localization_turn(particles, arlo, cam):
         #Turn particles and update particles 
         move.turnAll(deg, particles, arlo)
         #meanParticle = localize.localize(2, particles, 0, cam)
-        
+        sleep(0.5)
         # Check if both boxes have been spotted.
         colour = cam.get_next_frame()
-        sleep(1)
+        sleep(0.5)
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
         print("Object IDs: ", objectIDs)
         if not isinstance(objectIDs, type(None)):
