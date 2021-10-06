@@ -1,8 +1,8 @@
 import math
 from time import sleep
 import numpy as np
-#import localize
-#import move
+import localize
+import move
 import camera
 
 
@@ -10,7 +10,6 @@ import camera
 # # Get ARLO.Robot
 # sys.path.append("../")
 # import ARLO.robot
-
 # arlo = ARLO.robot.Robot()
 
 
