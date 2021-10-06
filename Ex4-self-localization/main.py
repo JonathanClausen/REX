@@ -5,12 +5,14 @@ import math
 import move
 import localize
 import sys
+import camera
 
 #Import arlo robot
 sys.path.append("../")
 import ARLO.robot
 
 arlo = ARLO.robot.Robot()
+cam = camera.Camera(0, 'arlo', useCaptureThread = True)
 
 target = np.array([150,0])
 # Initialize particles
@@ -19,7 +21,7 @@ particles = localize.initialize_particles(num_particles)
 
 # Turn 360 until we find boxes (findlocation.py)
 
-findlocation.localization_turn(particles, arlo)
+findlocation.localization_turn(particles, arlo, cam)
 
 
 # check location. Keep spinning

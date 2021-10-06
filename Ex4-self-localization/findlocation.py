@@ -13,11 +13,10 @@ import camera
 # arlo = ARLO.robot.Robot()
 
 
-def localization_turn(particles, arlo):
+def localization_turn(particles, arlo, cam):
     deg = 20
     counter = 0
     max_turn = 18
-    cam = camera.Camera(0)
     landmarks = []
     seenBoth = False
 
