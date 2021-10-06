@@ -18,6 +18,7 @@ try:
     cam = camera.Camera(0, 'arlo', useCaptureThread = True)
 
     target = np.array([150,0])
+    boxOne = np.array([300,0])
     # Initialize particles
     num_particles = 1000
 
@@ -41,11 +42,14 @@ try:
         distToTarget = math.sqrt(( target[0] - meanParticle.getX() )**2 + ( target[1] - meanParticle.getY() )**2)
         print(distToTarget)
 
-
         move.turnAll((targetOri), particles, arlo) 
         sleep(1)
         move.moveAll(round(distToTarget * 1.10, 5), particles, arlo)
-    
+
+
+        vecLength, targetOri = findlocation.estimate_target(boxOne[0], boxOne[1], meanParticle)
+        move.turnAll((targetOri), particles, arlo)
+        
 
 finally:
     cam.terminateCaptureThread()
