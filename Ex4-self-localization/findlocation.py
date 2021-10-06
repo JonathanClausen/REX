@@ -20,7 +20,7 @@ def localization_turn(particles, arlo, cam):
     landmarks = []
     seenBoth = False
 
-    while((not seenBoth) or (counter <= max_turn)):
+    while((not seenBoth) and (counter <= max_turn)):
         sleep(0.5)
         #Turn particles and update particles 
         move.turnAll(deg, particles, arlo)
