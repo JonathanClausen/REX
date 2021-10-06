@@ -4,6 +4,8 @@ from time import sleep
 import particle
 import numpy as np
 import localize
+import move
+import camera
 
 
 
@@ -15,19 +17,29 @@ arlo = ARLO.robot.Robot()
 
 
 def localization_turn(particles):
-    leftSpeed = math.floor(64 * 0.97)
-    rightSpeed = 64
-    degSec = 0.005
-    # this makes a full circle
-    deg = 30
-    timesToTurn = 19 
+    deg = 20
+    counter = 0
+    max_turn = 18
+    cam = camera.Camera(0)
+    landmarks = []
+    seenBoth = False
 
-    for i in range(timesToTurn):
-        print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
-        sleep(round(deg * degSec, 5) )
-        print(arlo.stop())
-        ## sample
-        sleep(1)
+    while(not seenBoth or counter >= max_turn):
+        #Turn particles and update particles 
+        move.TurnAll(deg, particles)
+        meanParticle = localize.localize(2, particles, 0)
+
+        # Check if both boxes have been spotted.
+        colour = cam.get_next_frame()
+        objectIDs, dists, angles = cam.detect_aruco_objects(colour)
+        for i in range(len(objectIDs)):
+            if (not isinstance(objectIDs[i], type(None)) and (objectIDs[i] not in landmarks)):
+                    landmarks.append(objectIDs[i])
+                    print("Found landmark: ", objectIDs[i])
+        if ((3 in landmarks) and (1 in landmarks)):
+            seenBoth = True
+
+        counter += 1
 
         ## Update samples to turn 20 degrees.
         

@@ -11,15 +11,11 @@ num_particles = 1000
 particles = localize.initialize_particles(num_particles)
 
 # Turn 360 until we find boxes (findlocation.py)
-#initial_location = findlocation.localization_turn(particles)
 
-# Main loop
-
-
-# Drive towards middle of boxes
+findlocation.localization_turn(particles)
 
 
-# check location.
+# check location. Keep spinning
 print("meanParticle")
 meanParticle = localize.localize(10, particles, 0)
 print("estimatetarget")
@@ -27,10 +23,10 @@ vecLength, targetOri = findlocation.estimate_target(0,300, meanParticle)
 print("disttotarget")
 distToTarget = math.sqrt(( target[0] - meanParticle.getX() )**2 + ( target[1] - meanParticle.getY() )**2)
 
-#Moving
-#move.turnAll(targetOri, particles) 
+
+move.turnAll(targetOri, particles) 
 print("moveall")
-move.moveAll(vecLength, particles)
+move.moveAll(distToTarget, particles)
 if (distToTarget < 10):
     finished = True
     

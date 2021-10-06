@@ -48,7 +48,7 @@ def go_straight(length):
     return
 
 def goTurn(deg):
-    degSec = 0.005
+    degSec = 0.010
     # this makes a full circle
 
     if (np.sign(deg) == 1):
