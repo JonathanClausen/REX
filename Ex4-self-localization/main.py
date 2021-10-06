@@ -7,6 +7,7 @@ import localize
 import sys
 import camera
 from time import sleep
+import copy
 
 #Import arlo robot
 sys.path.append("../")
@@ -23,7 +24,7 @@ try:
 
     # Turn 360 until we find boxes (findlocation.py)
 
-    findlocation.localization_turn(particles, arlo, cam)
+    particles = copy.deepcopy(findlocation.localization_turn(particles, arlo, cam))
 
 
     # check location. Keep spinning

@@ -137,7 +137,7 @@ def localize(numResample, particles, debug, cam):
             if debug:
                 print("est_pose X = ", est_pose.getX(), " Y = ", est_pose.getY(), " theta = ", est_pose.getTheta())
     print("particle-1: ", particles[0].getX() )
-    return particle.estimate_pose(particles)
+    return particles
 
 
 

@@ -4,6 +4,7 @@ import numpy as np
 import localize
 import move
 import camera
+import copy
 
 
 
@@ -32,7 +33,7 @@ def localization_turn(particles, arlo, cam):
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
         print("Object IDs: ", objectIDs)
         if not isinstance(objectIDs, type(None)):
-            meanParticle = localize.localize(1, particles, 1, cam)
+            particles = copy.deepcopy(localize.localize(1, particles, 1, cam))
             for i in range(len(objectIDs)):
                 if (objectIDs[i] not in landmarks):
                     landmarks.append(objectIDs[i])
@@ -44,6 +45,7 @@ def localization_turn(particles, arlo, cam):
         counter += 1
 
         ## Update samples to turn 20 degrees.
+    return particles
         
 def estimate_target(targetX, targetY, p):
     vecX = targetX - p.getX()
