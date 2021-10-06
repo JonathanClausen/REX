@@ -51,12 +51,13 @@ def goTurn(deg, arlo):
     degSec = 0.010
     # this makes a full circle
 
-    if (np.sign(deg) == 1):
+    if (np.sign(deg) == 0):
         # Turn right
         print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
     else:
         print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
-    sleep(round(deg * degSec, 5) )
+        
+    sleep(round(abs(deg) * degSec, 5) )
     print(arlo.stop())
     ## sample
 
