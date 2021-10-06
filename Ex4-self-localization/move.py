@@ -73,6 +73,6 @@ def moveAll(length, particles):
 def turnAll(delta_theta, particles):
     goTurn(delta_theta)
     for p in particles: 
-        p.setTheta(particle.getTheta()+delta_theta)
+        p.setTheta(p.getTheta()+delta_theta)
 
 
