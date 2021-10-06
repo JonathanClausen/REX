@@ -127,7 +127,7 @@ def localize(numResample, particles, debug, cam):
                 for p in range(len(particles)):
                     a = random.uniform(0.0, 1.0)
                     i = chooseSample(cumNormWeights, a)
-                    newParticles[p] = copy.copy(particles[i])
+                    newParticles[p] = copy.deepcopy(particles[i])
                 particle.add_uncertainty(newParticles, varPos, varOri)
                 particles = copy.deepcopy(newParticles)
                 #randomizer(particles,0.5)
