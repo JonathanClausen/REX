@@ -11,6 +11,7 @@ import sys
 import copy
 
 
+
 #sys.path.append("../ARLO/")
 
 
@@ -57,12 +58,13 @@ landmarkIDs = [1, 3 ]
 landmarks = {
 
     1: (0.0, 0.0),  # Coordinates for landmark 1
-    3: (150.0, 0.0)   # Coordinates for landmark 2
-    #4: (300.0, 0.0)  # Coordinates for landmark 2
+    3: (150.0, 0.0)   # Coordinates for landmark 3
+    #4: (300.0, 0.0)  # Coordinates for landmark 4
 }
 
 
 def localize(numResample, particles, debug, cam):
+    print("particle-1: ", particles[0].getX())
     est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
     num_particles = len(particles)
 
@@ -134,7 +136,7 @@ def localize(numResample, particles, debug, cam):
 
             if debug:
                 print("est_pose X = ", est_pose.getX(), " Y = ", est_pose.getY(), " theta = ", est_pose.getTheta())
-
+    print("particle-1: ", particles[0].getX() )
     return particle.estimate_pose(particles)
 
 
