@@ -49,6 +49,7 @@ def go_straight(length, arlo):
 
 def goTurn(deg, arlo):
     degSec = 0.010
+    print("goTurn: Turning %s degrees", deg)
     # this makes a full circle
 
     if (np.sign(deg) == 1):
@@ -70,7 +71,7 @@ def moveAll(length, particles, arlo):
 
 
 def turnAll(delta_theta, particles, arlo):
-    goTurn(delta_theta, arlo)
+    goTurn(math.degrees(delta_theta), arlo)
     for p in particles: 
         p.setTheta(p.getTheta()+delta_theta)
 
