@@ -28,8 +28,9 @@ def localization_turn(particles, arlo, cam):
         # Check if both boxes have been spotted.
         colour = cam.get_next_frame()
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
-        for i in range(len(objectIDs)):
-            if (not isinstance(objectIDs[i], type(None)) and (objectIDs[i] not in landmarks)):
+        if not isinstance(objectIDs, type(None)):
+            for i in range(len(objectIDs)):
+                if (objectIDs[i] not in landmarks):
                     landmarks.append(objectIDs[i])
                     print("Found landmark: ", objectIDs[i])
         if ((3 in landmarks) and (1 in landmarks)):

@@ -26,7 +26,7 @@ findlocation.localization_turn(particles, arlo, cam)
 
 # check location. Keep spinning
 print("meanParticle = ")
-meanParticle = localize.localize(10, particles, 0)
+meanParticle = localize.localize(10, particles, 0, cam)
 print(meanParticle.getX(), ", ", meanParticle.getY(), ", ", meanParticle.getTheta())
 
 print("estimatetarget = ")
