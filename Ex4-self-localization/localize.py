@@ -62,11 +62,10 @@ landmarks = {
 }
 
 
-def localize(numResample, particles, debug):
+def localize(numResample, particles, debug, cam):
     est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
     num_particles = len(particles)
 
-    cam = camera.Camera(0)
     varNorm = 30
     varTheta = 0.1
     varPos = 3
