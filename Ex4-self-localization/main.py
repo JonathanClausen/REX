@@ -42,7 +42,7 @@ try:
 
     move.turnAll(targetOri, particles, arlo) 
     print("turning degrees= ",targetOri)
-    sleep(10.0)
+    sleep(2)
     move.moveAll(distToTarget, particles, arlo)
     
 
