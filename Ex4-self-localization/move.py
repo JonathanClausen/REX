@@ -1,10 +1,10 @@
 import sys
 import math
 from time import sleep
-import particle
 from time import perf_counter
+import particle
 import numpy as np
-import main
+#import main
 
 
 leftSpeed = math.floor(64 * 0.97)

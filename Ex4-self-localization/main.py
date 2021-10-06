@@ -9,6 +9,7 @@ import sys
 #Import arlo robot
 sys.path.append("../")
 import ARLO.robot
+
 arlo = ARLO.robot.Robot()
 
 target = np.array([150,0])
