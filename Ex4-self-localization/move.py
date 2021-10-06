@@ -44,7 +44,7 @@ def go_straight(length, arlo):
             t = perf_counter()
         arlo.stop()
         print("Dt = ", distTime, " t = ", t, " DT-T = ", distTime-(t-start))
-        distTime -= t
+        distTime -= (t-start)
     return
 
 def goTurn(deg, arlo):
