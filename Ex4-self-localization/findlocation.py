@@ -24,7 +24,7 @@ def localization_turn(particles, arlo, cam):
         
         #Turn particles and update particles 
         move.turnAll(deg, particles, arlo)
-        #meanParticle = localize.localize(2, particles, 0, cam)
+        meanParticle = localize.localize(2, particles, 0, cam)
         sleep(0.5)
         # Check if both boxes have been spotted.
         colour = cam.get_next_frame()
@@ -35,6 +35,7 @@ def localization_turn(particles, arlo, cam):
             for i in range(len(objectIDs)):
                 if (objectIDs[i] not in landmarks):
                     landmarks.append(objectIDs[i])
+                    meanParticle = localize.localize(2, particles, 0, cam)
                     print("Found landmark: ", objectIDs[i])
         if ((3 in landmarks) and (1 in landmarks)):
             seenBoth = True

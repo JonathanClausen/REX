@@ -28,7 +28,7 @@ try:
 
     # check location. Keep spinning
     print("meanParticle = ")
-    meanParticle = localize.localize(10, particles, 0, cam)
+    meanParticle = particle.estimate_pose(particles)
     print(meanParticle.getX(), ", ", meanParticle.getY(), ", ", meanParticle.getTheta())
 
     print("estimatetarget = ")
