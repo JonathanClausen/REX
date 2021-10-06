@@ -14,13 +14,14 @@ import camera
 
 
 def localization_turn(particles, arlo, cam):
-    deg = 20
+    deg = 15
     counter = 0
     max_turn = 18
     landmarks = []
     seenBoth = False
 
-    while(not seenBoth or counter >= max_turn):
+    while((not seenBoth) or (counter <= max_turn)):
+        sleep(0.5)
         #Turn particles and update particles 
         move.turnAll(deg, particles, arlo)
         meanParticle = localize.localize(2, particles, 0, cam)
@@ -28,6 +29,7 @@ def localization_turn(particles, arlo, cam):
         # Check if both boxes have been spotted.
         colour = cam.get_next_frame()
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
+        print("Object IDs: ", objectIDs)
         if not isinstance(objectIDs, type(None)):
             for i in range(len(objectIDs)):
                 if (objectIDs[i] not in landmarks):
