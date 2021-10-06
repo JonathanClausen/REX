@@ -26,7 +26,7 @@ def localization_turn(particles):
 
     while(not seenBoth or counter >= max_turn):
         #Turn particles and update particles 
-        move.TurnAll(deg, particles)
+        move.turnAll(deg, particles)
         meanParticle = localize.localize(2, particles, 0)
 
         # Check if both boxes have been spotted.
