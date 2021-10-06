@@ -43,7 +43,6 @@ def go_straight(length, arlo):
                 break
             t = perf_counter()
         arlo.stop()
-        print("Dt = ", distTime, " t = ", t, " DT-T = ", distTime-(t-start))
         distTime -= (t-start)
     return
 

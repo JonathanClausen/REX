@@ -42,8 +42,7 @@ try:
 
 
     move.turnAll((targetOri), particles, arlo) 
-    print("turning radians= ", targetOri)
-    sleep(2)
+    sleep(1)
     move.moveAll(distToTarget, particles, arlo)
     
 
