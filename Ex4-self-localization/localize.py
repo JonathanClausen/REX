@@ -11,7 +11,7 @@ import sys
 import copy
 
 
-sys.path.append("../ARLO/")
+#sys.path.append("../ARLO/")
 
 
 # a is a uniform number between 0 and 1

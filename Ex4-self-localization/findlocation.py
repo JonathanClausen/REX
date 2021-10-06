@@ -9,14 +9,14 @@ import camera
 
 
 
-# Get ARLO.Robot
-sys.path.append("../")
-import ARLO.robot
+# # Get ARLO.Robot
+# sys.path.append("../")
+# import ARLO.robot
 
-arlo = ARLO.robot.Robot()
+# arlo = ARLO.robot.Robot()
 
 
-def localization_turn(particles):
+def localization_turn(particles, arlo):
     deg = 20
     counter = 0
     max_turn = 18
@@ -26,7 +26,7 @@ def localization_turn(particles):
 
     while(not seenBoth or counter >= max_turn):
         #Turn particles and update particles 
-        move.turnAll(deg, particles)
+        move.turnAll(deg, particles, arlo)
         meanParticle = localize.localize(2, particles, 0)
 
         # Check if both boxes have been spotted.

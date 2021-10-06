@@ -4,10 +4,8 @@ from time import sleep
 import particle
 from time import perf_counter
 import numpy as np
+import main
 
-sys.path.append("../")
-import ARLO.robot
-arlo = ARLO.robot.Robot()
 
 leftSpeed = math.floor(64 * 0.97)
 rightSpeed = 64
@@ -19,7 +17,7 @@ secMeter      = 2.55
 stopDist      = 400
 stopDistSide  = 200
 
-def go_straight(length):
+def go_straight(length, arlo):
     emStop = False
     sensFront = arlo.read_front_ping_sensor()
     ensLeft = arlo.read_left_ping_sensor()
@@ -49,7 +47,7 @@ def go_straight(length):
         distTime -= t
     return
 
-def goTurn(deg):
+def goTurn(deg, arlo):
     degSec = 0.010
     # this makes a full circle
 
@@ -62,16 +60,16 @@ def goTurn(deg):
     print(arlo.stop())
     ## sample
 
-def moveAll(length, particles):
-    go_straight(length)
+def moveAll(length, particles, arlo):
+    go_straight(length, arlo)
     for p in particles: 
         x = math.cos(p.getTheta())*length
         y = math.sin(p.getTheta())*length
         particle.move_particle(p,x,y,0)
 
 
-def turnAll(delta_theta, particles):
-    goTurn(delta_theta)
+def turnAll(delta_theta, particles, arlo):
+    goTurn(delta_theta, arlo)
     for p in particles: 
         p.setTheta(p.getTheta()+delta_theta)
 
