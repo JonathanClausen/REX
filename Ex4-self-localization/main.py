@@ -27,7 +27,7 @@ try:
     distToTarget = 100
     # Turn 360 until we find boxes (findlocation.py)
     while (distToTarget > 15):
-        particles = copy.deepcopy(findlocation.localization_turn(particles, arlo, cam))
+        particles = copy.deepcopy(findlocation.localization_turn(particles, arlo, cam)) 
         
         # check location. Keep spinning
         print("meanParticle = ")
@@ -46,7 +46,7 @@ try:
         sleep(1)
         move.moveAll(round(distToTarget * 1.10, 5), particles, arlo)
 
-
+        sleep(1)
         vecLength, targetOri = findlocation.estimate_target(boxOne[0], boxOne[1], meanParticle)
         move.turnAll((targetOri), particles, arlo)
         
