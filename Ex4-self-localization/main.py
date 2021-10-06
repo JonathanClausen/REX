@@ -11,38 +11,42 @@ import camera
 sys.path.append("../")
 import ARLO.robot
 
-arlo = ARLO.robot.Robot()
-cam = camera.Camera(0, 'arlo', useCaptureThread = True)
+try:
+    arlo = ARLO.robot.Robot()
+    cam = camera.Camera(0, 'arlo', useCaptureThread = True)
 
-target = np.array([150,0])
-# Initialize particles
-num_particles = 1000
-particles = localize.initialize_particles(num_particles)
+    target = np.array([150,0])
+    # Initialize particles
+    num_particles = 1000
+    particles = localize.initialize_particles(num_particles)
 
-# Turn 360 until we find boxes (findlocation.py)
+    # Turn 360 until we find boxes (findlocation.py)
 
-findlocation.localization_turn(particles, arlo, cam)
-
-
-# check location. Keep spinning
-print("meanParticle = ")
-meanParticle = localize.localize(10, particles, 0, cam)
-print(meanParticle.getX(), ", ", meanParticle.getY(), ", ", meanParticle.getTheta())
-
-print("estimatetarget = ")
-vecLength, targetOri = findlocation.estimate_target(0,150, meanParticle)
-print(vecLength)
-
-print("disttotarget = ")
-distToTarget = math.sqrt(( target[0] - meanParticle.getX() )**2 + ( target[1] - meanParticle.getY() )**2)
-print(distToTarget)
+    findlocation.localization_turn(particles, arlo, cam)
 
 
-move.turnAll(targetOri, particles, arlo) 
-print("moveall")
-move.moveAll(distToTarget, particles, arlo)
-if (distToTarget < 10):
-    finished = True
+    # check location. Keep spinning
+    print("meanParticle = ")
+    meanParticle = localize.localize(10, particles, 0, cam)
+    print(meanParticle.getX(), ", ", meanParticle.getY(), ", ", meanParticle.getTheta())
+
+    print("estimatetarget = ")
+    vecLength, targetOri = findlocation.estimate_target(0,150, meanParticle)
+    print(vecLength)
+
+    print("disttotarget = ")
+    distToTarget = math.sqrt(( target[0] - meanParticle.getX() )**2 + ( target[1] - meanParticle.getY() )**2)
+    print(distToTarget)
+
+
+    move.turnAll(targetOri, particles, arlo) 
+    print("moveall")
+    move.moveAll(distToTarget, particles, arlo)
+    if (distToTarget < 10):
+        finished = True
+
+finally:
+    cam.terminateCaptureThread()
     
 
 
