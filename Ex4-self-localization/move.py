@@ -24,7 +24,7 @@ def go_straight(length):
     sensFront = arlo.read_front_ping_sensor()
     ensLeft = arlo.read_left_ping_sensor()
     sensRight = arlo.read_right_ping_sensor()
-    distTime = round(length/100*secMeter,5)
+    distTime = round((length/100)*secMeter,5)
     while (distTime > 0.1 and (not emStop)):
         print("time to go", distTime)
         start = perf_counter()
@@ -45,6 +45,8 @@ def go_straight(length):
                 break
             t = perf_counter()
         arlo.stop()
+        print("Dt = ", distTime, " t = ", t, " DT-T = ", distTime-(t-start))
+        distTime -= t
     return
 
 def goTurn(deg):
