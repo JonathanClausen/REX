@@ -32,8 +32,8 @@ def localization_turn(particles):
         ## Update samples to turn 20 degrees.
         
 def estimate_target(targetX, targetY, p):
-    vecX = targetX - p.getX
-    vecY = targetY - p.getY
+    vecX = targetX - p.getX()
+    vecY = targetY - p.getY()
     roboOri = p.getTheta()
 
     vecLength = math.sqrt((vecX**2) + (vecY**2))
