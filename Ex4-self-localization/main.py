@@ -17,7 +17,7 @@ try:
     arlo = ARLO.robot.Robot()
     cam = camera.Camera(0, 'arlo', useCaptureThread = True)
 
-    target = np.array([75,0])
+    target = np.array([150,0])
     # Initialize particles
     num_particles = 1000
     particles = localize.initialize_particles(num_particles)
@@ -32,9 +32,9 @@ try:
     meanParticle = particle.estimate_pose(particles)
     print(meanParticle.getX(), ", ", meanParticle.getY(), ", ", meanParticle.getTheta())
 
-    print("estimatetarget = ")
+    #print("estimatetarget = ")
     vecLength, targetOri = findlocation.estimate_target(target[0], target[1], meanParticle)
-    print(vecLength)
+    #print(vecLength)
 
     print("disttotarget = ")
     distToTarget = math.sqrt(( target[0] - meanParticle.getX() )**2 + ( target[1] - meanParticle.getY() )**2)

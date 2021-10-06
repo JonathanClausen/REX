@@ -58,7 +58,7 @@ landmarkIDs = [1, 3 ]
 landmarks = {
 
     1: (0.0, 0.0),  # Coordinates for landmark 1
-    3: (150.0, 0.0)   # Coordinates for landmark 3
+    3: (300.0, 0.0)   # Coordinates for landmark 3
     #4: (300.0, 0.0)  # Coordinates for landmark 4
 }
 
