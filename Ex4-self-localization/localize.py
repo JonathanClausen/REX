@@ -130,12 +130,12 @@ def localize(numResample, particles, debug, cam):
                 particles = copy.deepcopy(newParticles)
                 #randomizer(particles,0.5)
 
-            est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
+            #est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
 
             if debug:
                 print("est_pose X = ", est_pose.getX(), " Y = ", est_pose.getY(), " theta = ", est_pose.getTheta())
 
-    return est_pose
+    return particle.estimate_pose(particles)
 
 
 

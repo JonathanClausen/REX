@@ -24,7 +24,7 @@ def localization_turn(particles, arlo, cam):
         
         #Turn particles and update particles 
         move.turnAll(math.radians(deg), particles, arlo)
-        meanParticle = localize.localize(2, particles, 0, cam)
+        #meanParticle = localize.localize(2, particles, 0, cam)
         sleep(0.5)
         # Check if both boxes have been spotted.
         colour = cam.get_next_frame()
