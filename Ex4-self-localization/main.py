@@ -40,8 +40,8 @@ try:
     print(distToTarget)
 
 
-    move.turnAll(math.radians(targetOri), particles, arlo) 
-    print("turning degrees= ",math.radians(targetOri))
+    move.turnAll((targetOri), particles, arlo) 
+    print("turning degrees= ",targetOri)
     sleep(2)
     move.moveAll(distToTarget, particles, arlo)
     
