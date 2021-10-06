@@ -24,7 +24,7 @@ def go_straight(length):
     sensFront = arlo.read_front_ping_sensor()
     ensLeft = arlo.read_left_ping_sensor()
     sensRight = arlo.read_right_ping_sensor()
-    distTime = length/100*secMeter
+    distTime = round(length/100*secMeter,5)
     while (distTime > 0.1 and (not emStop)):
         print("time to go", distTime)
         start = perf_counter()
@@ -61,7 +61,7 @@ def goTurn(deg):
     ## sample
 
 def moveAll(length, particles):
-    go_straight()
+    go_straight(length)
     for p in particles: 
         x = math.cos(p.getTheta())*length
         y = math.sin(p.getTheta())*length
