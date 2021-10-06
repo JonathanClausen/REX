@@ -32,10 +32,11 @@ def localization_turn(particles, arlo, cam):
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
         print("Object IDs: ", objectIDs)
         if not isinstance(objectIDs, type(None)):
+            meanParticle = localize.localize(1, particles, 1, cam)
             for i in range(len(objectIDs)):
                 if (objectIDs[i] not in landmarks):
                     landmarks.append(objectIDs[i])
-                    meanParticle = localize.localize(2, particles, 0, cam)
+                    
                     print("Found landmark: ", objectIDs[i])
         if ((3 in landmarks) and (1 in landmarks)):
             seenBoth = True
