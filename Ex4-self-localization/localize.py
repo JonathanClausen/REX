@@ -64,7 +64,6 @@ landmarks = {
 
 
 def localize(numResample, particles, debug, cam):
-    print("particle-1: ", particles[0].getX())
     est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
     num_particles = len(particles)
 
@@ -136,7 +135,6 @@ def localize(numResample, particles, debug, cam):
 
             if debug:
                 print("est_pose X = ", est_pose.getX(), " Y = ", est_pose.getY(), " theta = ", est_pose.getTheta())
-    print("particle-1: ", particles[0].getX() )
     return particles
 
 

@@ -48,7 +48,6 @@ def go_straight(length, arlo):
 
 def goTurn(deg, arlo):
     degSec = 0.008
-    print("goTurn: Turning degrees", deg)
     # this makes a full circle
 
     if (np.sign(deg) == 1):
