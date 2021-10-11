@@ -9,7 +9,7 @@ from numpy.lib.arraysetops import unique
 sys.path.append("../")
 
 import ARLO.robot
-import Ex4.particle
+import Ex4.particle as particle
 
 grid_size = 10
 sensor_max = 250
@@ -23,7 +23,7 @@ l_occ = np.log((1-prob_free) / prob_free)
 l_free = np.log(prob_free / (1 - prob_free))
 
 def occupancy_grid_mapping(grid, mean_particle, sensors):
-    update_m = perceptualField(grid,mean_particle,sensors, grid_size)
+    update_m = perceptualField(grid,mean_particle,sensors)
     for m in update_m:
         x = m[0] 
         y = m[1]
@@ -79,3 +79,4 @@ def perceptualField(map, p, dist, gridSize):
     
 
      
+occupancy_grid_mapping(np.zeros((100,100)), particle.Particle(50, 50, 0, 0), 50)
