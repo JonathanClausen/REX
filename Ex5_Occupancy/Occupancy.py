@@ -7,9 +7,8 @@ from numpy.lib.arraysetops import unique
 
 #Import arlo robot
 sys.path.append("../")
-
-import ARLO.robot
-import Ex4.particle
+sys.path.append("../Ex4")
+import Ex4.particle as particle
 
 grid_size = 10
 sensor_max = 250
@@ -28,6 +27,8 @@ def occupancy_grid_mapping(grid, mean_particle, sensors):
         x = m[0] 
         y = m[1]
         grid[x][y] = grid[x][y] + inverse_range_sensor_model([x, y, grid[x][y]], mean_particle, sensors) - l_0
+    return grid
+    
             
 
 def inverse_range_sensor_model(cell,robot,sensor):
@@ -40,13 +41,13 @@ def inverse_range_sensor_model(cell,robot,sensor):
     if (r < sensor):
         return l_free
         
-def perceptualField(map, p, dist, gridSize):
-    retArr = np.array([])
+def perceptualField(map, p, dist):
+    retArr = []
     angle = 0.12
     X = p.getX()
     Y = p.getY()
     roboOri = p.getTheta()
-    measurePoints = math.ceil(dist/gridSize)
+    measurePoints = math.ceil(dist/grid_size)
 
     leftOri = roboOri + angle
     rightOri = roboOri - angle
@@ -61,7 +62,8 @@ def perceptualField(map, p, dist, gridSize):
         rightOri = (-2*(math.pi)+rightOri)
     elif (rightOri < (-1*(math.pi))):
         rightOri = (2*(math.pi)+rightOri)
-    for i in range(measurePoints): 
+    for i in range(1,measurePoints): 
+            
             x2_left = math.floor(X+math.cos(leftOri))*(dist/i)
             y2_left = math.floor(X+math.sin(leftOri))*(dist/i)    
             x2_right = math.floor(X+math.cos(rightOri))*(dist/i)
@@ -71,12 +73,27 @@ def perceptualField(map, p, dist, gridSize):
             retArr.append([x2_left,y2_left])
             retArr.append([x2_right,y2_right])
             retArr.append([x2_center,y2_center])
-            retArr = retArr[~np.all(retArr < 0, axis = 1)]
-            retArr = retArr[~np.all(retArr > len(map), axis = 1)]
+    retArr = np.array(retArr)
+    print(retArr)
+    retArr = retArr[~np.all(retArr < 0, axis = 1)]
+    retArr = retArr[~np.all(retArr > len(map), axis = 1)]
     return(np.unique(retArr))
-    
-    
+
+def printMap(list):
+    y, x= np.shape(list)
+    startLine = "+" + ("---+"*x)
+    print(startLine)
+    for i in range(y):
+        print("|", end="")
+        for j in range(x):
+            print('{:>3}|'.format(list[i,j]), end="")
+        print()
+    print(startLine)
+    print()
+
+
     
 
      
-occupancy_grid_mapping(np.zeros((100,100)), Particle.particle(50, 50, 0, 0), 50)
+map = occupancy_grid_mapping(np.zeros((100,100)), particle.Particle(5, 5, 0, 0), 50)
+printMap(map)
