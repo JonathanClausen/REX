@@ -6,9 +6,8 @@ import math
 #Import arlo robot
 sys.path.append("../")
 
-sys.path.append("../Ex4-self-localization")
 import ARLO.robot
-import particle
+import Ex4.particle
 
 def occupancy_grid_mapping(grid, ):
     update_m = perceptualField(m,xt,zt)
