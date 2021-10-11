@@ -10,5 +10,7 @@ sensFront     = 0
 
 sensInterval = 1
 
-sensFront = arlo.read_front_ping_sensor()
-print("Measurement: ", round(sensFront / 10 , 5) )
+while True:
+    sensFront = arlo.read_front_ping_sensor()
+    print("Measurement: ", round(sensFront / 10 , 5) )
+    sleep(sensInterval)
