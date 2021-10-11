@@ -206,8 +206,6 @@ try:
                 angular_velocity += 0.2
             elif action == ord('d'): # Right
                 angular_velocity -= 0.2
-
-
         for p in particles:
             x = math.cos(p.getTheta())*velocity
             y = math.sin(p.getTheta())*velocity
