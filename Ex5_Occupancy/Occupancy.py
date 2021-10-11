@@ -79,3 +79,4 @@ def perceptualField(map, p, dist, gridSize):
     
 
      
+occupancy_grid_mapping(np.zeros((100,100)), Particle.particle(50, 50, 0, 0), 50)

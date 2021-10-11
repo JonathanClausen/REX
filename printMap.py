@@ -8,9 +8,9 @@ def printMap(list):
     for i in range(y):
         print("|", end="")
         for j in range(x):
-            print(round(list[i,j],1), end ="|")
+            print('{:>3}|'.format(list[i,j]), end="")
         print()
     print(startLine)
     print()
 
-printMap(np.array([[4.555,4.555,4.555],[3.555,3.555,3.555]]))
+printMap(np.array([[4,4,4],[3,3,3]]))
