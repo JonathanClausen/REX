@@ -23,7 +23,7 @@ l_occ = np.log((1-prob_free) / prob_free)
 l_free = np.log(prob_free / (1 - prob_free))
 
 def occupancy_grid_mapping(grid, mean_particle, sensors):
-    update_m = perceptualField(m,mean_particle,sensors)
+    update_m = perceptualField(grid,mean_particle,sensors, grid_size)
     for m in update_m:
         x = m[0] 
         y = m[1]
