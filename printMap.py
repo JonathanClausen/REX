@@ -3,14 +3,14 @@ import numpy as np
 
 def printMap(list):
     y, x= np.shape(list)
-    startLine = "+" + ("-"*x) + "+"
+    startLine = "+" + ("---+"*x)
     print(startLine)
     for i in range(y):
-        print("|", end ="")
+        print("|", end="")
         for j in range(x):
-            print(list[i,j], end ="")
-        print("|")
+            print(round(list[i,j],1), end ="|")
+        print()
     print(startLine)
     print()
 
-printMap(np.array([[4,4,4],[3,3,3]]))
+printMap(np.array([[4.555,4.555,4.555],[3.555,3.555,3.555]]))
