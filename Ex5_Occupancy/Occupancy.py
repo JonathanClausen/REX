@@ -95,5 +95,9 @@ def printMap(list):
     
 
      
+<<<<<<< HEAD
 map = occupancy_grid_mapping(np.zeros((100,100)), particle.Particle(5, 5, 0, 0), 50)
 printMap(map)
+=======
+occupancy_grid_mapping(np.zeros((100,100)), particle.Particle(50, 50, 0, 0), 50)
+>>>>>>> e753c6a0ed1908d15ee25b046f24fb7c86610c19
