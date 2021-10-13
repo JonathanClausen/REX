@@ -10,7 +10,7 @@ sys.path.append("../")
 sys.path.append("../Ex4")
 import Ex4.particle as particle
 
-grid_size = 30
+
 sensor_max = 250
 sensor_angle = math.radians(15 * 2)
 
@@ -98,8 +98,10 @@ def printMap(list):
         print(startLine)
     print()
 
-
-map = occupancy_grid_mapping(np.zeros((30, 30), dtype=float), particle.Particle(50, 50, 0.785, 0), 200)
-map[math.floor(50/grid_size)][math.floor(50/grid_size)] = 666
+grid_size = 200
+meanParticle = particle.Particle(50, 50, 0.785, 0) 
+distToObject = 700 
+map = occupancy_grid_mapping(np.zeros((30, 30), dtype=float), meanParticle , distToObject)
+map[math.floor(meanParticle.getX()/grid_size)][math.floor(meanParticle.getY()/grid_size)] = 666
 map = np.flip(map,0)
 printMap(map)
