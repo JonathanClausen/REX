@@ -26,7 +26,7 @@ def printMap(list, robot, grid_size):
             if (robot.getX()/grid_size == i and robot,getY()/grid_size == j):
                 print('{:^6}|'.format("R"), end="")
             elif not (list[i,j] == 0):
-                print('{:^6}|'.format(round(list[i,j], 3)), end="")
+                print('{:^6}|'.format(round(list[i,j], 1)), end="")
             else:
                 print('{:^6}|'.format(""), end="")
         print()
