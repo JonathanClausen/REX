@@ -5,7 +5,7 @@ from numpy.core.fromnumeric import put
 import sys
 sys.path.append("../")
 from ARLO.robot import Robot
-from Ex5_Occupancy.Occupancy import occupancy_grid_mapping
+from Ex5_Occupancy.Occupancy import occupancy_grid_mapping, printMap
 import localize
 import move
 import camera
@@ -88,7 +88,8 @@ def localization_turn2(particles, arlo, cam, map):
         ######TASK 5 Creating occupancy map ##########
         distToObject = round(arlo.read_front_ping_sensor()/10)
         newMap = occupancy_grid_mapping(map, particle.estimate_pose(particles), distToObject)
-        map = newMap
+        map = copy.deepcopy(newMap)
+        printMap(map)
         ############################################
         counter += 1
 
