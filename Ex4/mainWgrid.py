@@ -23,7 +23,7 @@ def printMap(list, arlo, grid_size):
     for i in range(y):
         print("|", end="")
         for j in range(x):
-            if (arlo.getX()/grid_size == i and arlo.getY()/grid_size == j):
+            if (math.floor(arlo.getX()/grid_size) == i and math.floor(arlo.getY()/grid_size) == j):
                 print('{:^6}|'.format("R"), end="")
             elif not (list[i,j] == 0):
                 print('{:^6}|'.format(round(list[i,j], 1)), end="")

@@ -23,11 +23,12 @@ l_occ = np.log((1-prob_free)/prob_free)
 l_free = np.log(prob_free/(1-prob_free))
 
 def inverse_range_sensor_model(cell, robot, sensor):
-    r = math.sqrt(((cell[0]*grid_size - robot.getX())**2) + ((cell[1]*grid_size - robot.getY())**2) )
-    angle = math.atan2( cell[1] - robot.getY(), cell[0] - robot.getX() ) - robot.getTheta()
+#    r = math.sqrt(((cell[0]*grid_size - robot.getX())**2) + ((cell[1]*grid_size - robot.getY())**2) )
+#    angle = math.atan2( cell[1] - robot.getY(), cell[0] - robot.getX() ) - robot.getTheta()
     if (math.floor(sensor/grid_size) == cell[0]) or (math.floor(sensor/grid_size) == cell[1]):
         return l_occ
-    if (math.floor(sensor/grid_size) < cell[0]) or (math.floor(sensor/grid_size) < cell[1]):
+    if ((math.floor(sensor/grid_size) > math.floor(robot.getX()/grid_size) - cell[0]) or
+        (math.floor(sensor/grid_size) > math.floor(robot.getY()/grid_size) - cell[1])):
         return l_0
     return l_free
 
@@ -98,7 +99,6 @@ def printMap(list):
         print()
         print(startLine)
     print()
-
 # grid_size = 30
 # meanParticle = particle.Particle(200, 200, 3.92, 0)
 # distToObject = 200
