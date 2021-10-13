@@ -2,8 +2,10 @@ import math
 from time import sleep
 import numpy as np
 from numpy.core.fromnumeric import put
+import sys
+sys.path.append("../")
 from ARLO.robot import Robot
-from Ex5_Occupancy.Occupancy import occupancy_grid_mapping
+from Ex5_Occupancy.Occupancy import occupancy_grid_mapping, printMap
 import localize
 import move
 import camera
@@ -80,13 +82,14 @@ def localization_turn2(particles, arlo, cam, map):
                     landmarks.append(objectIDs[i])
                     
                     print("Found landmark: ", objectIDs[i])
-        if ((3 in landmarks) and (1 in landmarks)):
+        if ((7 in landmarks) and (1 in landmarks)):
             seenBoth = True
 
         ######TASK 5 Creating occupancy map ##########
-        distToObject = arlo.frontping()
+        distToObject = round(arlo.read_front_ping_sensor()/10)
         newMap = occupancy_grid_mapping(map, particle.estimate_pose(particles), distToObject)
-        map = newMap
+        map = copy.deepcopy(newMap)
+        printMap(map)
         ############################################
         counter += 1
 

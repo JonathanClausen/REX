@@ -16,14 +16,14 @@ sys.path.append("../")
 import ARLO.robot
 
 
-def printMap(list, robot, grid_size):
+def printMap(list, arlo, grid_size):
     y, x= np.shape(list)
     startLine = "+" + ("------+"*x)
     print(startLine)
     for i in range(y):
         print("|", end="")
         for j in range(x):
-            if (robot.getX()/grid_size == i and robot,getY()/grid_size == j):
+            if (arlo.getX()/grid_size == i and arlo.getY()/grid_size == j):
                 print('{:^6}|'.format("R"), end="")
             elif not (list[i,j] == 0):
                 print('{:^6}|'.format(round(list[i,j], 1)), end="")
@@ -48,7 +48,7 @@ try:
     distToTarget = 100
     # Turn 360 until we find boxes (findlocation.py)
     while (distToTarget > 15):
-        particles, map = copy.deepcopy(findlocation.localization_turnV2(particles, arlo, cam,
+        particles, map = copy.deepcopy(findlocation.localization_turn2(particles, arlo, cam,
                                                                         np.zeros((20, 20), dtype=float)))
 
         # check location and update map. Keep spinning
@@ -72,7 +72,7 @@ try:
         vecLength, targetOri = findlocation.estimate_target(boxOne[0], boxOne[1], meanParticle)
         move.turnAll((targetOri), particles, arlo)
 
-        printMap(map, arlo, grid_size)
+        printMap(map, particle.estimate_pose(particles), grid_size)
 
 finally:
     cam.terminateCaptureThread()
