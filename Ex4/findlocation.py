@@ -83,11 +83,11 @@ def localization_turn2(particles, arlo, cam, map):
         if ((3 in landmarks) and (1 in landmarks)):
             seenBoth = True
 
-        #Creating occupancy map 
+        ######TASK 5 Creating occupancy map ##########
         distToObject = arlo.frontping()
         newMap = occupancy_grid_mapping(map, particle.estimate_pose(particles), distToObject)
         map = newMap
-
+        ############################################
         counter += 1
 
         ## Update samples to turn 20 degrees.
