@@ -86,7 +86,7 @@ def localization_turn2(particles, arlo, cam, map):
             seenBoth = True
 
         ######TASK 5 Creating occupancy map ##########
-        distToObject = arlo.read_front_ping_sensor
+        distToObject = round(arlo.read_front_ping_sensor()/10)
         newMap = occupancy_grid_mapping(map, particle.estimate_pose(particles), distToObject)
         map = newMap
         ############################################
