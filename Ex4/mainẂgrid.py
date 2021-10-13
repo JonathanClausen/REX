@@ -57,20 +57,19 @@ finally:
     cam.terminateCaptureThread()
 
 
-
-def printMap(list):
+def printMap(list, robot, landmarks, grid_size):
     y, x= np.shape(list)
-    startLine = "+" + ("---+"*x)
+    startLine = "+" + ("------+"*x)
     print(startLine)
     for i in range(y):
         print("|", end="")
         for j in range(x):
-            if ():
-                print('{:>3}|'.format("R", end="")
+            if (robot.getX()/grid_size == i and ):
+
             elif not (list[i,j] == 0):
-                print('{:>3}|'.format(round(list[i,j])), end="")
+                print('{:>6}|'.format(round(list[i,j], 3)), end="")
             else:
-                print('{:>3}|'.format(""), end="")
+                print('{:>6}|'.format(""), end="")
         print()
         print(startLine)
     print()

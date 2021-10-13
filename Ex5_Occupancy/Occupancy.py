@@ -16,10 +16,10 @@ sensor_angle = math.radians(15 * 2)
 
 
 ## Log function
-prob_free = 0.0
-l_0 = prob_free
-l_occ = 1
-l_free = -1
+prob_free = 0.9
+l_0 = 0
+l_occ = np.log((1-prob_free)/prob_free)
+l_free = np.log(prob_free/(1-prob_free))
 
 def inverse_range_sensor_model(cell, robot, sensor):
     r = math.sqrt(((cell[0]*grid_size - robot.getX())**2) + ((cell[1]*grid_size - robot.getY())**2) )
@@ -27,7 +27,7 @@ def inverse_range_sensor_model(cell, robot, sensor):
     if (math.floor(sensor/grid_size) == cell[0]) or (math.floor(sensor/grid_size) == cell[1]):
         return l_occ
     if (math.floor(sensor/grid_size) < cell[0]) or (math.floor(sensor/grid_size) < cell[1]):
-        return 0
+        return l_0
     return l_free
 
 def occupancy_grid_mapping(grid, mean_particle, sensors):
@@ -35,7 +35,7 @@ def occupancy_grid_mapping(grid, mean_particle, sensors):
     for m in update_m:
         x = m[0]
         y = m[1]
-        grid[x][y] = grid[x][y] + inverse_range_sensor_model([x, y, grid[x][y]], mean_particle, sensors)
+        grid[x][y] = grid[x][y] + inverse_range_sensor_model([x, y, grid[x][y]], mean_particle, sensors) - l_0
     return grid
 
 
@@ -85,23 +85,24 @@ def perceptualField(map, p, dist):
 
 def printMap(list):
     y, x= np.shape(list)
-    startLine = "+" + ("---+"*x)
+    startLine = "+" + ("------+"*x)
     print(startLine)
     for i in range(y):
         print("|", end="")
         for j in range(x):
             if not (list[i,j] == 0):
-                print('{:>3}|'.format(round(list[i,j])), end="")
+                print('{:>6}|'.format(round(list[i,j], 3)), end="")
             else:
-                print('{:>3}|'.format(""), end="")
+                print('{:>6}|'.format(""), end="")
         print()
         print(startLine)
     print()
 
-grid_size = 200
+grid_size = 30
 meanParticle = particle.Particle(50, 50, 0.785, 0) 
-distToObject = 700 
+distToObject = 200
 map = occupancy_grid_mapping(np.zeros((30, 30), dtype=float), meanParticle , distToObject)
+map = occupancy_grid_mapping(map, meanParticle , distToObject)
 map[math.floor(meanParticle.getX()/grid_size)][math.floor(meanParticle.getY()/grid_size)] = 666
 map = np.flip(map,0)
 printMap(map)
