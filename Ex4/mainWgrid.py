@@ -23,7 +23,7 @@ def printMap(list, robot, grid_size):
     for i in range(y):
         print("|", end="")
         for j in range(x):
-            if (robot.getX()/grid_size == i and robot,getY()/grid_size == j):
+            if (robot.getX()/grid_size == i and robot.getY()/grid_size == j):
                 print('{:^6}|'.format("R"), end="")
             elif not (list[i,j] == 0):
                 print('{:^6}|'.format(round(list[i,j], 1)), end="")
@@ -48,7 +48,7 @@ try:
     distToTarget = 100
     # Turn 360 until we find boxes (findlocation.py)
     while (distToTarget > 15):
-        particles, map = copy.deepcopy(findlocation.localization_turnV2(particles, arlo, cam,
+        particles, map = copy.deepcopy(findlocation.localization_turn2(particles, arlo, cam,
                                                                         np.zeros((20, 20), dtype=float)))
 
         # check location and update map. Keep spinning
