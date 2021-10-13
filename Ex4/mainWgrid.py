@@ -47,13 +47,13 @@ try:
     # Initialize particles
     num_particles = 1000
     grid_size = 30
-
+    map = np.zeros((20, 20), dtype=float)
     particles = localize.initialize_particles(num_particles)
     distToTarget = 100
     # Turn 360 until we find boxes (findlocation.py)
     while (distToTarget > 15):
         particles, map = copy.deepcopy(findlocation.localization_turn2(particles, arlo, cam,
-                                                                        np.zeros((20, 20), dtype=float)))
+                                                                        map))
 
         # check location and update map. Keep spinning
         print("meanParticle = ")
