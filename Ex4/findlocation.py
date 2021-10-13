@@ -2,6 +2,8 @@ import math
 from time import sleep
 import numpy as np
 from numpy.core.fromnumeric import put
+import sys
+sys.path.append("../")
 from ARLO.robot import Robot
 from Ex5_Occupancy.Occupancy import occupancy_grid_mapping
 import localize

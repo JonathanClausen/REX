@@ -17,6 +17,7 @@ sensor_angle = math.radians(15 * 2)
 
 ## Log function
 prob_free = 0.9
+grid_size = 30
 l_0 = 0
 l_occ = np.log((1-prob_free)/prob_free)
 l_free = np.log(prob_free/(1-prob_free))
@@ -98,11 +99,11 @@ def printMap(list):
         print(startLine)
     print()
 
-grid_size = 30
-meanParticle = particle.Particle(200, 200, 3.92, 0)
-distToObject = 200
-map = occupancy_grid_mapping(np.zeros((30, 30), dtype=float), meanParticle , distToObject)
-map = occupancy_grid_mapping(map, meanParticle , distToObject)
-map[math.floor(meanParticle.getX()/grid_size)][math.floor(meanParticle.getY()/grid_size)] = 66
-map = np.flip(map,0)
-printMap(map)
+# grid_size = 30
+# meanParticle = particle.Particle(200, 200, 3.92, 0)
+# distToObject = 200
+# map = occupancy_grid_mapping(np.zeros((30, 30), dtype=float), meanParticle , distToObject)
+# map = occupancy_grid_mapping(map, meanParticle , distToObject)
+# map[math.floor(meanParticle.getX()/grid_size)][math.floor(meanParticle.getY()/grid_size)] = 66
+# map = np.flip(map,0)
+# printMap(map)
