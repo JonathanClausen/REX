@@ -16,26 +16,29 @@ sensor_angle = math.radians(15 * 2)
 ## Log function
 prob_free = 0.9
 l_0 = prob_free
-l_occ = np.log((1-prob_free) / prob_free)
-l_free = np.log(prob_free / (1 - prob_free))
+l_occ = np.log((1-prob_free/prob_free))
+l_free = np.log(prob_free/(1-prob_free))
 
 
 def inverse_range_sensor_model(cell, robot, sensor):
-    r = math.sqrt(((cell[0] - robot.getX())**2) + ((cell[1] - robot.getY())**2) )
+    r = math.sqrt((((cell[0]*grid_size) - robot.getX())**2) + (((cell[1]*grid_size) - robot.getY())**2) )
+    # print("r for [%f][%f] = %f" % (cell[0], cell[1], r))
     angle = math.atan2( cell[1] - robot.getY(), cell[0] - robot.getX() ) - robot.getTheta()
-    if (r > (max(sensor_max, sensor + (grid_size**2 / 2))) or  abs(angle) > sensor_angle  ):
-        return cell[2]
+    if (r > (max(sensor_max, sensor + (grid_size**2 / 2)))):
+        return l_0
     if (sensor < sensor_max) and (abs(r - sensor) < grid_size/2):
         return l_occ
     if (r < sensor):
         return l_free
+    return l_0
 
-def occupancy_grid_mapping(grid, mean_particle, sensors):
-    update_m = perceptualField(grid,mean_particle,sensors)
+def occupancy_grid_mapping(grid, mean_particle, sensor):
+    update_m = perceptualField(grid,mean_particle,sensor)
     for m in update_m:
         x = m[0]
         y = m[1]
-        grid[x][y] = grid[x][y] + inverse_range_sensor_model([x, y, grid[x][y]], mean_particle, sensors) - l_0
+        grid[x][y] = grid[x][y] + inverse_range_sensor_model([x, y, grid[x][y]], mean_particle, sensor) - l_0
+        print("value for [%2i][%2i] = %f" % (x, y, grid[x][y]))
     return grid
 
 
@@ -45,7 +48,7 @@ def perceptualField(map, p, dist):
     X = p.getX()
     Y = p.getY()
     roboOri = p.getTheta()
-    measurePoints = math.ceil(dist/grid_size)
+    measurePoints = math.ceil(dist/grid_size)*5
 
     leftOri = roboOri + angle
     rightOri = roboOri - angle
@@ -102,13 +105,16 @@ def printMap(list):
     for i in range(y):
         print("|", end="")
         for j in range(x):
-            print('{:>3}|'.format(list[i,j]), end="")
+            print('{:>3}|'.format(round(list[i,j])), end="")
         print()
         print(startLine)
     print()
 
 
-map = occupancy_grid_mapping(np.zeros((15, 15), dtype=int), particle.Particle(50, 50, 0, 0), 150)
+map = occupancy_grid_mapping(np.zeros((15, 15), dtype=float), particle.Particle(50, 50, 0.785, 0), 149)
 map[math.floor(50/grid_size)][math.floor(50/grid_size)] = 666
 map = np.flip(map,0)
 printMap(map)
+
+print(l_occ)
+print(l_free)
