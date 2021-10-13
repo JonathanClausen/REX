@@ -72,7 +72,7 @@ try:
         vecLength, targetOri = findlocation.estimate_target(boxOne[0], boxOne[1], meanParticle)
         move.turnAll((targetOri), particles, arlo)
 
-        printMap(map, arlo, grid_size)
+        printMap(map, particle.estimate_pose(particles), grid_size)
 
 finally:
     cam.terminateCaptureThread()
