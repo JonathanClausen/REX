@@ -85,24 +85,24 @@ def perceptualField(map, p, dist):
 
 def printMap(list):
     y, x= np.shape(list)
-    startLine = "+" + ("------+"*x)
+    startLine = "+" + ("----+"*x)
     print(startLine)
     for i in range(y):
         print("|", end="")
         for j in range(x):
             if not (list[i,j] == 0):
-                print('{:>6}|'.format(round(list[i,j], 3)), end="")
+                print('{:>4}|'.format(round(list[i,j], 1)), end="")
             else:
-                print('{:>6}|'.format(""), end="")
+                print('{:>4}|'.format(""), end="")
         print()
         print(startLine)
     print()
 
 grid_size = 30
-meanParticle = particle.Particle(50, 50, 0.785, 0) 
+meanParticle = particle.Particle(200, 200, 3.92, 0)
 distToObject = 200
 map = occupancy_grid_mapping(np.zeros((30, 30), dtype=float), meanParticle , distToObject)
 map = occupancy_grid_mapping(map, meanParticle , distToObject)
-map[math.floor(meanParticle.getX()/grid_size)][math.floor(meanParticle.getY()/grid_size)] = 666
+map[math.floor(meanParticle.getX()/grid_size)][math.floor(meanParticle.getY()/grid_size)] = 66
 map = np.flip(map,0)
 printMap(map)
