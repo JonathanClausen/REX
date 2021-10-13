@@ -82,7 +82,7 @@ def localization_turn2(particles, arlo, cam, map):
                     landmarks.append(objectIDs[i])
                     
                     print("Found landmark: ", objectIDs[i])
-        if ((3 in landmarks) and (1 in landmarks)):
+        if ((7 in landmarks) and (1 in landmarks)):
             seenBoth = True
 
         ######TASK 5 Creating occupancy map ##########
