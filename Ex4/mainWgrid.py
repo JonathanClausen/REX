@@ -19,6 +19,10 @@ import ARLO.robot
 def printMap(list, arlo, grid_size):
     y, x= np.shape(list)
     startLine = "+" + ("------+"*x)
+
+    print("r Y " , arlo.getX())
+    print("r Y " , arlo.getY())
+
     print(startLine)
     for i in range(y):
         print("|", end="")
