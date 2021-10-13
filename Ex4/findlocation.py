@@ -5,7 +5,7 @@ from numpy.core.fromnumeric import put
 import sys
 sys.path.append("../")
 from ARLO.robot import Robot
-from Ex5_Occupancy.Occupancy import occupancy_grid_mapping, printMap
+from Ex5_Occupancy.Occupancy import occupancy_grid_mapping
 import localize
 import move
 import camera
@@ -55,6 +55,28 @@ def localization_turn(particles, arlo, cam):
     return particles
 
 
+
+def printMap(list, arlo, grid_size):
+    y, x= np.shape(list)
+    startLine = "+" + ("------+"*x)
+
+    print("r Y " , arlo.getX())
+    print("r Y " , arlo.getY())
+
+    print(startLine)
+    for i in range(y):
+        print("|", end="")
+        for j in range(x):
+            if (math.floor(arlo.getX()/grid_size) == i and math.floor(arlo.getY()/grid_size) == j):
+                print('{:^6}|'.format("R"), end="")
+            elif not (list[i,j] == 0):
+                print('{:^6}|'.format(round(list[i,j], 1)), end="")
+            else:
+                print('{:^6}|'.format(""), end="")
+        print()
+        print(startLine)
+    print()
+
 def localization_turn2(particles, arlo, cam, map):
     deg = 15
     counter = 0
@@ -89,7 +111,7 @@ def localization_turn2(particles, arlo, cam, map):
         distToObject = round(arlo.read_front_ping_sensor()/10)
         newMap = occupancy_grid_mapping(map, particle.estimate_pose(particles), distToObject)
         map = copy.deepcopy(newMap)
-        printMap(map)
+        printMap(map, particle.estimate_pose(particles), 30)
         ############################################
         counter += 1
 
