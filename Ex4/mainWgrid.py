@@ -51,7 +51,7 @@ try:
         particles, map = copy.deepcopy(findlocation.localization_turnV2(particles, arlo, cam,
                                                                         np.zeros((20, 20), dtype=float)))
 
-        # check location. Keep spinning
+        # check location and update map. Keep spinning
         print("meanParticle = ")
         meanParticle = particle.estimate_pose(particles)
         print(meanParticle.getX(), ", ", meanParticle.getY(), ", ", meanParticle.getTheta())
@@ -72,7 +72,7 @@ try:
         vecLength, targetOri = findlocation.estimate_target(boxOne[0], boxOne[1], meanParticle)
         move.turnAll((targetOri), particles, arlo)
 
-        PrintMap(map, arlo, grid_size)
+        printMap(map, arlo, grid_size)
 
 finally:
     cam.terminateCaptureThread()
