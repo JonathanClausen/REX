@@ -1,8 +1,6 @@
 import numpy as np
 import sys
-
 import math
-
 from numpy.lib.arraysetops import unique
 
 #Import arlo robot
@@ -10,7 +8,7 @@ sys.path.append("../")
 sys.path.append("../Ex4")
 import Ex4.particle as particle
 
-grid_size = 10
+grid_size = 30
 sensor_max = 250
 sensor_angle = math.radians(15 * 2)
 
@@ -110,7 +108,7 @@ def printMap(list):
     print()
 
 
-map = occupancy_grid_mapping(np.zeros((15, 15), dtype=int), particle.Particle(50, 50, 0, 0), 50)
-map[5][5] = 666
-# map = np.flip(map,0)
+map = occupancy_grid_mapping(np.zeros((15, 15), dtype=int), particle.Particle(50, 50, 0, 0), 150)
+map[math.floor(50/grid_size)][math.floor(50/grid_size)] = 666
+map = np.flip(map,0)
 printMap(map)
