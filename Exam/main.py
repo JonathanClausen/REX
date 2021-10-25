@@ -1,4 +1,3 @@
-from Exam.findlocation import adjusted_target
 import findlocation
 import numpy as np
 import particle
@@ -56,7 +55,7 @@ try:
             target = [landmarks[landmarkIDs[nextLandmark]][0], landmarks[landmarkIDs[nextLandmark]][1]]
 
         # Adjusting target so we don't run into the box
-        targetPerimiter = adjusted_target(meanParticle, target, perimiterToTargets)
+        targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
 
         vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
 
