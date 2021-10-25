@@ -22,7 +22,7 @@ try:
     # Initialize particles
     num_particles = 1000
 
-    perimiterToTargets = 30
+    perimiterToTargets = 40
     # Landmarks.
     # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
     landmarkIDs = [1,9,3,4]
@@ -52,6 +52,7 @@ try:
         # Update target to next target in landmarks if current target reached.
         if (distToTarget < 30):
             nextLandmark += 1
+            print("Next target is: ", landmarkIDs[nextLandmark])
             target = [landmarks[landmarkIDs[nextLandmark]][0], landmarks[landmarkIDs[nextLandmark]][1]]
 
         # Adjusting target so we don't run into the box
