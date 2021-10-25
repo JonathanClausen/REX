@@ -21,7 +21,7 @@ import particle
 # arlo = ARLO.robot.Robot()
 
 
-def localization_turn(particles, arlo, landmarks, cam):
+def localization_turn(particles, arlo, marks, cam):
     deg = 15
     counter = 0
     max_turn = 24
@@ -40,7 +40,7 @@ def localization_turn(particles, arlo, landmarks, cam):
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
 
         if not isinstance(objectIDs, type(None)):
-            particles = copy.deepcopy(localize.localize(1, particles, 0, landmarks, cam))
+            particles = copy.deepcopy(localize.localize(1, particles, 0, marks, cam))
             for i in range(len(objectIDs)):
                 if (objectIDs[i] not in landmarks):
                     landmarks.append(objectIDs[i])
