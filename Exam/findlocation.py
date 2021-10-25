@@ -46,7 +46,7 @@ def localization_turn(particles, arlo, marks, cam):
                     landmarks.append(objectIDs[i])
                     print("Found landmark: ", objectIDs[i])
 
-        if (len(landmarks) <= 2):
+        if (len(landmarks) >= 2):
             seenBoth = True
 
         counter += 1
