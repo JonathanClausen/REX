@@ -76,7 +76,7 @@ def localize(numResample, particles, debug, landmarks, cam):
                     # XXX: Do something for each detected object - remember, the same ID may appear several times
                 if (objectIDs[i] not in landmarks):
                     continue
-
+                print(objectIDs[i])
                 lx = (landmarks[objectIDs[i]])[0]
                 ly = (landmarks[objectIDs[i]])[1]
                 sumWeight = 0
