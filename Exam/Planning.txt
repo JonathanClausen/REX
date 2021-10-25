@@ -1,0 +1,26 @@
+Hvis fri (2 bokse kan ses):
+    1. Localize
+    2. Gotobox
+
+Hvis intet kan ses (en eller ingen landmarks):
+    1. 
+    2. 
+
+For tæt/på vej mod forkert kasse:
+    1. Find på noget 
+
+Kender position, men kan ikke se mål: 
+    1. Planlæg rute uden om obstacles. 
+    2. Prøv igen 
+
+Emergency stop: 
+    1. Forsøg noget 
+
+Delvist mål: 
+    1. Er vi nået helt frem? 
+    2. Hvortil nu?
+
+Helt færdige:
+    1. Victory 
+
+
