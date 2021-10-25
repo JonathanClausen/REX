@@ -39,7 +39,7 @@ try:
     # Initializing target
     target = [landmarks[landmarkIDs[nextLandmark]][0], landmarks[landmarkIDs[nextLandmark]][1]]
 
-    while (nextLandmark <= 4):
+    while (nextLandmark < 4):
         
         particles = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
         
