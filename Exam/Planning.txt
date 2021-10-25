@@ -9,9 +9,11 @@ Hvis intet kan ses (en eller ingen landmarks):
 For tæt/på vej mod forkert kasse:
     1. Find på noget 
 
-Kender position, men kan ikke se mål: 
+Kender position, men kan ikke se mål / noget i vejen: 
     1. Planlæg rute uden om obstacles. 
     2. Prøv igen 
+
+Kender position, kan se mål, men noget i vejen. 
 
 Emergency stop: 
     1. Forsøg noget 
