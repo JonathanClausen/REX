@@ -22,6 +22,7 @@ try:
     # Initialize particles
     num_particles = 1000
 
+    perimiterToTargets = 40
     # Landmarks.
     # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
     landmarkIDs = [1,9,3,4]
@@ -39,7 +40,7 @@ try:
     # Initializing target
     target = [landmarks[landmarkIDs[nextLandmark]][0], landmarks[landmarkIDs[nextLandmark]][1]]
 
-    while (nextLandmark <= 4):
+    while (nextLandmark < 4):
         
         particles = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
         
@@ -51,11 +52,15 @@ try:
         # Update target to next target in landmarks if current target reached.
         if (distToTarget < 30):
             nextLandmark += 1
+            print("Next target is: ", landmarkIDs[nextLandmark])
             target = [landmarks[landmarkIDs[nextLandmark]][0], landmarks[landmarkIDs[nextLandmark]][1]]
-            
-        vecLength, targetOri = findlocation.estimate_target(target[0], target[1], meanParticle)
 
-        distToTarget = math.sqrt(( target[0] - meanParticle.getX() )**2 + ( target[1] - meanParticle.getY() )**2)
+        # Adjusting target so we don't run into the box
+        targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
+
+        vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
+
+        distToTarget = math.sqrt(( targetPerimiter[0] - meanParticle.getX() )**2 + ( targetPerimiter[1] - meanParticle.getY() )**2)
         print("Distance to target: ", distToTarget)
 
         move.turnAll(targetOri, particles, arlo) 

@@ -69,14 +69,15 @@ def localize(numResample, particles, debug, landmarks, cam):
         colour = cam.get_next_frame()
         # Detect objects
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
+        
         if not isinstance(objectIDs, type(None)):
+            dists = [num + 22 for num in dists]
             # List detected objects
             for i in range(len(objectIDs)):
                 print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
                     # XXX: Do something for each detected object - remember, the same ID may appear several times
                 if (objectIDs[i] not in landmarks):
                     continue
-
                 lx = (landmarks[objectIDs[i]])[0]
                 ly = (landmarks[objectIDs[i]])[1]
                 sumWeight = 0
