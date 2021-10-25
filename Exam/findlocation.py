@@ -42,7 +42,7 @@ def localization_turn(particles, arlo, marks, cam):
         if not isinstance(objectIDs, type(None)):
             particles = copy.deepcopy(localize.localize(1, particles, 0, marks, cam))
             for i in range(len(objectIDs)):
-                if (objectIDs[i] not in landmarks):
+                if ((objectIDs[i] not in landmarks) and (objectIDs in marks)):
                     landmarks.append(objectIDs[i])
                     print("Found landmark: ", objectIDs[i])
 
