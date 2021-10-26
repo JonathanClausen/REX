@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+
+import camera
+
 # localize
 # drej mod mål
 # kan jeg se mål?
@@ -32,19 +35,27 @@ def go_to_xy(a,b):
     A = math.atan(a/b)
     return (A,c) #B = degrees, c = lenght
 
-
-def findWay(meanPart, goalLandmark, cam):
+# funktionen her antager at robotten peger i den retning robotten ønker At køre.
+# den vil så returnere (vinkel, lengde)
+# robotten skal dreje og køre for at komme op på siden af kassen
+#
+def findWay(cam):
     # tag billede
     frame = cam.get_next_frame()
 
     # identificer alle kasser
     objectIDs, dists, angles = cam.detect_aruco_objects(frame)
+
+    if (objectIDs is None):
+        print("error no objects found")
+        return (0,0)
+
     bLeft = []
     distLeft = []
     bRight = []
     distRight = []
 
-    # find the center box
+    # find the center box, the box that is in the way
     goAroundIndex = min(enumerate(angles), key=lambda x: abs(x[1]))
     goAroundDist = dists[goAroundIndex]
     goAroundAng = angles[goAroundIndex]
@@ -54,107 +65,57 @@ def findWay(meanPart, goalLandmark, cam):
     dists.pop(goAroundIndex)
     objectIDs.pop(goAroundIndex)
 
+    # sort the objects to what is left and right of the center box
     for i in range(len(objectIDs)):
         print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
         # devide into two lists on +- angle
+        # insert the distance between center box and the other obstacle (i) -> space
         space = goAroundDist**2 + dists[i]**2 - 2*goAroundDist*dists[i] * cos(goAroundAng)
-        if space > 300:
-            print("ignoring due to distance over 3 m")
+        if space > 250:
+            print("ignoring due to distance over 2.5 m")
         elif angles[i] > 0:
             print("to my left")
             bLeft.append(objectsIDs[i])
-            # calculate the distance between the boxes
             distLeft.append(space)
+
         else:
             print("to my right")
             bRight.append(objectsIDs[i])
             distRight.append(space)
 
-    # find de to nærmeste kasser i hver trekant
-    minLeft = min(bLeft)
-    minRight = min(bRight)
-    if minLeft < minRight:
-
-
-    # giv data til emil
-
-    return (x, y)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-j
+    # find de to nærmeste kasser til højre og venstre
+    minLeft = min(bLeft, default=999) # default hvis listen er tom
+    minRight = min(bRight, default=999)
+
+    # hvis der er frit til en af siderne vælger den denne
+    # og køre en meter ved siden af forhindringen
+    distEmpty = 100
+
+    # chossing the side with the most space
+    if (minLeft >= minRight):
+        if minLeft == 999:
+            # left is free finding direction next to obstacle
+            print("left is clear")
+            return go_to_xy(goAroundDist, distEmpty)
+        index = distLeft.index(minLeft)
+        leftBoxID = bLeft[index]
+        # the total angle between the two boxes we want to go between
+#        angBetweenBoxes = abs(angles[objectIDs.index(leftBoxID)]) + abs(goAroundAng)
+        print("going between box ", objects[goAroundIndex], " and ", leftBoxID)
+        return go_to_xy(goAroundDist, minLeft)
+    else:
+        if minRight == 999:
+            # left is free finding direction next to obstacle
+            print("right is clear")
+            turn, dist = go_to_xy(goAroundDist, minRight)
+            return go_to_xy(goAroundDist, distEmpty)
+        index = distRight.index(minRight)
+        rightBoxID = bLeft[index]
+        # the total angle between the two boxes we want to go between
+#        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
+        print("going between box ", objects[goAroundIndex], " and ", rightBoxID)
+        turn, dist = go_to_xy(goAroundDist, minRight)
+        return (-turn, dist)
+
+
+findWay(camera.Camera(0))
