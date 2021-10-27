@@ -123,11 +123,12 @@ def findWay(cam):
         index = distRight.index(minRight)
         rightBoxID = bRight[index]
         
-        #Determine if any box is closer than center box. If so drive to side of that box.m 
+        #Go for centerbox
         if goAroundDist < min(distRight):
             turn, dist = go_to_xy(minRight,goAroundDist)
             print("going between box ", goAroundID, " and ", rightBoxID)
             return (-turn-goAroundAng, dist)
+        #Go for nearest rightbox 
         else:
             turn, dist = go_to_xy(minRight,dists[np.where(objectIDs == rightBoxID)[0]])
             print("going between box ", rightBoxID, " and ", goAroundID)
