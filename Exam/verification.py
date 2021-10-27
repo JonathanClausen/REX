@@ -17,9 +17,9 @@ def verify(mean, front, goBox, emergency):
     elif (goBox and (front < 400)):
         return True
 
-def checkMean(particle, target):
-    pX = particle.getX()
-    pY = particle.getY()
+def checkMean(mean, target):
+    pX = mean.getX()
+    pY = mean.getY()
 
     dist = math.sqrt((pX - target[0])**2 + (pY- target[1])**2)
 
