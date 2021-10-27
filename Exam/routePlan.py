@@ -1,33 +1,8 @@
 #!/usr/bin/env python3
 
-
 import camera
 import math
 import numpy as np
-# localize
-# drej mod mål
-# kan jeg se mål?
-#   nej
-#       tag afstand til object i målretning
-
-
-
-
-#       if left free
-#           turn left_45
-#           go x_lenght
-#       elif right_free
-#           turn right_45
-#           go x_lenght
-#       else
-#           check dist between boxes
-#           filter large dists away fx over 3 m
-#           select shortest distance from left and right triangle
-#
-#           go_toSide largest min dist's side, 1/2 dist from obst
-#           if sist left < dist right
-#               go dist/2 to the left side of obst
-
 
 
 def go_to_xy(a,b):
@@ -35,13 +10,12 @@ def go_to_xy(a,b):
     c = math.sqrt(a**2+b**2)
     print("in go_to_xy", "a =", a, "b=" ,b )
     A = math.atan(a/b)
-
     return (A,c) #B = degrees, c = lenght
+
 
 # funktionen her antager at robotten peger i den retning robotten ønker At køre.
 # den vil så returnere (vinkel, lengde)
 # robotten skal dreje og køre for at komme op på siden af kassen
-#
 def findWay(cam):
     # tag billede
     frame = cam.get_next_frame()
@@ -77,7 +51,8 @@ def findWay(cam):
         space = math.sqrt(goAroundDist**2 + dists[i]**2 - 2*goAroundDist*dists[i] * (math.cos(angles[i] - goAroundAng)))
 
         #print("dist between boxes", space)
-        #print("angle Center = ", goAroundAng, " ob i = ", angles[i], " angle between in deg= ", math.degrees((angles[i] - goAroundAng)))
+        #print("angle Center = ", goAroundAng, " ob i = ", angles[i],
+        #" angle between in deg= ", math.degrees((angles[i] - goAroundAng)))
         if space > 25000:
             print("ignoring due to distance over 2.5 m")
         elif angles[i] > 0:
@@ -134,13 +109,13 @@ def findWay(cam):
             print("going between box ", rightBoxID, " and ", goAroundID)
             return (turn-goAroundAng, dist)
 
-
-try:
-    cam = camera.Camera(0, 'arlo', useCaptureThread=True)
-    turnXDRadians, goDistMM =  findWay(cam)
-    turnXDegrees = math.degrees(turnXDRadians)
-    goDistM = goDistMM/1000
-    print("turnXDegrees ", turnXDegrees)
-    print("Go Dist in M ", goDistMM)
-finally:
-    cam.terminateCaptureThread()
+# for testing
+# try:
+#     cam = camera.Camera(0, 'arlo', useCaptureThread=True)
+#     turnXDRadians, goDistMM =  findWay(cam)
+#     turnXDegrees = math.degrees(turnXDRadians)
+#     goDistM = goDistMM/1000
+#     print("turnXDegrees ", turnXDegrees)
+#     print("Go Dist in M ", goDistMM)
+# finally:
+#     cam.terminateCaptureThread()
