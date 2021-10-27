@@ -119,6 +119,6 @@ def run_goToBox(targetBoxID, arlo, cam):
     while (getAng(targetBoxID, cam) == [0.0,0.0]):
         turn(10, arlo)
         sleep(1)
-
+    print("Now i must be looking at "+targetBoxID+". Calling go()")
     turn(getAng(targetBoxID, cam)[0], arlo)
     return go(targetBoxID, arlo, cam)
