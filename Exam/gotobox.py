@@ -22,8 +22,9 @@ def getAng(targetBoxID, cam):
 
 #distCoeffs[, rvecs[, tvecs[, _objPoints]]]
 
+    sleep(0.5)
     frame = cam.get_next_frame()
-
+    sleep(0.5)
 
 #Grabbing dictionary
     objectIDs, dists, angles = cam.detect_aruco_objects(frame)
