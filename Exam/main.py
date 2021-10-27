@@ -73,6 +73,7 @@ try:
         print("Going to box: ",landmarkIDs[nextLandmarkIndex])
         turn, distTraveled, hasReachedTarget = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, cam)
         move.moveAllParticles(distTraveled, particles)
+        move.turnAllParticles(math.radians(abs(turn)))
         
 
 finally:
