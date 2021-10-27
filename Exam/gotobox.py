@@ -36,7 +36,7 @@ def getAng(targetBoxID, cam):
 
         dist = dists[np.where(objectIDs == targetBoxID)][0]
 
-        return [ degrees, dist ] 
+        return [ round(degrees,5), round(dist,5) ] 
     else:
         return [0.0,0.0]
 
@@ -116,8 +116,8 @@ def go(targetBoxID, arlo, cam):
 
 
 def run_goToBox(targetBoxID, arlo, cam):
-    while (getAng(targetBoxID, cam) == []):
-        turn(getAng(targetBoxID, cam)[0], arlo)
+    while (getAng(targetBoxID, cam) == [0.0,0.0]):
+        turn(10, arlo)
 
     turn(getAng(targetBoxID, cam)[0], arlo)
     return go(targetBoxID, arlo, cam)
