@@ -43,32 +43,22 @@ def go_to_xy(a,b):
 def findWay(cam):
     # tag billede
     frame = cam.get_next_frame()
-
     # identificer alle kasser
     objectIDs, dists, angles = cam.detect_aruco_objects(frame)
-
     if (objectIDs is None):
         print("error no objects found")
         return (0,0)
-
     bLeft = []
     distLeft = []
     bRight = []
-    distRight = []
-
-    # find the center box, the box that is in the way
+    distRight = []   # find the center box, the box that is in the way
     goAroundIndex = np.argmin(np.abs(angles)) #min(enumerate(angles), key=lambda x: abs(x[1]))
     goAroundDist = dists[goAroundIndex]
     goAroundAng = angles[goAroundIndex]
-
-    print("avoid object : ", objectIDs[goAroundIndex])
-
-    # removing the center box from the lists
+    print("avoid object : ", objectIDs[goAroundIndex])   # removing the center box from the lists
     angles = np.delete(angles, goAroundIndex)
     dists = np.delete(dists, goAroundIndex)
-    objectIDs = np.delete(objectIDs, goAroundIndex)
-
-    # sort the objects to what is left and right of the center box
+    objectIDs = np.delete(objectIDs, goAroundIndex)   # sort the objects to what is left and right of the center box
     for i in range(len(objectIDs)):
         print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
         # devide into two lists on +- angle
@@ -82,21 +72,14 @@ def findWay(cam):
             print("to my left")
             bLeft.append(objectIDs[i])
             distLeft.append(space)
-
         else:
             print("to my right")
             bRight.append(objectIDs[i])
-            distRight.append(space)
-
-    # find de to nærmeste kasser til højre og venstre
+            distRight.append(space)   # find de to nærmeste kasser til højre og venstre
     minLeft = min(bLeft, default=999) # default hvis listen er tom
-    minRight = min(bRight, default=999)
-
-    # hvis der er frit til en af siderne vælger den denne
+    minRight = min(bRight, default=999)   # hvis der er frit til en af siderne vælger den denne
     # og køre en meter ved siden af forhindringen
-    distEmpty = 100
-
-    # chossing the side with the most space
+    distEmpty = 100   # chossing the side with the most space
     if (minLeft >= minRight):
         if minLeft == 999:
             # left is free finding direction next to obstacle
@@ -105,7 +88,7 @@ def findWay(cam):
         index = distLeft.index(minLeft)
         leftBoxID = bLeft[index]
         # the total angle between the two boxes we want to go between
-#        angBetweenBoxes = abs(angles[objectIDs.index(leftBoxID)]) + abs(goAroundAng)
+        # angBetweenBoxes = abs(angles[objectIDs.index(leftBoxID)]) + abs(goAroundAng)
         print("going between box ", objects[goAroundIndex], " and ", leftBoxID)
         return go_to_xy(goAroundDist, minLeft)
     else:
@@ -117,10 +100,14 @@ def findWay(cam):
         index = distRight.index(minRight)
         rightBoxID = bLeft[index]
         # the total angle between the two boxes we want to go between
-#        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
+        #        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
         print("going between box ", objects[goAroundIndex], " and ", rightBoxID)
         turn, dist = go_to_xy(goAroundDist, minRight)
         return (-turn, dist)
 
 
-findWay(camera.Camera(0))
+try:
+    cam = camera.Camera(0, 'arlo', useCaptureThread=True)
+    print("result ", findWay(cam))
+finally:
+    cam.terminateCaptureThread()
