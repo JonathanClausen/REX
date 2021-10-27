@@ -33,7 +33,9 @@ import numpy as np
 def go_to_xy(a,b):
     a = a/2
     c = math.sqrt(a**2+b**2)
+    print("in go_to_xy", "a =", a, "b=" ,b )
     A = math.acos(a/b)
+
     return (A,c) #B = degrees, c = lenght
 
 # funktionen her antager at robotten peger i den retning robotten ønker At køre.
