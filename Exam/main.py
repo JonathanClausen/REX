@@ -69,11 +69,17 @@ try:
         move.turnAll(targetOri, particles, arlo)  # Turning towards current box
         sleep(1)
         # If box is visible then go to box
-        print("Going to box: ",landmarkIDs[nextLandmarkIndex])
-        turn, distTraveled, particles  = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, particles, landmarks, cam)
-        print("Travelled dist = ",distTraveled)
-        move.turnAllParticles(math.radians(abs(turn)), particles)
-        move.moveAllParticles(distTraveled, particles)
+        colour = cam.get_next_frame()
+        objectIDs, dists, angles = cam.detect_aruco_objects(colour)
+        sleep(0.5)
+        if (landmarkIDs[nextLandmarkIndex] in objectIDs):
+            print("Going to box: ",landmarkIDs[nextLandmarkIndex])
+            turn, distTraveled, particles  = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, particles, landmarks, cam)
+            print("Travelled dist = ",distTraveled)
+            move.turnAllParticles(math.radians(abs(turn)), particles)
+            move.moveAllParticles(distTraveled, particles)
+        else:
+            move.turnAll(distToTarget, particles, arlo)
         
 
 finally:

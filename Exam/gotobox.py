@@ -119,10 +119,7 @@ def go(targetBoxID, arlo, particles, landmarks, cam):
 
 
 def run_goToBox(targetBoxID, arlo, particles, landmarks, cam):
-    while (getAng(targetBoxID, cam) == [0.0,0.0]):
-        sleep(0.5)
-        turn(-20, arlo)
-        sleep(0.5)
+    
     print("Now i must be looking at "+str(targetBoxID)+". Calling go()")
     turn(getAng(targetBoxID, cam)[0], arlo)
     return go(targetBoxID, arlo, particles, landmarks, cam)
