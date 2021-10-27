@@ -54,12 +54,12 @@ def goTurn(deg, arlo):
 
     if (np.sign(deg) == 1):
         # Turn right
-        print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
+        arlo.go_diff(leftSpeed, rightSpeed, 0, 1)
     else:
-        print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
+        arlo.go_diff(leftSpeed, rightSpeed, 1, 0)
         
     sleep(round(abs(deg) * degSec, 5) )
-    print(arlo.stop())
+    arlo.stop()
     ## sample
 
 def moveAllParticles(length, particles):
