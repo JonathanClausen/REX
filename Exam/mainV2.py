@@ -20,54 +20,72 @@ try:
     arlo = ARLO.robot.Robot()
     cam = camera.Camera(0, 'arlo', useCaptureThread = True)
 
-    landmarkIDs = [1,2,3,4]
+    perimiterToTargets = 20
+
+    landmarkIDs = [1,2,3,4,1]
     landmarks = {
             1: (0.0, 0.0),  # Coordinates for landmark 1
             2: (0.0, 300.0),
             3: (400.0, 0.0),
             4: (400.0, 300.0)
         }
-
+        
+    num_particles = 1000
     particles = localize.initialize_particles(num_particles)
-    reachedCurrentTarget = False 
-    targetList = [1,2,3,4,1]
-    localized = localize()
 
+    reachedCurrentTarget = False 
     #RUNNING UNTIL ALL ARE FOUND
-    for nextLandmark in targetList:
+    for nextLandmark in landmarkIDs:
         #Checking if we can localize ourself. If not, Random via obstacle() 
-        while not localized:
+        while not isLocalized:
+            particles, isLocalized = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
+            if isLocalized:
+                break
             obstacleAvoid.obstacleAvoidance()
-            localized = localize() #True if found
 
         #Localized Succedes -> Time to move, until target is reached. 
         while not reachedCurrentTarget:
-            #Returns -> 0,1,2
+            print("Attempting to find target: ", nextLandmark)		
+            #ts ret -> 0,1,2
             #0 -> See goals and clear 
             #1 -> See other box in path
             #2 -> See nothing
-            print("Attempting to find target: ", nextLandmark)		
-            goalVisible = turnToGoal()
-            if goalVisible == 0:
-                print("Goal Visible Moving")
-                turn, distTraveled, hasReachedTarget = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, cam)
+            target = landmarks[nextLandmark]
+            ts = targetStatus(target, cam)
 
-            
-            elif goalVisible == 1:
+            meanParticle = particle.estimate_pose(particles)
+            targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
+            vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
+            distToTarget = math.sqrt(( targetPerimiter[0] - meanParticle.getX() )**2 + ( targetPerimiter[1] - meanParticle.getY() )**2)
+           
+           if ts == 0:
+                print("Target Visible -> Moving to", nextLandmark)
+                turn, distTraveled, particles, hasEmergencyStopped = gotobox.run_goToBox(
+                                                                                nextLandmark, 
+                                                                                arlo, 
+                                                                                particles, 
+                                                                                landmarks, 
+                                                                                cam)
+                move.turnAllParticles(math.radians(abs(turn)), particles)
+                move.moveAllParticles(distTraveled, particles)
+
+            elif ts == 1:
                 print("Obstacle in way, routeplanning")
+                move.turnAll(targetOri, particles, arlo)
                 turnRadians, dist = routePlan.routeplan()
                 move.turnAll(turnRadians)
                 move.moveAll(dist)
                 move.turnAll(0-(turnRadians*2))
 
-            elif goalVisible == 2:
-                print("Can't See Anything, doing obstacleAvoidance")
-                obstacleAvoidance()
+            elif ts == 2:
+                print("Can't See Anything, turning to target -> obstacleAvoidance")
+                move.turnAll(turnRadians)
+                obstacleAvoid.obstacleAvoidance()
 
 
             reachedCurrentTarget = reachedTarget() #Ret -> True/false
             if not reachedCurrentTarget and emergencyStop:
-                obstacleAvoidance()
+                obstacleAvoid.obstacleAvoidance()
 
 
 finally:
