@@ -76,8 +76,10 @@ def findWay(cam):
             print("to my right")
             bRight.append(objectIDs[i])
             distRight.append(space)   # find de to nærmeste kasser til højre og venstre
-    minLeft = min(bLeft, default=999) # default hvis listen er tom
-    minRight = min(bRight, default=999)   # hvis der er frit til en af siderne vælger den denne
+
+
+    minLeft = min(distLeft, default=999) # default hvis listen er tom
+    minRight = min(distRight, default=999)   # hvis der er frit til en af siderne vælger den denne
     # og køre en meter ved siden af forhindringen
     distEmpty = 100   # chossing the side with the most space
     if (minLeft >= minRight):
@@ -98,7 +100,7 @@ def findWay(cam):
             turn, dist = go_to_xy(goAroundDist, minRight)
             return go_to_xy(goAroundDist, distEmpty)
         index = distRight.index(minRight)
-        rightBoxID = bLeft[index]
+        rightBoxID = bRight[index]
         # the total angle between the two boxes we want to go between
         #        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
         print("going between box ", objects[goAroundIndex], " and ", rightBoxID)
