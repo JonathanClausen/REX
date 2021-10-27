@@ -44,21 +44,21 @@ try:
 
     while (nextLandmarkIndex < 4):
         
+        # Update target to next target in landmarks if current target reached.
+        if (hasReachedTarget):
+            nextLandmarkIndex += 1
+            if (nextLandmarkIndex >= len(landmarks)):
+                nextLandmarkIndex = 0
+            print("Next target is: ", landmarkIDs[nextLandmarkIndex])
+            target = [landmarks[landmarkIDs[nextLandmarkIndex]] ]
+            hasReachedTarget = False
+
         particles = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
         
         # check location. Keep spinning
         print("meanParticle = ")
         meanParticle = particle.estimate_pose(particles)
         print(meanParticle.getX(), ", ", meanParticle.getY(), ", ", meanParticle.getTheta())
-        print("nextLandmark = ", landmarkIDs[nextLandmarkIndex])
-        # Update target to next target in landmarks if current target reached.
-        if (hasReachedTarget):
-            nextLandmarkIndex += 1
-            if (nextLandmarkIndex >= len(landmarks)):
-                nextLandmarkIndex = 1
-            print("Next target is: ", landmarkIDs[nextLandmarkIndex])
-            target = [landmarks[landmarkIDs[nextLandmarkIndex]][0], landmarks[landmarkIDs[nextLandmarkIndex]][1]]
-            hasReachedTarget = False
 
         # Adjusting target so we don't run into the box
         targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
@@ -70,6 +70,7 @@ try:
 
         move.turnAll(targetOri, particles, arlo) 
         sleep(1)
+        print("Going to box: ",landmarkIDs[nextLandmarkIndex])
         turn, distTraveled, hasReachedTarget = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, cam)
         move.moveAllParticles(distTraveled, particles)
         
