@@ -26,3 +26,18 @@ Helt færdige:
     1. Victory (dance)
 
 
+main :)
+1. selflocalize 
+    1.1 True -> 
+        goto 2.
+    1.2 False ->
+
+2. Traveltime 
+    2.1 Can I see goal?
+        True -> GoToBox 
+    2.2 Can't see goal?
+        3.
+3. Next
+
+
+
