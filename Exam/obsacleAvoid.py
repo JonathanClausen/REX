@@ -1,9 +1,7 @@
 from time import sleep
 import math
+import move
 
-import ARLO.robot
-
-# Create a robot object and initialize
 
 # send a go_diff command to drive forward
 leftSpeed = math.floor(64 * 0.97)
@@ -20,6 +18,7 @@ right45Clear = False
 safeFrontDist = 500
 safeSideDist = 300
 
+
 #Updating distance variables 
 def update_dists():
     global frontDist
@@ -29,6 +28,7 @@ def update_dists():
     frontDist = arlo.read_front_ping_sensor()
     rightDist = arlo.read_right_ping_sensor()
     leftDist= arlo.read_left_ping_sensor()
+
 
 # Checking we are to close - Thus we have to change direction
 def dists_safe():
@@ -47,9 +47,10 @@ def dists_safe():
     if rightDist > safeSideDist:
         right45Clear = True
 
+
 # if r = 1 turn left, 0 = right.   (0 = R, 
 # r can only be 1 or 0
-def turn_x_degree(x, r):
+def turn_x_degree(x, r, arlo):
     rightDir = r
     leftDir = 1 - rightDir
     # 0.2 in time is good for small changes
@@ -58,7 +59,8 @@ def turn_x_degree(x, r):
     sleep(round(sleeptime, 5))
     arlo.stop()
 
-def obstacle():
+
+def obstacle(arlo):
     update_dists()
     dists_safe()
     go = False
@@ -86,7 +88,8 @@ def obstacle():
             go = True
     return totalTurn
 
-def obstacleAvoidance(particles):
+
+def obstacleAvoidance(particles, arlo):
     sum = 0
     while sum < secMeter:
         update_dists()
@@ -106,6 +109,6 @@ def obstacleAvoidance(particles):
             arlo.stop()
             move.moveAllParticles((t-start)*secMeter/100, particles)
         else:
-            turn = obstacle()
+            turn = obstacle(arlo)
             move.turnAllParticles(math.radians(abs(turn)), particles)
     return particles
