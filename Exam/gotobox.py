@@ -36,7 +36,7 @@ def getAng(targetBoxID, cam):
 
         dist = dists[np.where(objectIDs == targetBoxID)][0]
 
-        return [ degrees, dist ] 
+        return [ round(degrees,5), round(dist,5) ] 
     else:
         return [0.0,0.0]
 
