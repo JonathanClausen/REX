@@ -38,7 +38,7 @@ def getAng(targetBoxID, cam):
 
         return [ degrees, dist ] 
     else:
-        return []
+        return [0.0,0.0]
 
 # få sider
 
@@ -105,8 +105,7 @@ def go(targetBoxID, arlo, cam):
         arlo.stop()
 
         if not emStop:
-            if (getAng(targetBoxID, cam) != []):
-                turn(getAng(targetBoxID, cam)[0], arlo)
+            turn(getAng(targetBoxID, cam)[0], arlo)
         sensFront = arlo.read_front_ping_sensor()
         picDist = getAng(targetBoxID, cam)[1]*1000
         sensLeft = arlo.read_left_ping_sensor()
@@ -118,8 +117,7 @@ def go(targetBoxID, arlo, cam):
 
 def run_goToBox(targetBoxID, arlo, cam):
     while (getAng(targetBoxID, cam) == []):
-        if (getAng(targetBoxID, cam) != []):
-            turn(getAng(targetBoxID, cam)[0], arlo)
-    if (getAng(targetBoxID, cam) != []):
         turn(getAng(targetBoxID, cam)[0], arlo)
+        
+    turn(getAng(targetBoxID, cam)[0], arlo)
     return go(targetBoxID, arlo, cam)
