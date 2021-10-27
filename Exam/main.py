@@ -33,13 +33,13 @@ try:
         4: (400.0, 300.0)
     }
 
-    nextLandmarkIndex = 0
+    nextLandmarkIndex = -1
     
     particles = localize.initialize_particles(num_particles)
     distToTarget = 100
     # Initializing target
     target = landmarks[landmarkIDs[nextLandmarkIndex]]
-    hasReachedTarget = False
+    hasReachedTarget = True
 
     while (nextLandmarkIndex < 4):
         
