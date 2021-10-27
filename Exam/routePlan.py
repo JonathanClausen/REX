@@ -107,6 +107,7 @@ def findWay(cam):
 
 
 try:
-    print("result ", findWay(camera.Camera(0, 'arlo', useCaptureThread=True)))
+    cam = camera.Camera(0, 'arlo', useCaptureThread=True)
+    print("result ", findWay(cam))
 finally:
     cam.terminateCaptureThread()
