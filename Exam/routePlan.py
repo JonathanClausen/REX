@@ -100,7 +100,7 @@ def findWay(cam):
         # the total angle between the two boxes we want to go between
         # angBetweenBoxes = abs(angles[objectIDs.index(leftBoxID)]) + abs(goAroundAng)
         print("going between box ", goAroundID, " and ", leftBoxID)
-        return go_to_xy(goAroundDist+goAroundDist, minLeft)
+        return go_to_xy(goAroundDist+goAroundAng, minLeft)
     else:
         if minRight == 999:
             # left is free finding direction next to obstacle
@@ -113,7 +113,7 @@ def findWay(cam):
         #        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
         print("going between box ", goAroundID, " and ", rightBoxID)
         turn, dist = go_to_xy(goAroundDist, minRight)
-        return (-turn-goAroundDist, dist)
+        return (-turn-goAroundAng, dist)
 
 
 try:
