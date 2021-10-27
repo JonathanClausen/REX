@@ -33,7 +33,7 @@ import numpy as np
 def go_to_xy(a,b):
     a = a/2
     c = math.sqrt(a**2+b**2)
-    A = math.atan(a/b)
+    A = math.acos(a/b)
     return (A,c) #B = degrees, c = lenght
 
 # funktionen her antager at robotten peger i den retning robotten ønker At køre.
@@ -98,8 +98,6 @@ def findWay(cam):
             return (turn, dist)
         index = distLeft.index(minLeft)
         leftBoxID = bLeft[index]
-        # the total angle between the two boxes we want to go between
-        # angBetweenBoxes = abs(angles[objectIDs.index(leftBoxID)]) + abs(goAroundAng)
         print("going between box ", goAroundID, " and ", leftBoxID)
         turn, dist = go_to_xy(minLeft,goAroundDist)
         return (turn-goAroundAng, dist)
@@ -112,7 +110,6 @@ def findWay(cam):
         index = distRight.index(minRight)
         rightBoxID = bRight[index]
         # the total angle between the two boxes we want to go between
-        #        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
         print("going between box ", goAroundID, " and ", rightBoxID)
         turn, dist = go_to_xy(minRight,goAroundDist)
         return (-turn-goAroundAng, dist)
