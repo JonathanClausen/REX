@@ -54,6 +54,8 @@ try:
         # Update target to next target in landmarks if current target reached.
         if (hasReachedTarget):
             nextLandmarkIndex += 1
+            if (nextLandmarkIndex >= len(landmarks)):
+                nextLandmarkIndex = 1
             print("Next target is: ", landmarkIDs[nextLandmarkIndex])
             target = [landmarks[landmarkIDs[nextLandmarkIndex]][0], landmarks[landmarkIDs[nextLandmarkIndex]][1]]
             hasReachedTarget = False
