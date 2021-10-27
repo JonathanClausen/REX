@@ -115,7 +115,7 @@ def go(targetBoxID, arlo, particles, landmarks, cam):
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((min(sensFront, picDist) - stopDist)/1000)*(2/3))*secMeter
-    return [firstTurn, (sum / secMeter) * 100, particles]
+    return [firstTurn, (sum / secMeter) * 100, particles, emStop]
 
 
 
