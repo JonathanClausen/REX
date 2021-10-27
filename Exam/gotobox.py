@@ -29,7 +29,7 @@ def picPos(targetBoxID, cam):
     corners, ids, rejected = cv2.aruco.detectMarkers(frame, arucoDict, parameters=arucoParams)
     tvec = []
     if ((ids is not None) and (targetBoxID in ids)):
-        corners = ids.index(targetBoxID)
+        corners = corners[ids.index(targetBoxID)]
         print(targetBoxID)
         rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, cameraMatrix, distCoeffs)
     return tvec
