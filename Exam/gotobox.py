@@ -5,6 +5,8 @@ import numpy as np
 from time import sleep
 import math
 from time import perf_counter
+from localize import localize
+import copy
 # from goDist import go
 
 leftSpeed     = math.floor(64 * 0.97)
@@ -20,8 +22,9 @@ def getAng(targetBoxID, cam):
 
 #distCoeffs[, rvecs[, tvecs[, _objPoints]]]
 
+    sleep(0.5)
     frame = cam.get_next_frame()
-
+    sleep(0.5)
 
 #Grabbing dictionary
     objectIDs, dists, angles = cam.detect_aruco_objects(frame)
@@ -54,11 +57,11 @@ def turn(deg, arlo):
     if (not isRight):
         print("Adjusting to left deg")
         deg = deg * (-1)
-        print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
+        arlo.go_diff(leftSpeed, rightSpeed, 0, 1)
     else:
-        print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
+        arlo.go_diff(leftSpeed, rightSpeed, 1, 0)
     sleep(round(deg * degSec, 5))
-    print(arlo.stop())
+    arlo.stop()
     print("amount of degrees to go", deg * degSec)
 
 
@@ -68,11 +71,11 @@ safeDistSide  = 150
 
 secMeter      = 2.55
 
-stopDist      = 400
+stopDist      = 300
 stopDistSide  = 200
 
 
-def go(targetBoxID, arlo, cam):
+def go(targetBoxID, arlo, particles, landmarks, cam):
     sum = 0
     emStop = False
     sensFront = arlo.read_front_ping_sensor()
@@ -103,6 +106,7 @@ def go(targetBoxID, arlo, cam):
             t = perf_counter()
         sum += t-start
         arlo.stop()
+        particles = copy.deepcopy(localize(1,particles, 0, landmarks, cam))
 
         if not emStop:
             turn(getAng(targetBoxID, cam)[0], arlo)
@@ -111,14 +115,12 @@ def go(targetBoxID, arlo, cam):
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((min(sensFront, picDist) - stopDist)/1000)*(2/3))*secMeter
-    return [firstTurn, sum * secMeter, True]
+    return [firstTurn, (sum / secMeter) * 100, particles]
 
 
 
-def run_goToBox(targetBoxID, arlo, cam):
-    while (getAng(targetBoxID, cam) == [0.0,0.0]):
-        turn(10, arlo)
-        sleep(1)
+def run_goToBox(targetBoxID, arlo, particles, landmarks, cam):
+    
     print("Now i must be looking at "+str(targetBoxID)+". Calling go()")
     turn(getAng(targetBoxID, cam)[0], arlo)
-    return go(targetBoxID, arlo, cam)
+    return go(targetBoxID, arlo, particles, landmarks, cam)
