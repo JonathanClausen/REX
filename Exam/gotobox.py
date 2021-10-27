@@ -5,6 +5,8 @@ import numpy as np
 from time import sleep
 import math
 from time import perf_counter
+from localize import localize
+import copy
 # from goDist import go
 
 leftSpeed     = math.floor(64 * 0.97)
@@ -72,7 +74,7 @@ stopDist      = 400
 stopDistSide  = 200
 
 
-def go(targetBoxID, arlo, cam):
+def go(targetBoxID, arlo, particles, landmarks, cam):
     sum = 0
     emStop = False
     sensFront = arlo.read_front_ping_sensor()
@@ -103,6 +105,7 @@ def go(targetBoxID, arlo, cam):
             t = perf_counter()
         sum += t-start
         arlo.stop()
+        particles = copy.deepcopy(localize(1,particles, 0, landmarks, cam))
 
         if not emStop:
             turn(getAng(targetBoxID, cam)[0], arlo)
@@ -111,14 +114,14 @@ def go(targetBoxID, arlo, cam):
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((min(sensFront, picDist) - stopDist)/1000)*(2/3))*secMeter
-    return [firstTurn, sum * secMeter, True]
+    return [firstTurn, sum * secMeter, particles]
 
 
 
-def run_goToBox(targetBoxID, arlo, cam):
+def run_goToBox(targetBoxID, arlo, particles, landmarks, cam):
     while (getAng(targetBoxID, cam) == [0.0,0.0]):
         turn(10, arlo)
         sleep(1)
     print("Now i must be looking at "+str(targetBoxID)+". Calling go()")
     turn(getAng(targetBoxID, cam)[0], arlo)
-    return go(targetBoxID, arlo, cam)
+    return go(targetBoxID, arlo, particles, landmarks, cam)

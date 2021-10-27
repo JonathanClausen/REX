@@ -19,7 +19,6 @@ try:
     cam = camera.Camera(0, 'arlo', useCaptureThread = True)
 
     
-    boxOne = np.array([300,0])
     # Initialize particles
     num_particles = 1000
 
@@ -39,7 +38,7 @@ try:
     particles = localize.initialize_particles(num_particles)
     distToTarget = 100
     # Initializing target
-    target = [landmarks[landmarkIDs[nextLandmarkIndex]][0], landmarks[landmarkIDs[nextLandmarkIndex]][1]]
+    target = landmarks[landmarkIDs[nextLandmarkIndex]]
     hasReachedTarget = False
 
     while (nextLandmarkIndex < 4):
@@ -71,7 +70,7 @@ try:
         move.turnAll(targetOri, particles, arlo) 
         sleep(1)
         print("Going to box: ",landmarkIDs[nextLandmarkIndex])
-        turn, distTraveled, hasReachedTarget = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, cam)
+        turn, distTraveled, particles  = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, particles, landmarks, cam)
         move.turnAllParticles(math.radians(abs(turn)), particles)
         move.moveAllParticles(distTraveled, particles)
         
