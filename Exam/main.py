@@ -72,6 +72,7 @@ try:
         sleep(1)
         print("Going to box: ",landmarkIDs[nextLandmarkIndex])
         turn, distTraveled, hasReachedTarget = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, cam)
+        move.turnAllParticles(math.radians(abs(turn)), particles)
         move.moveAllParticles(distTraveled, particles)
         
 

@@ -52,7 +52,7 @@ def turn(deg, arlo):
     print("isRight", isRight, "Degrees to turn ", deg)
     print("Turning to box")
     if (not isRight):
-        print("Advusting to left deg")
+        print("Adjusting to left deg")
         deg = deg * (-1)
         print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
     else:
