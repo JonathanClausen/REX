@@ -50,7 +50,7 @@ try:
             if (nextLandmarkIndex >= len(landmarks)):
                 nextLandmarkIndex = 0
             print("Next target is: ", landmarkIDs[nextLandmarkIndex])
-            target = [landmarks[landmarkIDs[nextLandmarkIndex]] ]
+            target = landmarks[landmarkIDs[nextLandmarkIndex]]
             hasReachedTarget = False
 
         particles = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
