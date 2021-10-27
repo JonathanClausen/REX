@@ -120,4 +120,4 @@ def run_goToBox(targetBoxID, arlo, cam):
     while (getAng(targetBoxID, cam) == []):
         turn(getAng(targetBoxID, cam)[0], arlo)
     turn(getAng(targetBoxID, cam)[0], arlo)
-    go(targetBoxID, arlo, cam)
+    return go(targetBoxID, arlo, cam)
