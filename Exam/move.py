@@ -16,7 +16,7 @@ safeDist      = 300
 safeDistSide  = 150
 
 secMeter      = 2.55
-stopDist      = 400
+stopDist      = 30
 stopDistSide  = 200
 
 def go_straight(length, arlo):
