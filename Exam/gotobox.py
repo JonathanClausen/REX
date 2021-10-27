@@ -29,7 +29,7 @@ def getAng(targetBoxID, cam):
     if ((objectIDs is not None) and (targetBoxID in objectIDs)):
         # Get only target angle and target dist
         radiantAngle = angles[np.where(objectIDs == targetBoxID)]
-        degrees = math.degrees(radiantAngle)
+        degrees = math.degrees(radiantAngle[0])
 
         if (radiantAngle < math.pi):
             degrees = -1 * math.degrees(radiantAngle)
