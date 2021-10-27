@@ -58,7 +58,7 @@ try:
             vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
             distToTarget = math.sqrt(( targetPerimiter[0] - meanParticle.getX() )**2 + ( targetPerimiter[1] - meanParticle.getY() )**2)
            
-           if ts == 0:
+            if ts == 0:
                 print("Target Visible -> Moving to", nextLandmark)
                 turn, distTraveled, particles, hasEmergencyStopped = gotobox.run_goToBox(
                                                                                 nextLandmark, 

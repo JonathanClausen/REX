@@ -7,9 +7,9 @@ import move
 leftSpeed = math.floor(64 * 0.97)
 rightSpeed = 64
 
-frontDist = arlo.read_front_ping_sensor()
-rightDist = arlo.read_right_ping_sensor()
-leftDist = arlo.read_left_ping_sensor()
+frontDist = 0
+rightDist = 0
+leftDist = 0
 
 frontClear = False
 left45Clear = False
