@@ -50,7 +50,7 @@ try:
         print("meanParticle = ")
         meanParticle = particle.estimate_pose(particles)
         print(meanParticle.getX(), ", ", meanParticle.getY(), ", ", meanParticle.getTheta())
-
+        print("nextLandmark = ", landmarkIDs[nextLandmarkIndex])
         # Update target to next target in landmarks if current target reached.
         if (hasReachedTarget):
             nextLandmarkIndex += 1
