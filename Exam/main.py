@@ -66,10 +66,12 @@ try:
         distToTarget = math.sqrt(( targetPerimiter[0] - meanParticle.getX() )**2 + ( targetPerimiter[1] - meanParticle.getY() )**2)
         print("Distance to target: ", distToTarget)
 
-        move.turnAll(targetOri, particles, arlo) 
+        move.turnAll(targetOri, particles, arlo)  # Turning towards current box
         sleep(1)
+        # If box is visible then go to box
         print("Going to box: ",landmarkIDs[nextLandmarkIndex])
         turn, distTraveled, particles  = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, particles, landmarks, cam)
+        print("Travelled dist = ",distTraveled)
         move.turnAllParticles(math.radians(abs(turn)), particles)
         move.moveAllParticles(distTraveled, particles)
         
