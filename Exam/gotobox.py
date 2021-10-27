@@ -28,13 +28,13 @@ def getAng(targetBoxID, cam):
 
     if ((objectIDs is not None) and (targetBoxID in objectIDs)):
         # Get only target angle and target dist
-        radiantAngle = angles[np.where(objectIDs == targetBoxID)]
+        radiantAngle = angles[np.where(objectIDs == targetBoxID)][0]
         degrees = math.degrees(radiantAngle)
 
         if (radiantAngle < math.pi):
             degrees = -1 * math.degrees(radiantAngle)
 
-        dist = dists[np.where(objectIDs == targetBoxID)]
+        dist = dists[np.where(objectIDs == targetBoxID)][0]
 
         return [ degrees, dist ] 
     else:
@@ -118,6 +118,8 @@ def go(targetBoxID, arlo, cam):
 
 def run_goToBox(targetBoxID, arlo, cam):
     while (getAng(targetBoxID, cam) == []):
+        if (getAng(targetBoxID, cam) != []):
+            turn(getAng(targetBoxID, cam)[0], arlo)
+    if (getAng(targetBoxID, cam) != []):
         turn(getAng(targetBoxID, cam)[0], arlo)
-    turn(getAng(targetBoxID, cam)[0], arlo)
-    go(targetBoxID, arlo, cam)
+    return go(targetBoxID, arlo, cam)

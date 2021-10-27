@@ -66,7 +66,7 @@ try:
 
         move.turnAll(targetOri, particles, arlo) 
         sleep(1)
-        distTraveled = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, cam)
+        turn, distTraveled = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, cam)
         move.moveAllParticles(distTraveled, particles)
         
 
