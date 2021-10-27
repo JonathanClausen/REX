@@ -56,11 +56,11 @@ def turn(deg, arlo):
     if (not isRight):
         print("Adjusting to left deg")
         deg = deg * (-1)
-        print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
+        arlo.go_diff(leftSpeed, rightSpeed, 0, 1)
     else:
-        print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
+        arlo.go_diff(leftSpeed, rightSpeed, 1, 0)
     sleep(round(deg * degSec, 5))
-    print(arlo.stop())
+    arlo.stop()
     print("amount of degrees to go", deg * degSec)
 
 

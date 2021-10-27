@@ -72,12 +72,13 @@ try:
         colour = cam.get_next_frame()
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
         sleep(0.5)
-        if (landmarkIDs[nextLandmarkIndex] in objectIDs):
-            print("Going to box: ",landmarkIDs[nextLandmarkIndex])
-            turn, distTraveled, particles  = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, particles, landmarks, cam)
-            print("Travelled dist = ",distTraveled)
-            move.turnAllParticles(math.radians(abs(turn)), particles)
-            move.moveAllParticles(distTraveled, particles)
+        if not isinstance(objectIDs, type(None)):
+            if (landmarkIDs[nextLandmarkIndex] in objectIDs):
+                print("Going to box: ",landmarkIDs[nextLandmarkIndex])
+                turn, distTraveled, particles  = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, particles, landmarks, cam)
+                print("Travelled dist = ",distTraveled)
+                move.turnAllParticles(math.radians(abs(turn)), particles)
+                move.moveAllParticles(distTraveled, particles)
         else:
             move.moveAll(distToTarget, particles, arlo)
         
