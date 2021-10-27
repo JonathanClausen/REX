@@ -111,13 +111,13 @@ def go(targetBoxID, arlo, cam):
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((min(sensFront, picDist) - stopDist)/1000)*(2/3))*secMeter
-    return [firstTurn, sum * secMeter]
+    return [firstTurn, sum * secMeter, True]
 
 
 
 def run_goToBox(targetBoxID, arlo, cam):
     while (getAng(targetBoxID, cam) == []):
         turn(getAng(targetBoxID, cam)[0], arlo)
-        
+
     turn(getAng(targetBoxID, cam)[0], arlo)
     return go(targetBoxID, arlo, cam)
