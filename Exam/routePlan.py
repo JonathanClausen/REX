@@ -100,7 +100,7 @@ def findWay(cam):
         # the total angle between the two boxes we want to go between
         # angBetweenBoxes = abs(angles[objectIDs.index(leftBoxID)]) + abs(goAroundAng)
         print("going between box ", goAroundID, " and ", leftBoxID)
-        return go_to_xy(goAroundDist, minLeft)
+        return go_to_xy(goAroundDist+goAroundAng, minLeft)
     else:
         if minRight == 999:
             # left is free finding direction next to obstacle
@@ -113,11 +113,15 @@ def findWay(cam):
         #        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
         print("going between box ", goAroundID, " and ", rightBoxID)
         turn, dist = go_to_xy(goAroundDist, minRight)
-        return (-turn, dist)
+        return (-turn-goAroundAng, dist)
 
 
 try:
     cam = camera.Camera(0, 'arlo', useCaptureThread=True)
-    print("result ", findWay(cam))
+    turnXDRadians, goDistMM =  findWay(cam)
+    turnXDegrees = math.degrees(turnXDRadians)
+    goDistM = goDistMM/1000
+    print("turnXDegrees ", turnXDegrees)
+    print("Go Dist in M ", goDistM)
 finally:
     cam.terminateCaptureThread()
