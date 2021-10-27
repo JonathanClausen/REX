@@ -7,13 +7,11 @@ import math
 from time import perf_counter
 # from goDist import go
 
-#arlo = ARLO.robot.Robot()
-
 leftSpeed     = math.floor(64 * 0.97)
 rightSpeed    = 64
 degSec = 0.005
 
-def picPos(targetBoxID):
+def picPos(targetBoxID, cam):
     markerLength = 0.145
     cameraMatrix =np.array([[506.94,0,640/2],
                             [0,506.94,480/2],
@@ -22,8 +20,8 @@ def picPos(targetBoxID):
 
 #distCoeffs[, rvecs[, tvecs[, _objPoints]]]
 
-    cap = cv2.VideoCapture(0) # video capture source camera (Here webcam of laptop)
-    ret,frame = cap.read() # return a single frame in variable `frame`
+    frame = cam.get_next_frame()
+
 
 #Grabbing dictionary
     arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_250)
@@ -36,8 +34,8 @@ def picPos(targetBoxID):
 
 
 # få sider
-def getAng(targetBoxID):
-    tvec = picPos(targetBoxID)
+def getAng(targetBoxID, cam):
+    tvec = picPos(targetBoxID, cam)
     if (tvec == []):
         return (45, 10000)
     a = tvec[0][0][0]
@@ -119,8 +117,8 @@ def go(targetBoxID, arlo):
 
 
 
-def run_goToBox(targetBoxID, arlo):
-    while (picPos(targetBoxID) == []):
+def run_goToBox(targetBoxID, arlo, cam):
+    while (picPos(targetBoxID, cam) == []):
         turn(getAng(targetBoxID, arlo)[0])
     turn(getAng(targetBoxID)[0])
     go(targetBoxID, arlo)
