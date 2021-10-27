@@ -96,7 +96,7 @@ def findWay(cam):
         if minLeft == 9999999:
             # left is free finding direction next to obstacle
             print("left is clear")
-            turn, dist = go_to_xy(minLeft, distEmpty)
+            turn, dist = go_to_xy(distEmpty, goAroundDist)
             return (turn, dist)
         index = distLeft.index(minLeft)
         leftBoxID = bLeft[index]
