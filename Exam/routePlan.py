@@ -61,11 +61,12 @@ def findWay(cam):
     goAroundAng = angles[goAroundIndex]
     goAroundID = objectIDs[goAroundIndex]
     print("avoid object : ", goAroundID)
-
+    
     # removing the center box from the lists
-    angles = np.delete(angles, goAroundIndex)
-    dists = np.delete(dists, goAroundIndex)
-    objectIDs = np.delete(objectIDs, goAroundIndex)
+    for i in np.where(objectIDs == goAroundID): 
+        objectIDs = np.delete(objectIDs, i) 
+        dists = np.delete(dists, i)
+        angles = np.delete(angles, i)
 
     # sort the objects to what is left and right of the center box
     for i in range(len(objectIDs)):
