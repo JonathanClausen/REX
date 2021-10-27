@@ -31,7 +31,7 @@ def picPos(targetBoxID, cam):
     print("corners: ", corners)
     if ((ids is not None) and (targetBoxID in ids)):
         print("target: ", targetBoxID)
-        corners = corners[ids.where(targetBoxID)]
+        corners = corners[(np.where(ids == targetBoxID)[0])]
         rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, cameraMatrix, distCoeffs)
     return tvec
 
