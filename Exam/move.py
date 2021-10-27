@@ -4,6 +4,8 @@ from time import sleep
 from time import perf_counter
 import particle
 import numpy as np
+import cv2
+
 #import main
 
 
@@ -60,17 +62,21 @@ def goTurn(deg, arlo):
     print(arlo.stop())
     ## sample
 
-def moveAll(length, particles, arlo):
-    go_straight(length, arlo)
+def moveAllParticles(length, particles):
     for p in particles: 
         x = math.cos(p.getTheta())*length
         y = math.sin(p.getTheta())*length
         particle.move_particle(p,x,y,0)
 
-
-def turnAll(delta_theta, particles, arlo):
-    goTurn(math.degrees(delta_theta), arlo)
+def turnAllParticles(delta_theta, particles):
     for p in particles: 
         p.setTheta(p.getTheta()+delta_theta)
 
+def moveAll(length, particles, arlo):
+    go_straight(length, arlo)
+    moveAllParticles(length, particles)
 
+
+def turnAll(delta_theta, particles, arlo):
+    goTurn(math.degrees(delta_theta), arlo)
+    turnAllParticles(delta_theta, particles)
