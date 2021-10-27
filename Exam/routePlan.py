@@ -54,7 +54,8 @@ def findWay(cam):
     distRight = []   # find the center box, the box that is in the way
     goAroundIndex = np.argmin(np.abs(angles)) #min(enumerate(angles), key=lambda x: abs(x[1]))
     goAroundDist = dists[goAroundIndex]
-    goAroundAng = angles[goAroundIndex]   print("avoid object : ", objectIDs[goAroundIndex])   # removing the center box from the lists
+    goAroundAng = angles[goAroundIndex]
+    print("avoid object : ", objectIDs[goAroundIndex])   # removing the center box from the lists
     angles = np.delete(angles, goAroundIndex)
     dists = np.delete(dists, goAroundIndex)
     objectIDs = np.delete(objectIDs, goAroundIndex)   # sort the objects to what is left and right of the center box
@@ -70,7 +71,8 @@ def findWay(cam):
         elif angles[i] > 0:
             print("to my left")
             bLeft.append(objectIDs[i])
-            distLeft.append(space)       else:
+            distLeft.append(space)
+        else:
             print("to my right")
             bRight.append(objectIDs[i])
             distRight.append(space)   # find de to nærmeste kasser til højre og venstre
@@ -89,19 +91,19 @@ def findWay(cam):
         # angBetweenBoxes = abs(angles[objectIDs.index(leftBoxID)]) + abs(goAroundAng)
         print("going between box ", objects[goAroundIndex], " and ", leftBoxID)
         return go_to_xy(goAroundDist, minLeft)
-      else:
-          if minRight == 999:
-              # left is free finding direction next to obstacle
-              print("right is clear")
-              turn, dist = go_to_xy(goAroundDist, minRight)
-              return go_to_xy(goAroundDist, distEmpty)
-          index = distRight.index(minRight)
-          rightBoxID = bLeft[index]
-          # the total angle between the two boxes we want to go between
-          #        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
-          print("going between box ", objects[goAroundIndex], " and ", rightBoxID)
-          turn, dist = go_to_xy(goAroundDist, minRight)
-          return (-turn, dist)
+    else:
+        if minRight == 999:
+            # left is free finding direction next to obstacle
+            print("right is clear")
+            turn, dist = go_to_xy(goAroundDist, minRight)
+            return go_to_xy(goAroundDist, distEmpty)
+        index = distRight.index(minRight)
+        rightBoxID = bLeft[index]
+        # the total angle between the two boxes we want to go between
+        #        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
+        print("going between box ", objects[goAroundIndex], " and ", rightBoxID)
+        turn, dist = go_to_xy(goAroundDist, minRight)
+        return (-turn, dist)
 
 
 try:
