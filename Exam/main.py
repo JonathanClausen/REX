@@ -79,7 +79,7 @@ try:
             move.turnAllParticles(math.radians(abs(turn)), particles)
             move.moveAllParticles(distTraveled, particles)
         else:
-            move.turnAll(distToTarget, particles, arlo)
+            move.moveAll(distToTarget, particles, arlo)
         
 
 finally:
