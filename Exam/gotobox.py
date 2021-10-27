@@ -46,7 +46,7 @@ def getAng(targetBoxID, cam):
     return (round(math.degrees(math.asin(a/dist)), 5), dist)
 
 # turn
-def turn(deg):
+def turn(deg, arlo):
     global rightSpeed
     global LeftSpeed
     global degSec
@@ -74,11 +74,11 @@ stopDist      = 400
 stopDistSide  = 200
 
 
-def go(targetBoxID, arlo):
+def go(targetBoxID, arlo, cam):
     sum = 0
     emStop = False
     sensFront = arlo.read_front_ping_sensor()
-    boxAt = getAng(targetBoxID)
+    boxAt = getAng(targetBoxID, cam)
     picDist = boxAt[1]*1000
     firstTurn = boxAt[0]
     sensLeft = arlo.read_left_ping_sensor()
@@ -107,9 +107,9 @@ def go(targetBoxID, arlo):
         arlo.stop()
 
         if not emStop:
-            turn(getAng(targetBoxID)[0])
+            turn(getAng(targetBoxID, cam)[0], arlo)
         sensFront = arlo.read_front_ping_sensor()
-        picDist = getAng()[1]*1000
+        picDist = getAng(targetBoxID, cam)[1]*1000
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((min(sensFront, picDist) - stopDist)/1000)*(2/3))*secMeter
@@ -119,6 +119,6 @@ def go(targetBoxID, arlo):
 
 def run_goToBox(targetBoxID, arlo, cam):
     while (picPos(targetBoxID, cam) == []):
-        turn(getAng(targetBoxID, arlo)[0])
-    turn(getAng(targetBoxID)[0])
-    go(targetBoxID, arlo)
+        turn(getAng(targetBoxID, cam)[0], arlo)
+    turn(getAng(targetBoxID, cam)[0], arlo)
+    go(targetBoxID, arlo, cam)
