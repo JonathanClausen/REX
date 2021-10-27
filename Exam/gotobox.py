@@ -11,7 +11,7 @@ leftSpeed     = math.floor(64 * 0.97)
 rightSpeed    = 64
 degSec = 0.005
 
-def picPos(targetBoxID, cam):
+def getAng(targetBoxID, cam):
     markerLength = 0.145
     cameraMatrix =np.array([[506.94,0,640/2],
                             [0,506.94,480/2],
@@ -24,29 +24,16 @@ def picPos(targetBoxID, cam):
 
 
 #Grabbing dictionary
-    arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_250)
-    arucoParams = cv2.aruco.DetectorParameters_create()
-    corners, ids, rejected = cv2.aruco.detectMarkers(frame, arucoDict, parameters=arucoParams)
-    tvec = []
-    print("corners: ", corners)
-    if ((ids is not None) and (targetBoxID in ids)):
-        print("target: ", targetBoxID)
-        corners = corners[(np.where(ids == targetBoxID)[0])]
-        rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, cameraMatrix, distCoeffs)
-    return tvec
+    objectIDs, dists, angles = cam.detect_aruco_objects(frame)
 
+    if ((objectIDs is not None) and (targetBoxID in objectIDs)):
+        # Get only target angle and target dist
+        return [ math.degrees(angles[np.where(objectIDs == targetBoxID)]), dists[np.where(objectIDs == targetBoxID)] ] 
+    else:
+        return []
 
 # få sider
-def getAng(targetBoxID, cam):
-    tvec = picPos(targetBoxID, cam)
-    if (tvec == []):
-        return (45, 10000)
-    a = tvec[0][0][0]
-    b = tvec[0][0][2]
-    dist = math.sqrt(a**2+b**2)
-    print("a = ", a, "b = ", b, "dist = ", dist)
-    print("ang  with minus = ", math.degrees(math.asin(a/dist)), "ang -a = ", math.degrees(math.asin(-a/dist)))
-    return (round(math.degrees(math.asin(a/dist)), 5), dist)
+
 
 # turn
 def turn(deg, arlo):
@@ -121,7 +108,7 @@ def go(targetBoxID, arlo, cam):
 
 
 def run_goToBox(targetBoxID, arlo, cam):
-    while (picPos(targetBoxID, cam) == []):
+    while (getAng(targetBoxID, cam) == []):
         turn(getAng(targetBoxID, cam)[0], arlo)
     turn(getAng(targetBoxID, cam)[0], arlo)
     go(targetBoxID, arlo, cam)
