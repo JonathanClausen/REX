@@ -70,22 +70,22 @@ def findWay(cam):
 
     # sort the objects to what is left and right of the center box
     for i in range(len(objectIDs)):
-        print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
+        #print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
 
         # devide into two lists on +- angle
         # insert the distance between center box and the other obstacle (i) -> space
         space = math.sqrt(goAroundDist**2 + dists[i]**2 - 2*goAroundDist*dists[i] * (math.cos(angles[i] - goAroundAng)))
 
-        print("dist between boxes", space)
-        print("angle Center = ", goAroundAng, " ob i = ", angles[i], " angle between in deg= ", math.degrees((angles[i] - goAroundAng)))
+        #print("dist between boxes", space)
+        #print("angle Center = ", goAroundAng, " ob i = ", angles[i], " angle between in deg= ", math.degrees((angles[i] - goAroundAng)))
         if space > 25000:
             print("ignoring due to distance over 2.5 m")
         elif angles[i] > 0:
-            print("to my left")
+            print(objectIDs[i] ," to my left")
             bLeft.append(objectIDs[i])
             distLeft.append(space)
         else:
-            print("to my right")
+            print(objectIDs[i] ," to my right")
             bRight.append(objectIDs[i])
             distRight.append(space)   # find de to nærmeste kasser til højre og venstre
 
@@ -102,9 +102,14 @@ def findWay(cam):
             return (turn, dist)
         index = distLeft.index(minLeft)
         leftBoxID = bLeft[index]
-        print("going between box ", goAroundID, " and ", leftBoxID)
-        turn, dist = go_to_xy(minLeft,goAroundDist)
+        if goAroundDist < min(distLeft):
+            turn, dist = go_to_xy(minLeft,goAroundDist)
+            print("going between box ", goAroundID, " and ", leftBoxID)
+        else:
+            turn, dist = go_to_xy(minLeft,dists[np.where(objectIDs == leftBoxID)[0]])
+            print("going between box ",leftBoxID, " and ", goAroundID)
         return (turn-goAroundAng, dist)
+
     else:
         if minRight == 9999999:
             # left is free finding direction next to obstacle
@@ -113,9 +118,14 @@ def findWay(cam):
             return (-turn-goAroundAng, dist)
         index = distRight.index(minRight)
         rightBoxID = bRight[index]
-        # the total angle between the two boxes we want to go between
-        print("going between box ", goAroundID, " and ", rightBoxID)
-        turn, dist = go_to_xy(minRight,goAroundDist)
+        
+        #Determine if any box is closer than center box. If so drive to side of that box.m 
+        if goAroundDist < min(distRight):
+            turn, dist = go_to_xy(minRight,goAroundDist)
+            print("going between box ", goAroundID, " and ", rightBoxID)
+        else:
+            turn, dist = go_to_xy(minRight,dists[np.where(objectIDs == rightBoxID)[0]])
+            print("going between box ", rightBoxID, " and ", goAroundID)
         return (-turn-goAroundAng, dist)
 
 
