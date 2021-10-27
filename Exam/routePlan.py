@@ -2,7 +2,8 @@
 
 
 import camera
-
+import math
+import numpy as np
 # localize
 # drej mod mål
 # kan jeg se mål?
@@ -56,31 +57,33 @@ def findWay(cam):
     distRight = []
 
     # find the center box, the box that is in the way
-    goAroundIndex = min(enumerate(angles), key=lambda x: abs(x[1]))
+    goAroundIndex = np.argmin(np.abs(angles)) #min(enumerate(angles), key=lambda x: abs(x[1]))
     goAroundDist = dists[goAroundIndex]
     goAroundAng = angles[goAroundIndex]
 
+    print("avoid object : ", objectIDs[goAroundIndex])
+
     # removing the center box from the lists
-    angles.pop(goAroundIndex)
-    dists.pop(goAroundIndex)
-    objectIDs.pop(goAroundIndex)
+    angles = np.delete(angles, goAroundIndex)
+    dists = np.delete(dists, goAroundIndex)
+    objectIDs = np.delete(objectIDs, goAroundIndex)
 
     # sort the objects to what is left and right of the center box
     for i in range(len(objectIDs)):
         print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
         # devide into two lists on +- angle
         # insert the distance between center box and the other obstacle (i) -> space
-        space = goAroundDist**2 + dists[i]**2 - 2*goAroundDist*dists[i] * cos(goAroundAng)
+        space = goAroundDist**2 + dists[i]**2 - 2*goAroundDist*dists[i] * math.cos(goAroundAng)
         if space > 250:
             print("ignoring due to distance over 2.5 m")
         elif angles[i] > 0:
             print("to my left")
-            bLeft.append(objectsIDs[i])
+            bLeft.append(objectIDs[i])
             distLeft.append(space)
 
         else:
             print("to my right")
-            bRight.append(objectsIDs[i])
+            bRight.append(objectIDs[i])
             distRight.append(space)
 
     # find de to nærmeste kasser til højre og venstre
