@@ -86,12 +86,12 @@ def findWay(cam):
             distRight.append(space)   # find de to nærmeste kasser til højre og venstre
 
 
-    minLeft = min(distLeft, default=999) # default hvis listen er tom
-    minRight = min(distRight, default=999)   # hvis der er frit til en af siderne vælger den denne
+    minLeft = min(distLeft, default=9999999) # default hvis listen er tom
+    minRight = min(distRight, default=999999)   # hvis der er frit til en af siderne vælger den denne
     # og køre en meter ved siden af forhindringen
     distEmpty = 100   # chossing the side with the most space
     if (minLeft >= minRight):
-        if minLeft == 999:
+        if minLeft == 9999999:
             # left is free finding direction next to obstacle
             print("left is clear")
             turn, dist = go_to_xy(minLeft, distEmpty)
@@ -104,10 +104,10 @@ def findWay(cam):
         turn, dist = go_to_xy(minLeft,goAroundDist)
         return (turn-goAroundAng, dist)
     else:
-        if minRight == 999:
+        if minRight == 9999999:
             # left is free finding direction next to obstacle
             print("right is clear")
-            turn, dist = go_to_xy(goAroundDist, distEmpty)
+            turn, dist = go_to_xy(distEmpty,goAroundDist)
             return (-turn-goAroundAng, dist)
         index = distRight.index(minRight)
         rightBoxID = bRight[index]
