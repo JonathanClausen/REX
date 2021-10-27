@@ -28,7 +28,7 @@ def getAng(targetBoxID, cam):
 
     if ((objectIDs is not None) and (targetBoxID in objectIDs)):
         # Get only target angle and target dist
-        return [ math.degrees(angles[objectIDs.index(targetBoxID)]), dists[objectIDs.index(targetBoxID)]]
+        return [ math.degrees(angles[np.where(objectIDs == targetBoxID)]), dists[np.where(objectIDs == targetBoxID)] ] 
     else:
         return []
 
