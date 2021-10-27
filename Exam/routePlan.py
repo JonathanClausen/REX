@@ -75,7 +75,7 @@ def findWay(cam):
         # insert the distance between center box and the other obstacle (i) -> space
         space = goAroundDist**2 + dists[i]**2 - 2*goAroundDist*dists[i] * math.cos(angles[i] - goAroundAng)
         print("dist between boxes", space)
-        print("angle Center = ", goAroundAng, " ob i = ", angles[i], " angle between = ", (angles[i] - goAroundAng))
+        print("angle Center = ", goAroundAng, " ob i = ", angles[i], " angle between in deg= ", math.degrees((angles[i] - goAroundAng)))
         if space > 25000:
             print("ignoring due to distance over 2.5 m")
         elif angles[i] > 0:
