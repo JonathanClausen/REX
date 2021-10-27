@@ -33,7 +33,9 @@ import numpy as np
 def go_to_xy(a,b):
     a = a/2
     c = math.sqrt(a**2+b**2)
-    A = math.acos(a/b)
+    print("in go_to_xy", "a =", a, "b=" ,b )
+    A = math.atan(a/b)
+
     return (A,c) #B = degrees, c = lenght
 
 # funktionen her antager at robotten peger i den retning robotten ønker At køre.
@@ -94,7 +96,7 @@ def findWay(cam):
         if minLeft == 9999999:
             # left is free finding direction next to obstacle
             print("left is clear")
-            turn, dist = go_to_xy(minLeft, distEmpty)
+            turn, dist = go_to_xy(distEmpty, goAroundDist)
             return (turn, dist)
         index = distLeft.index(minLeft)
         leftBoxID = bLeft[index]
