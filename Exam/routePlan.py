@@ -118,6 +118,10 @@ def findWay(cam):
 
 try:
     cam = camera.Camera(0, 'arlo', useCaptureThread=True)
-    print("result ", findWay(cam))
+    turnXDRadians, goDistMM =  findWay(cam)
+    turnXDegrees = math.degrees(turnXDRadians)
+    goDistM = goDistMM/1000
+    print("turnXDegrees ", turnXDegrees)
+    print("Go Dist in M ", goDistM)
 finally:
     cam.terminateCaptureThread()
