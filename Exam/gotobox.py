@@ -97,7 +97,8 @@ def go(targetBoxID, arlo, cam):
         arlo.stop()
 
         if not emStop:
-            turn(getAng(targetBoxID, cam)[0], arlo)
+            if (getAng(targetBoxID, cam) is not []):
+                turn(getAng(targetBoxID, cam)[0], arlo)
         sensFront = arlo.read_front_ping_sensor()
         picDist = getAng(targetBoxID, cam)[1]*1000
         sensLeft = arlo.read_left_ping_sensor()
