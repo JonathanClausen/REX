@@ -51,16 +51,24 @@ def findWay(cam):
     bLeft = []
     distLeft = []
     bRight = []
-    distRight = []   # find the center box, the box that is in the way
+    distRight = []
+
+    # find the center box, the box that is in the way
     goAroundIndex = np.argmin(np.abs(angles)) #min(enumerate(angles), key=lambda x: abs(x[1]))
     goAroundDist = dists[goAroundIndex]
     goAroundAng = angles[goAroundIndex]
-    print("avoid object : ", objectIDs[goAroundIndex])   # removing the center box from the lists
+    goAroundID = objectIDs[goAroundIndex]
+    print("avoid object : ", goAroundID)
+
+    # removing the center box from the lists
     angles = np.delete(angles, goAroundIndex)
     dists = np.delete(dists, goAroundIndex)
-    objectIDs = np.delete(objectIDs, goAroundIndex)   # sort the objects to what is left and right of the center box
+    objectIDs = np.delete(objectIDs, goAroundIndex)
+
+    # sort the objects to what is left and right of the center box
     for i in range(len(objectIDs)):
         print("Object ID = ", objectIDs[i], ", Distance = ", dists[i], ", angle = ", angles[i])
+
         # devide into two lists on +- angle
         # insert the distance between center box and the other obstacle (i) -> space
         space = goAroundDist**2 + dists[i]**2 - 2*goAroundDist*dists[i] * math.cos(angles[i] - goAroundAng)
@@ -91,7 +99,7 @@ def findWay(cam):
         leftBoxID = bLeft[index]
         # the total angle between the two boxes we want to go between
         # angBetweenBoxes = abs(angles[objectIDs.index(leftBoxID)]) + abs(goAroundAng)
-        print("going between box ", objects[goAroundIndex], " and ", leftBoxID)
+        print("going between box ", goAroundID, " and ", leftBoxID)
         return go_to_xy(goAroundDist, minLeft)
     else:
         if minRight == 999:
@@ -103,7 +111,7 @@ def findWay(cam):
         rightBoxID = bRight[index]
         # the total angle between the two boxes we want to go between
         #        angBetweenBoxes = abs(angles[objectIDs.index(rightBoxID)]) + abs(goAroundAng)
-        print("going between box ", objects[goAroundIndex], " and ", rightBoxID)
+        print("going between box ", goAroundID, " and ", rightBoxID)
         turn, dist = go_to_xy(goAroundDist, minRight)
         return (-turn, dist)
 
