@@ -40,6 +40,7 @@ try:
     distToTarget = 100
     # Initializing target
     target = [landmarks[landmarkIDs[nextLandmarkIndex]][0], landmarks[landmarkIDs[nextLandmarkIndex]][1]]
+    hasReachedTarget = False
 
     while (nextLandmarkIndex < 4):
         
@@ -51,10 +52,11 @@ try:
         print(meanParticle.getX(), ", ", meanParticle.getY(), ", ", meanParticle.getTheta())
 
         # Update target to next target in landmarks if current target reached.
-        if (distToTarget < 30):
+        if (hasReachedTarget):
             nextLandmarkIndex += 1
             print("Next target is: ", landmarkIDs[nextLandmarkIndex])
             target = [landmarks[landmarkIDs[nextLandmarkIndex]][0], landmarks[landmarkIDs[nextLandmarkIndex]][1]]
+            hasReachedTarget = False
 
         # Adjusting target so we don't run into the box
         targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
@@ -66,7 +68,7 @@ try:
 
         move.turnAll(targetOri, particles, arlo) 
         sleep(1)
-        turn, distTraveled = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, cam)
+        turn, distTraveled, hasReachedTarget = gotobox.run_goToBox(landmarkIDs[nextLandmarkIndex], arlo, cam)
         move.moveAllParticles(distTraveled, particles)
         
 
