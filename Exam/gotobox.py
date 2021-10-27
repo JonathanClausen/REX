@@ -118,6 +118,7 @@ def go(targetBoxID, arlo, cam):
 def run_goToBox(targetBoxID, arlo, cam):
     while (getAng(targetBoxID, cam) == [0.0,0.0]):
         turn(10, arlo)
+        sleep(1)
 
     turn(getAng(targetBoxID, cam)[0], arlo)
     return go(targetBoxID, arlo, cam)
