@@ -91,7 +91,7 @@ def findWay(cam):
     # og køre en meter ved siden af forhindringen
     distEmpty = 100   # chossing the side with the most space
     if (minLeft >= minRight):
-        if minLeft == 999:
+        if minLeft == 9999999:
             # left is free finding direction next to obstacle
             print("left is clear")
             turn, dist = go_to_xy(minLeft, distEmpty)
@@ -104,7 +104,7 @@ def findWay(cam):
         turn, dist = go_to_xy(minLeft,goAroundDist)
         return (turn-goAroundAng, dist)
     else:
-        if minRight == 999:
+        if minRight == 9999999:
             # left is free finding direction next to obstacle
             print("right is clear")
             turn, dist = go_to_xy(goAroundDist, distEmpty)
