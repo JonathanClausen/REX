@@ -50,6 +50,7 @@ try:
 
         #Localized Succedes -> Time to move, until target is reached. 
         while not reachedCurrentTarget:
+            print("_________________________________________________________\n")
             print("Attempting to find target: ", nextLandmark)
             target = landmarks[nextLandmark]
 
@@ -75,12 +76,21 @@ try:
                                                                                 cam)
                 move.turnAllParticles(math.radians(abs(turn)), particles)
                 move.moveAllParticles(distTraveled, particles)
+                meanCheck = verification.checkMean(meanParticle, target)
+                closestPing = min(arlo.read_front_ping_sensor(),
+                    arlo.read_left_ping_sensor(),
+                    arlo.read_right_ping_sensor())
+                boxCheck = verification.checkGoToBox(distToTarget, distTraveled)
+                print("parameters for verify: ")
+                print("meanCheck = ", meanCheck)
+                print("closestPing = ", closestPing)
+                print("boxCheck = ", boxCheck)
+                print("emergencyStop = ", hasEmergencyStopped) 
+
                 reachedCurrentTarget = verification.verify(
-                    verification.checkMean(meanParticle, target), 
-                    min(arlo.read_front_ping_sensor(),
-                        arlo.read_left_ping_sensor(),
-                        arlo.read_right_ping_sensor()),
-                    verification.checkGoToBox(distToTarget, distTraveled),
+                    meanCheck,
+                    closestPing,
+                    boxCheck,
                     hasEmergencyStopped)
 
             elif ts == 1:
@@ -104,6 +114,7 @@ try:
                 print("EmergencyStop occured, target not reacehed -> doing obstacle Avoidance")
                 obstacleAvoid.obstacleAvoidance()
 
+            
 
 finally:
     cam.terminateCaptureThread()
