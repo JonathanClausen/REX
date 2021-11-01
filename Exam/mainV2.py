@@ -57,6 +57,7 @@ try:
             target = landmarks[nextLandmark]
 
             meanParticle = particle.estimate_pose(particles)
+            print("mp-before: ",meanParticle.getX(),meanParticle.getY())
             targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
             vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
             distToTarget = math.sqrt(( targetPerimiter[0] - meanParticle.getX() )**2 + ( targetPerimiter[1] - meanParticle.getY() )**2)
@@ -94,6 +95,7 @@ try:
                     closestPing,
                     boxCheck,
                     hasEmergencyStopped)
+                #ER VI FOR STRENGE HER? Skal vi bare acceptere?    
 
             elif ts == 1:
                 print("ROUTEPLANNING")
@@ -119,7 +121,7 @@ try:
                 print("EMERGENCYSTOP!")
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
             
-            print("MEANPARTICLE X, Y:", meanParticle.getX(), meanParticle.getY() )
+            
             
 
 finally:
