@@ -65,7 +65,7 @@ def turn_x_degree(x, r, arlo):
     leftDir = 1 - rightDir
     # 0.2 in time is good for small changes
     sleeptime = 0.005555 * x
-    print(arlo.go_diff(leftSpeed, rightSpeed, leftDir, rightDir))
+    arlo.go_diff(leftSpeed, rightSpeed, leftDir, rightDir)
     sleep(round(sleeptime, 5))
     arlo.stop()
 
@@ -103,11 +103,11 @@ def obstacleAvoidance(particles, arlo):
     sum = 0
     distTime = secMeter
     while sum < secMeter:
+        start = perf_counter()
+        t = start
         update_dists()
         dists_safe()
         if (frontClear and left45Clear and right45Clear):
-            start = perf_counter()
-            t = start
             arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
             while ((t - start) < distTime):
                 update_dists()
