@@ -38,6 +38,7 @@ try:
 
     reachedCurrentTarget = False 
     isLocalized = False
+    hasEmergencyStopped = False
     #RUNNING UNTIL ALL ARE FOUND
     for nextLandmark in landmarkIDs:
         #Checking if we can localize ourself. If not, Random via obstacle() 
