@@ -84,16 +84,16 @@ try:
 
             elif ts == 2:
                 print("Can't See target or other boxes, turning to target -> obstacleAvoidance")
-                move.turnAll(targetOri, particles, arlo)
+                # move.turnAll(targetOri, particles, arlo)
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
 
 
-            reachedCurrentTarget = verify(
-                checkMean(meanParticle, target), 
+            reachedCurrentTarget = targetStatus.verify(
+                targetStatus.checkMean(meanParticle, target), 
                 min(arlo.read_front_ping_sensor(),
                     arlo.read_left_ping_sensor(),
                     arlo.read_right_ping_sensor()),
-                checkGoToBox(distToTarget, distTraveled),
+                targetStatus.checkGoToBox(distToTarget, distTraveled),
                 hasEmergencyStopped
             ) #Ret -> True/false
             if (not reachedCurrentTarget and hasEmergencyStopped):
