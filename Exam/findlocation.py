@@ -38,7 +38,6 @@ def localization_turn(particles, arlo, marks, cam):
         colour = cam.get_next_frame()
         sleep(0.5)
         objectIDs, dists, angles = cam.detect_aruco_objects(colour)
-
         if not isinstance(objectIDs, type(None)):
             particles = copy.deepcopy(localize.localize(1, particles, 0, marks, cam))
             for i in range(len(objectIDs)):
@@ -52,7 +51,7 @@ def localization_turn(particles, arlo, marks, cam):
         counter += 1
 
         ## Update samples to turn 20 degrees.
-    return particles
+    return particles,seenBoth
 
 def estimate_target(targetX, targetY, p):
     vecX = targetX - p.getX()
