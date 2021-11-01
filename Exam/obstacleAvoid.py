@@ -24,7 +24,7 @@ safeSideDist = 300
 
 
 #Updating distance variables 
-def update_dists():
+def update_dists(arlo):
     global frontDist
     global rightDist
     global leftDist
@@ -97,13 +97,13 @@ def obstacleAvoidance(particles, arlo):
     sum = 0
     distTime = secMeter
     while sum < distTime:
-        update_dists()
+        update_dists(arlo)
         dists_safe()
         if (frontClear and left45Clear and right45Clear):
             while (sum < distTime):
                 start = perf_counter()
                 arlo.go_diff(leftSpeed, rightSpeed, 1, 1)
-                update_dists()
+                update_dists(arlo)
                 dists_safe()
                 if (not frontClear or not left45Clear or not right45Clear):
                     print("obstacle")
