@@ -83,8 +83,8 @@ try:
                 move.turnAll(0-(turnRadians*2))
 
             elif ts == 2:
-                print("Can't See Anything, turning to target -> obstacleAvoidance")
-                move.turnAll(turnRadians)
+                print("Can't See target or other boxes, turning to target -> obstacleAvoidance")
+                move.turnAll(targetOri)
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
 
 
