@@ -35,10 +35,10 @@ def go_straight(length, arlo):
             if (sensFront < safeDist or
                 sensRight < safeDistSide or
                 sensLeft  < safeDistSide):
-                print("Emercency stop!!! sensors :\nR ", sensRight,
-                      ",\n L ", sensLeft,
-                      ",\n F ", sensFront,
-                      "\n time traveled = ", t)
+                #print("Emercency stop!!! sensors :\nR ", sensRight,
+                #     ",\n L ", sensLeft,
+                #    ",\n F ", sensFront,
+                #   "\n time traveled = ", t)
                 emStop = True
                 break
             t = perf_counter()

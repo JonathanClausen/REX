@@ -121,6 +121,6 @@ def go(targetBoxID, arlo, particles, landmarks, cam):
 
 def run_goToBox(targetBoxID, arlo, particles, landmarks, cam):
     
-    print("Now i must be looking at "+str(targetBoxID)+". Calling go()")
+    #print("Now i must be looking at "+str(targetBoxID)+". Calling go()")
     turn(getAng(targetBoxID, cam)[0], arlo)
     return go(targetBoxID, arlo, particles, landmarks, cam)

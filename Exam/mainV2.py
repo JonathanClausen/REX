@@ -63,7 +63,6 @@ try:
             #0 -> See goals and clear
             #1 -> See other box in path
             #2 -> See nothing
-            print("Calculating targetstatus")
             ts = targetStatus.checkTargetStatus(nextLandmark, cam) #Check comment above
            
             if (ts == 0):
@@ -81,6 +80,7 @@ try:
                     arlo.read_left_ping_sensor(),
                     arlo.read_right_ping_sensor())
                 boxCheck = verification.checkGoToBox(distToTarget, distTraveled)
+                print("VERIFICATION:")
                 print("parameters for verify: ")
                 print("meanCheck = ", meanCheck)
                 print("closestPing = ", closestPing)
@@ -94,14 +94,14 @@ try:
                     hasEmergencyStopped)
 
             elif ts == 1:
-                print("Obstacle in way, routeplanning")
+                print("ROUTEPLANNING")
                 turnRadians, dist = routePlan.findWay(cam)
                 move.turnAll(turnRadians, particles, arlo)
                 hasEmergencyStopped = move.moveAll(dist, particles, arlo)
                 move.turnAll(0-(turnRadians*2),particles, arlo)
 
             elif ts == 2:
-                print("Can't See target or other boxes, turning to target -> obstacleAvoidance")
+                print("OBSTACLE AVOIDANCE")
                 # move.turnAll(targetOri, particles, arlo)
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
                 particles, isLocalized = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
@@ -111,8 +111,9 @@ try:
             
             #Ret -> True/false
             if (not reachedCurrentTarget and hasEmergencyStopped):
-                print("EmergencyStop occured, target not reacehed -> doing obstacle Avoidance")
+                print("EmergencyStop!")
                 obstacleAvoid.obstacleAvoidance()
+            
 
             
 
