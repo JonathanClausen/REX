@@ -3,7 +3,7 @@ import math
 
 def verify(mean, front, goBox, emergency):
     if emergency:
-        if (goBox and mean) or ((front < 400) and goBox):
+        if (goBox and mean) or goBox):
             return True
         else:
             return False
