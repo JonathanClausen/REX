@@ -78,9 +78,9 @@ try:
             elif ts == 1:
                 print("Obstacle in way, routeplanning")
                 turnRadians, dist = routePlan.findWay(cam)
-                move.turnAll(turnRadians)
-                move.moveAll(dist)
-                move.turnAll(0-(turnRadians*2))
+                move.turnAll(turnRadians, particles, arlo)
+                move.moveAll(dist, particles, arlo)
+                move.turnAll(0-(turnRadians*2),particles, arlo)
 
             elif ts == 2:
                 print("Can't See target or other boxes, turning to target -> obstacleAvoidance")
