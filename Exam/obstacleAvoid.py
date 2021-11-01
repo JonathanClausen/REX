@@ -120,5 +120,4 @@ def obstacleAvoidance(particles, arlo):
 
 
 particles = localize.initialize_particles(1000)
-
 obstacleAvoidance(particles, arlo)
