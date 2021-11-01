@@ -23,7 +23,7 @@ def checkMean(mean, target):
 
     dist = math.sqrt((pX - target[0])**2 + (pY- target[1])**2)
 
-    return (dist < 40)
+    return (dist < 60)
 
 def checkGoToBox(total, traveled):
     delta = total - traveled
