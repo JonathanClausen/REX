@@ -55,7 +55,7 @@ try:
             targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
             vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
             distToTarget = math.sqrt(( targetPerimiter[0] - meanParticle.getX() )**2 + ( targetPerimiter[1] - meanParticle.getY() )**2)
-            turnAll(targetOri, particles, arlo)
+            mov.turnAll(targetOri, particles, arlo)
             #ts ret -> 0,1,2
             #0 -> See goals and clear 
             #1 -> See other box in path
