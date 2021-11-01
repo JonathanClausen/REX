@@ -102,9 +102,9 @@ def obstacle(arlo):
 def obstacleAvoidance(particles, arlo):
     sum = 0
     distTime = secMeter
-    while sum < secMeter:
-        start = perf_counter()
-        t = start
+    start = perf_counter()
+    t = start
+    while sum < distTime:
         update_dists()
         dists_safe()
         if (frontClear and left45Clear and right45Clear):
