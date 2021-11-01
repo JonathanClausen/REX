@@ -84,7 +84,7 @@ try:
 
             elif ts == 2:
                 print("Can't See target or other boxes, turning to target -> obstacleAvoidance")
-                move.turnAll(targetOri)
+                move.turnAll(targetOri, particles, arlo)
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
 
 
