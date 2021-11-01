@@ -116,7 +116,7 @@ try:
                 print("EMERGENCYSTOP!")
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
             
-            print("MEANPARTICLE X, Y:" meanParticle.getX(), meanParticle.getY() )
+            print("MEANPARTICLE X, Y:", meanParticle.getX(), meanParticle.getY() )
             
 
 finally:
