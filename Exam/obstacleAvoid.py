@@ -1,7 +1,9 @@
 from time import sleep
 import math
 import move
-
+import sys
+import perf_counter
+from localize import localize
 
 sys.path.append("../")
 import ARLO.robot
@@ -11,6 +13,9 @@ arlo = ARLO.robot.Robot()
 # send a go_diff command to drive forward
 leftSpeed = math.floor(64 * 0.97)
 rightSpeed = 64
+
+secMeter = 2.55
+degSec = 0.005
 
 frontDist = 0
 rightDist = 0
@@ -96,6 +101,7 @@ def obstacle(arlo):
 
 def obstacleAvoidance(particles, arlo):
     sum = 0
+    distTime = secMeter
     while sum < secMeter:
         update_dists()
         dists_safe()
