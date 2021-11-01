@@ -27,4 +27,4 @@ def checkMean(mean, target):
 
 def checkGoToBox(total, traveled):
     delta = total - traveled
-    return ((delta < 40) and (delta > -10))
+    return ((delta < 40) and (delta > -40))
