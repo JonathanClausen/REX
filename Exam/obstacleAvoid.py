@@ -65,14 +65,14 @@ def turn_x_degree(x, r, arlo):
 
 
 def obstacle(arlo):
-    update_dists()
+    update_dists(arlo)
     dists_safe()
     go = False
     turn = 0
     # 0 = turn right
     while (not go):
         totalTurn = 0
-        update_dists()
+        update_dists(arlo)
         dists_safe()
         if (not frontClear):
             if turn:
