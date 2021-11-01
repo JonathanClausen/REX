@@ -95,6 +95,7 @@ try:
                     closestPing,
                     boxCheck,
                     hasEmergencyStopped)
+                #ER VI FOR STRENGE HER? Skal vi bare acceptere?    
 
             elif ts == 1:
                 print("ROUTEPLANNING")
