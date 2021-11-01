@@ -3,6 +3,11 @@ import math
 import move
 
 
+sys.path.append("../")
+import ARLO.robot
+
+arlo = ARLO.robot.Robot()
+
 # send a go_diff command to drive forward
 leftSpeed = math.floor(64 * 0.97)
 rightSpeed = 64
@@ -107,8 +112,12 @@ def obstacleAvoidance(particles, arlo):
                 t = perf_counter()
             sum += t-start
             arlo.stop()
-            move.moveAllParticles((t-start)*secMeter/100, particles)
+            move.moveAllParticles(sum/secMeter*100, particles)
         else:
             turn = obstacle(arlo)
             move.turnAllParticles(math.radians(abs(turn)), particles)
     return particles
+
+
+particles = localize.initialize_particles(1000)
+obstacleAvoidance(particles, arlo)
