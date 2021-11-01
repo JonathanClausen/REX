@@ -57,6 +57,7 @@ try:
             target = landmarks[nextLandmark]
 
             meanParticle = particle.estimate_pose(particles)
+            print("mp-before: ",meanParticle.getX(),meanParticle.getY())
             targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
             vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
             distToTarget = math.sqrt(( targetPerimiter[0] - meanParticle.getX() )**2 + ( targetPerimiter[1] - meanParticle.getY() )**2)
