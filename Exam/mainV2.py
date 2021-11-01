@@ -89,12 +89,12 @@ try:
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
 
 
-            reachedCurrentTarget = targetStatus.verify(
-                targetStatus.checkMean(meanParticle, target), 
+            reachedCurrentTarget = verification.verify(
+                verification.checkMean(meanParticle, target), 
                 min(arlo.read_front_ping_sensor(),
                     arlo.read_left_ping_sensor(),
                     arlo.read_right_ping_sensor()),
-                targetStatus.checkGoToBox(distToTarget, distTraveled),
+                verification.checkGoToBox(distToTarget, distTraveled),
                 hasEmergencyStopped
             ) #Ret -> True/false
             if (not reachedCurrentTarget and hasEmergencyStopped):
