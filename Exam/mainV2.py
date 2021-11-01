@@ -1,4 +1,4 @@
-from ../Ex4.move import turnAll
+from time import sleep
 import verification
 import findlocation
 import numpy as np
@@ -8,7 +8,6 @@ import move
 import localize
 import sys
 import camera
-from time import sleep
 import copy
 import gotobox
 import obstacleAvoid
