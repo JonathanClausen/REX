@@ -112,7 +112,7 @@ try:
             #Ret -> True/false
             if (not reachedCurrentTarget and hasEmergencyStopped):
                 print("EMERGENCYSTOP!")
-                obstacleAvoid.obstacleAvoidance()
+                obstacleAvoid.obstacleAvoidance(particles, arlo)
             
 
             
