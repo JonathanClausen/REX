@@ -24,7 +24,7 @@ def go_straight(length, arlo):
     sensRight = arlo.read_right_ping_sensor()
     distTime = round((length/100)*secMeter,5)
     while (distTime > 0.1 and (not emStop)):
-        print("time to go", distTime)
+        #print("time to go", distTime)
         start = perf_counter()
         t = start
         arlo.go_diff(leftSpeed, rightSpeed, 1, 1)

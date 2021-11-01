@@ -36,11 +36,11 @@ try:
     num_particles = 1000
     particles = localize.initialize_particles(num_particles)
 
-    reachedCurrentTarget = False 
     isLocalized = False
     hasEmergencyStopped = False
     #RUNNING UNTIL ALL ARE FOUND
     for nextLandmark in landmarkIDs:
+        reachedCurrentTarget = False 
         #Checking if we can localize ourself. If not, Random via obstacle() 
         while not isLocalized:
             particles, isLocalized = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
