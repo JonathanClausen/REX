@@ -3,7 +3,7 @@ import math
 import move
 import sys
 from time import perf_counter
-from localize import localize
+import localize
 
 sys.path.append("../")
 import ARLO.robot
