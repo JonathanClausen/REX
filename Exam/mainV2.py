@@ -74,6 +74,13 @@ try:
                                                                                 cam)
                 move.turnAllParticles(math.radians(abs(turn)), particles)
                 move.moveAllParticles(distTraveled, particles)
+                reachedCurrentTarget = verification.verify(
+                verification.checkMean(meanParticle, target), 
+                min(arlo.read_front_ping_sensor(),
+                    arlo.read_left_ping_sensor(),
+                    arlo.read_right_ping_sensor()),
+                verification.checkGoToBox(distToTarget, distTraveled),
+                hasEmergencyStopped
 
             elif ts == 1:
                 print("Obstacle in way, routeplanning")
@@ -88,13 +95,7 @@ try:
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
 
 
-            reachedCurrentTarget = verification.verify(
-                verification.checkMean(meanParticle, target), 
-                min(arlo.read_front_ping_sensor(),
-                    arlo.read_left_ping_sensor(),
-                    arlo.read_right_ping_sensor()),
-                verification.checkGoToBox(distToTarget, distTraveled),
-                hasEmergencyStopped
+            
             ) #Ret -> True/false
             if (not reachedCurrentTarget and hasEmergencyStopped):
                 obstacleAvoid.obstacleAvoidance()
