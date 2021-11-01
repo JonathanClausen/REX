@@ -41,7 +41,7 @@ try:
             particles, isLocalized = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
             if isLocalized:
                 break
-            obstacleAvoid.obstacleAvoidance()
+            obstacleAvoid.obstacleAvoidance(particles, arlo)
 
         #Localized Succedes -> Time to move, until target is reached. 
         while not reachedCurrentTarget:
@@ -80,7 +80,7 @@ try:
             elif ts == 2:
                 print("Can't See Anything, turning to target -> obstacleAvoidance")
                 move.turnAll(turnRadians)
-                obstacleAvoid.obstacleAvoidance()
+                obstacleAvoid.obstacleAvoidance(particles, arlo)
 
 
             reachedCurrentTarget = reachedTarget() #Ret -> True/false
@@ -90,11 +90,3 @@ try:
 
 finally:
     cam.terminateCaptureThread()
-    
-
-
-    
-
-
-
-            
