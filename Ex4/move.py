@@ -61,11 +61,12 @@ def goTurn(deg, arlo):
     ## sample
 
 def moveAll(length, particles, arlo):
-    go_straight(length, arlo)
+    hasEmergencyStopped = go_straight(length, arlo)
     for p in particles: 
         x = math.cos(p.getTheta())*length
         y = math.sin(p.getTheta())*length
         particle.move_particle(p,x,y,0)
+    return hasEmergencyStopped
 
 
 def turnAll(delta_theta, particles, arlo):
