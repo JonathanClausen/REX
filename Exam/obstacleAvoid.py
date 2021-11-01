@@ -112,7 +112,7 @@ def obstacleAvoidance(particles, arlo):
             while ((t - start) < distTime):
                 update_dists()
                 dists_safe()
-                if (frontClear or left45Clear or right45Clear):
+                if (not frontClear or not left45Clear or not right45Clear):
                     print("obstacle")
                     break
                 t = perf_counter()
