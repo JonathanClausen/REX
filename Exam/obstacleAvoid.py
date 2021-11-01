@@ -2,8 +2,8 @@ from time import sleep
 import math
 import move
 import sys
-import perf_counter
-from localize import localize
+from time import perf_counter
+import localize
 
 sys.path.append("../")
 import ARLO.robot
