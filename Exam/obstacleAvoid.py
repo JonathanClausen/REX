@@ -1,14 +1,8 @@
 from time import sleep
 import math
 import move
-import sys
 from time import perf_counter
-import localize
 
-sys.path.append("../")
-import ARLO.robot
-
-arlo = ARLO.robot.Robot()
 
 # send a go_diff command to drive forward
 leftSpeed = math.floor(64 * 0.97)
