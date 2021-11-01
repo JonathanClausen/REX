@@ -77,8 +77,7 @@ try:
 
             elif ts == 1:
                 print("Obstacle in way, routeplanning")
-                move.turnAll(targetOri, particles, arlo)
-                turnRadians, dist = routePlan.routeplan()
+                turnRadians, dist = routePlan.findWay(cam)
                 move.turnAll(turnRadians)
                 move.moveAll(dist)
                 move.turnAll(0-(turnRadians*2))
