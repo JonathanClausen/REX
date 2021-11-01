@@ -1,5 +1,5 @@
-from Ex4.move import turnAll
-from Exam.verification import checkMean, verify
+from ../Ex4.move import turnAll
+import verification
 import findlocation
 import numpy as np
 import particle
