@@ -1,3 +1,5 @@
+from Ex4.move import turnAll
+from Exam.verification import checkMean, verify
 import findlocation
 import numpy as np
 import particle
@@ -11,6 +13,8 @@ import copy
 import gotobox
 import obstacleAvoid
 import routePlan
+import targetStatus
+
 
 #Import arlo robot
 sys.path.append("../")
@@ -45,18 +49,19 @@ try:
 
         #Localized Succedes -> Time to move, until target is reached. 
         while not reachedCurrentTarget:
-            print("Attempting to find target: ", nextLandmark)		
-            #ts ret -> 0,1,2
-            #0 -> See goals and clear 
-            #1 -> See other box in path
-            #2 -> See nothing
+            print("Attempting to find target: ", nextLandmark)
             target = landmarks[nextLandmark]
-            ts = targetStatus(target, cam)
 
             meanParticle = particle.estimate_pose(particles)
             targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
             vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
             distToTarget = math.sqrt(( targetPerimiter[0] - meanParticle.getX() )**2 + ( targetPerimiter[1] - meanParticle.getY() )**2)
+            turnAll(targetOri, particles, arlo)
+            #ts ret -> 0,1,2
+            #0 -> See goals and clear 
+            #1 -> See other box in path
+            #2 -> See nothing
+            ts = targetStatus.checkTargetStatus(nextLandmark, cam) #Check comment above
            
             if (ts == 0):
                 print("Target Visible -> Moving to", nextLandmark)
@@ -83,8 +88,15 @@ try:
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
 
 
-            reachedCurrentTarget = reachedTarget() #Ret -> True/false
-            if not reachedCurrentTarget and emergencyStop:
+            reachedCurrentTarget = verify(
+                checkMean(meanParticle, target), 
+                min(arlo.read_front_ping_sensor(),
+                    arlo.read_left_ping_sensor(),
+                    arlo.read_right_ping_sensor()),
+                checkGoToBox(distToTarget, distTraveled),
+                hasEmergencyStopped
+            ) #Ret -> True/false
+            if (not reachedCurrentTarget and hasEmergencyStopped):
                 obstacleAvoid.obstacleAvoidance()
 
 
