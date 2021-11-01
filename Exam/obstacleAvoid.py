@@ -122,6 +122,7 @@ def obstacleAvoidance(particles, arlo):
         else:
             turn = obstacle(arlo)
             move.turnAllParticles(math.radians(abs(turn)), particles)
+        print(sum)
     return particles
 
 
