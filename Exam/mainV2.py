@@ -66,7 +66,7 @@ try:
             ts = targetStatus.checkTargetStatus(nextLandmark, cam) #Check comment above
            
             if (ts == 0):
-                print("Target Visible -> Moving to", nextLandmark)
+                print("TARGET IN SIGHT", nextLandmark)
                 turn, distTraveled, particles, hasEmergencyStopped = gotobox.run_goToBox(
                                                                                 nextLandmark, 
                                                                                 arlo, 
@@ -111,7 +111,7 @@ try:
             
             #Ret -> True/false
             if (not reachedCurrentTarget and hasEmergencyStopped):
-                print("EmergencyStop!")
+                print("EMERGENCYSTOP!")
                 obstacleAvoid.obstacleAvoidance()
             
 

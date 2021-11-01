@@ -42,7 +42,7 @@ def getAng():
         return 45
     a = tvec[0][0][0]
     c = tvec[0][0][2]
-    print("a = ", a, "c = ", c)
+    #print("a = ", a, "c = ", c)
     return  math.degrees(math.asin(a/c))
 
 # turn
@@ -51,17 +51,17 @@ def turn(deg):
     global LeftSpeed
     global degSec
     isRight = deg > 0
-    print("isRight", isRight, "Degrees to turn ", deg)
-    print("Turning to box")
+    #print("isRight", isRight, "Degrees to turn ", deg)
+    #print("Turning to box")
     if (not isRight):
-        print("Advusting to left deg")
+        #print("Advusting to left deg")
         deg = deg * (-1)
-        print(arlo.go_diff(leftSpeed, rightSpeed, 0, 1))
+        arlo.go_diff(leftSpeed, rightSpeed, 0, 1)
     else:
-        print(arlo.go_diff(leftSpeed, rightSpeed, 1, 0))
+        arlo.go_diff(leftSpeed, rightSpeed, 1, 0)
     sleep(round(deg * degSec, 5))
     print(arlo.stop())
-    print("amount of degrees to go", deg * degSec)
+    #print("amount of degrees to go", deg * degSec)
 
 
 
