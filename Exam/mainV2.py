@@ -96,7 +96,7 @@ try:
 
 
             
-            ) #Ret -> True/false
+            #Ret -> True/false
             if (not reachedCurrentTarget and hasEmergencyStopped):
                 obstacleAvoid.obstacleAvoidance()
 
