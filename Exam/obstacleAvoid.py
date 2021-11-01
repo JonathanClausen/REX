@@ -85,15 +85,15 @@ def obstacle(arlo):
                 totalTurn -= 10
             else:
                 totalTurn += 10
-            turn_x_degree(10,turn)
+            turn_x_degree(10,turn, arlo)
         elif (not left45Clear):
             turn = 0
             totalTurn += 10
-            turn_x_degree(10,turn)
+            turn_x_degree(10,turn, arlo)
         elif (not right45Clear):
             turn = 1
             totalTurn -= 10
-            turn_x_degree(10,turn)
+            turn_x_degree(10,turn, arlo)
         else:
             go = True
     return totalTurn
