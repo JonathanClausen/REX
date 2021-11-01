@@ -94,12 +94,14 @@ try:
                 print("Can't See target or other boxes, turning to target -> obstacleAvoidance")
                 # move.turnAll(targetOri, particles, arlo)
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
+                particles, isLocalized = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
                 hasEmergencyStopped = False
 
 
             
             #Ret -> True/false
             if (not reachedCurrentTarget and hasEmergencyStopped):
+                print("EmergencyStop occured, target not reacehed -> doing obstacle Avoidance")
                 obstacleAvoid.obstacleAvoidance()
 
 
