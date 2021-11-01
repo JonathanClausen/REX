@@ -1,4 +1,4 @@
-
+from time import sleep
 
 def checkTargetStatus(target, cam):
     sleep(0.5)
