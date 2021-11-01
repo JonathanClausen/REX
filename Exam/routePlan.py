@@ -22,7 +22,7 @@ def findWay(cam):
     # identificer alle kasser
     objectIDs, dists, angles = cam.detect_aruco_objects(frame)
     if (objectIDs is None):
-        print("error no objects found")
+        print("error in route planning, no objects found")
         return (0,0)
     bLeft = []
     distLeft = []
@@ -35,6 +35,10 @@ def findWay(cam):
     goAroundAng = angles[goAroundIndex]
     goAroundID = objectIDs[goAroundIndex]
     print("avoid object : ", goAroundID)
+
+    if (goAroundID in [1, 2, 3, 4]):
+        print("Error in route planning, not trusting current theta")
+        return (0,0)
     
     # removing the center box from the lists
     for i in np.where(objectIDs == goAroundID): 
