@@ -87,13 +87,14 @@ try:
                 print("Obstacle in way, routeplanning")
                 turnRadians, dist = routePlan.findWay(cam)
                 move.turnAll(turnRadians, particles, arlo)
-                move.moveAll(dist, particles, arlo)
+                hasEmergencyStopped = move.moveAll(dist, particles, arlo)
                 move.turnAll(0-(turnRadians*2),particles, arlo)
 
             elif ts == 2:
                 print("Can't See target or other boxes, turning to target -> obstacleAvoidance")
                 # move.turnAll(targetOri, particles, arlo)
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
+                hasEmergencyStopped = False
 
 
             

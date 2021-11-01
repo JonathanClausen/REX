@@ -44,7 +44,7 @@ def go_straight(length, arlo):
             t = perf_counter()
         arlo.stop()
         distTime -= (t-start)
-    return
+    return emStop
 
 def goTurn(deg, arlo):
     degSec = 0.008
