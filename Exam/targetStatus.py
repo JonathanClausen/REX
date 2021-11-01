@@ -3,6 +3,7 @@
 def checkTargetStatus(target, cam):
     frame = cam.get_next_frame()
     ids, dists, angles = cam.detect_aruco_objects(frame)
+    print(ids)
     if not(bool(ids)): 
         return 2    
     elif target in ids: 

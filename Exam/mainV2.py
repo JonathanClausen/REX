@@ -61,6 +61,7 @@ try:
             #0 -> See goals and clear
             #1 -> See other box in path
             #2 -> See nothing
+            print("Calculating targetstatus")
             ts = targetStatus.checkTargetStatus(nextLandmark, cam) #Check comment above
            
             if (ts == 0):
