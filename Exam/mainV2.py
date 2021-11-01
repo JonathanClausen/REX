@@ -1,4 +1,6 @@
 from time import sleep
+
+from numpy.core.fromnumeric import mean
 import verification
 import findlocation
 import numpy as np
@@ -114,7 +116,7 @@ try:
                 print("EMERGENCYSTOP!")
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
             
-
+            print("MEANPARTICLE X, Y:" meanParticle.getX(), meanParticle.getY() )
             
 
 finally:
