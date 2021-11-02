@@ -29,9 +29,9 @@ def localization_turn(particles, arlo, marks, cam):
     seenBoth = False
 
     while((not seenBoth) and (counter <= max_turn)):
-        
-        #Turn particles and update particles 
-        move.turnAll(math.radians(deg), particles, arlo)
+        #Turn particles and update particles
+        if (not (counter == 0)):
+            move.turnAll(math.radians(deg), particles, arlo)
         #meanParticle = localize.localize(2, particles, 0, cam)
         sleep(0.5)
         # Check if both boxes have been spotted.
