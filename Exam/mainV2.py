@@ -106,7 +106,7 @@ try:
                 else:
                     move.turnAll(turnRadians, particles, arlo)
                     hasEmergencyStopped = move.moveAll(dist, particles, arlo)
-                    move.turnAll(0-(turnRadians*2),particles, arlo)
+                    move.turnAll(targetOri,particles, arlo)
 
             elif ts == 2:
                 print("OBSTACLE AVOIDANCE")
