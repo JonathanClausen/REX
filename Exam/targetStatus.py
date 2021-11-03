@@ -18,13 +18,14 @@ def checkTargetStatus(target, cam):
         if len(ids) == 1:     
             return 0 #Target is the only thing seen
         else: 
-            boxAngles   = angles[np.where(ids != target)]
+            targetAngle = np.abs(angles[np.where(ids == target)])
+            boxAngles   = (angles[np.where(ids != target)])+targetAngle
             boxDists    = dists[np.where(ids != target)]
             spaces = []
             for i in range(len(boxAngles)): 
                 space_between_box_target = math.sin(boxAngles[i])*boxDists[i]
                 spaces.append(space_between_box_target)
-            if (len(spaces > 0) and (np.min(spaces))): #not enough space
+            if ((len(spaces) > 0) and (np.min(spaces) < 35)): #not enough space
                 print("Not enough space to get to target")
                 return 1
             else: 
