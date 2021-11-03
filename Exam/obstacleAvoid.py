@@ -97,7 +97,7 @@ def obstacle(arlo):
 def obstacleAvoidance(particles, arlo):
     sleep(0.5)
     sum = 0
-    distTime = secMeter
+    distTime = round(secMeter/2, 5)
     while sum < distTime:
         update_dists(arlo)
         dists_safe()

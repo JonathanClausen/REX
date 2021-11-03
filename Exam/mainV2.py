@@ -132,6 +132,7 @@ try:
                 print("OBSTACLE AVOIDANCE")
                 # move.turnAll(targetOri, particles, arlo)
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
+                particles = localize.initialize_particles(num_particles)
                 particles, isLocalized = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam)) 
                 hasEmergencyStopped = False
 
