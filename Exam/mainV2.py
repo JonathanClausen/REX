@@ -75,28 +75,40 @@ try:
                                                                                 arlo, 
                                                                                 particles, 
                                                                                 landmarks, 
-                                                                                cam)
+                                                                                cam,
+                                                                                1000)
                 move.turnAllParticles(math.radians(abs(turn)), particles)
                 move.moveAllParticles(distTraveled, particles)
-                meanCheck = verification.checkMean(meanParticle, target)
-                closestPing = min(arlo.read_front_ping_sensor(),
-                    arlo.read_left_ping_sensor(),
-                    arlo.read_right_ping_sensor())
-                boxCheck = verification.checkGoToBox(distToTarget, distTraveled)
-                print("\n")
-                print("VERIFICATION:")
-                print("Total dist to travel: ", distToTarget)
-                print("Acual dist traveled : ", distTraveled)
-                print("Result: ", boxCheck)
-                print("\n")
+                if (not hasEmergencyStopped):
+                    turn, distTraveled, particles, hasEmergencyStopped = gotobox.run_goToBox(
+                                                                                    nextLandmark, 
+                                                                                    arlo, 
+                                                                                    particles, 
+                                                                                    landmarks, 
+                                                                                    cam,
+                                                                                    300)
+                    move.turnAllParticles(math.radians(abs(turn)), particles)
+                    move.moveAllParticles(distTraveled, particles)
+                    reachedCurrentTarget = True
+                # meanCheck = verification.checkMean(meanParticle, target)
+                # closestPing = min(arlo.read_front_ping_sensor(),
+                #     arlo.read_left_ping_sensor(),
+                #     arlo.read_right_ping_sensor())
+                # boxCheck = verification.checkGoToBox(distToTarget, distTraveled)
+                # print("\n")
+                # print("VERIFICATION:")
+                # print("Total dist to travel: ", distToTarget)
+                # print("Acual dist traveled : ", distTraveled)
+                # print("Result: ", boxCheck)
+                # print("\n")
 
-                reachedCurrentTarget = verification.verify(
-                    meanCheck,
-                    closestPing,
-                    boxCheck,
-                    hasEmergencyStopped)
+                # reachedCurrentTarget = verification.verify(
+                #     meanCheck,
+                #     closestPing,
+                #     boxCheck,
+                #     hasEmergencyStopped)
                 #ER VI FOR STRENGE HER? Skal vi bare acceptere?    
-                print("Verification:", reachedCurrentTarget)
+                # print("Verification:", reachedCurrentTarget)
             elif ts == 1:
                 print("ROUTEPLANNING")
                 turnRadians, dist = routePlan.findWay(cam)
