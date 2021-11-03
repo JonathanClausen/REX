@@ -78,7 +78,7 @@ def findWay(cam, targetID):
     # og køre en meter ved siden af forhindringen
     distEmpty = 100   # chossing the side with the most space
     if (minLeft >= minRight):
-        if ((minLeft == 9999999) and (targetID is not goAroundID)):
+        if ((minLeft == 9999999) and (targetID != goAroundID)):
             # left is free finding direction next to obstacle
             print("left is clear")
             turn, dist = go_to_xy(distEmpty, goAroundDist)
@@ -87,7 +87,7 @@ def findWay(cam, targetID):
         leftBoxID = bLeft[index]
 
         #Go for centerbox
-        if ((goAroundDist < min(roboToBoxLeft)) and (targetID is not goAroundID)):
+        if ((goAroundDist < min(roboToBoxLeft)) and (targetID != goAroundID)):
             turn, dist = go_to_xy(minLeft,goAroundDist)
             print("going between box ", goAroundID, " and ", leftBoxID)
             return (turn+goAroundAng, dist)
@@ -98,7 +98,7 @@ def findWay(cam, targetID):
             return (-turn+goAroundAng, dist)
 
     else:
-        if ((minRight == 9999999) and (targetID is not goAroundID)):
+        if ((minRight == 9999999) and (targetID != goAroundID)):
             # left is free finding direction next to obstacle
             print("right is clear")
             turn, dist = go_to_xy(distEmpty,goAroundDist)
@@ -107,7 +107,7 @@ def findWay(cam, targetID):
         rightBoxID = bRight[index]
         
         #Go for centerbox
-        if ((goAroundDist < min(roboToBoxRight)) and (targetID is not goAroundID)):
+        if ((goAroundDist < min(roboToBoxRight)) and (targetID != goAroundID)):
             turn, dist = go_to_xy(minRight,goAroundDist)
             print("going between box ", goAroundID, " and ", rightBoxID)
             return (-turn+goAroundAng, dist)
