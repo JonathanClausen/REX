@@ -2,7 +2,7 @@ import math
 
 mean_tolerance = 60                 #in centimeter
 sens_front_tolerance = 600          #in millimeter
-go_to_box_tolerance = 20            #in centimeter
+go_to_box_tolerance = 40            #in centimeter
 
 def verify(mean, front, goBox, emergency):
     if emergency:
