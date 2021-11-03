@@ -25,7 +25,7 @@ def checkTargetStatus(target, cam):
         if len(ids) == 1:     
             return 0 #Target is the only thing seen
         else: 
-            if np.min(space_between_box_target) < 35: #not enough space
+            if np.min(spaces) < 35: #not enough space
                 return 1
                 print("Not enough space to get to target")
             else: 
