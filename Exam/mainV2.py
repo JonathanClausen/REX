@@ -120,6 +120,7 @@ try:
             if (not reachedCurrentTarget and hasEmergencyStopped):
                 print("EMERGENCYSTOP!")
                 obstacleAvoid.obstacleAvoidance(particles, arlo)
+    print("\n\nAll done!!!!! we fucking did it!! - i hope")
             
 
 finally:
