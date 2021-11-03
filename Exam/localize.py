@@ -54,6 +54,7 @@ CBLACK = (0, 0, 0)
 
 
 def localize(numResample, particles, debug, landmarks, cam):
+    print("Localizing")
     est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
     num_particles = len(particles)
 
