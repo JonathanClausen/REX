@@ -85,11 +85,11 @@ safeDistSide  = 150
 
 secMeter      = 2.55
 
-stopDist      = 300
+#stopDist      = 1000 # millimeter
 stopDistSide  = 200
 
-
-def go(targetBoxID, arlo, particles, landmarks, cam):
+# stopdist is millimeter
+def go(targetBoxID, arlo, particles, landmarks, cam, stopDist):
     sum = 0
     emStop = False
     sensFront = arlo.read_front_ping_sensor()
@@ -133,8 +133,8 @@ def go(targetBoxID, arlo, particles, landmarks, cam):
 
 
 
-def run_goToBox(targetBoxID, arlo, particles, landmarks, cam):
+def run_goToBox(targetBoxID, arlo, particles, landmarks, cam, stop):
     
     #print("Now i must be looking at "+str(targetBoxID)+". Calling go()")
     turn(getAng(targetBoxID, cam)[0], arlo)
-    return go(targetBoxID, arlo, particles, landmarks, cam)
+    return go(targetBoxID, arlo, particles, landmarks, cam, stop)
