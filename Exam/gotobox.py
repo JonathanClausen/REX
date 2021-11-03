@@ -90,6 +90,7 @@ stopDistSide  = 200
 
 # stopdist is millimeter
 def go(targetBoxID, arlo, particles, landmarks, cam, stopDist):
+    print("Stopdist = ", stopDist)
     sum = 0
     emStop = False
     sensFront = arlo.read_front_ping_sensor()
