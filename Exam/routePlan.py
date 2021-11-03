@@ -28,9 +28,11 @@ def findWay(cam):
     distLeft = []
     bRight = []
     distRight = []
+    roboToBoxLeft = []
+    roboToBoxRight = []
 
     # find the center box, the box that is in the way
-    goAroundIndex = np.argmin(np.multiply((np.abs(angles)+1),dists)) #min(enumerate(angles), key=lambda x: abs(x[1]))
+    goAroundIndex = np.argmin(np.abs(angles)) #min(enumerate(angles), key=lambda x: abs(x[1]))
     goAroundDist = dists[goAroundIndex]
     goAroundAng = angles[goAroundIndex]
     goAroundID = objectIDs[goAroundIndex]
@@ -63,13 +65,15 @@ def findWay(cam):
             print(objectIDs[i] ," to my left")
             bLeft.append(objectIDs[i])
             distLeft.append(space)
+            roboToBoxLeft.append(dists[i])
         else:
             print(objectIDs[i] ," to my right")
             bRight.append(objectIDs[i])
             distRight.append(space)   # find de to nærmeste kasser til højre og venstre
+            roboToBoxRight.append(dists[i])
 
 
-    minLeft = min(distLeft, default=9999999) # default hvis listen er tom
+    minLeft  = min(distLeft , default=9999999) # default hvis listen er tom
     minRight = min(distRight, default=9999999)   # hvis der er frit til en af siderne vælger den denne
     # og køre en meter ved siden af forhindringen
     distEmpty = 100   # chossing the side with the most space
@@ -83,7 +87,7 @@ def findWay(cam):
         leftBoxID = bLeft[index]
 
         #Go for centerbox
-        if goAroundDist < min(distLeft):
+        if goAroundDist < min(roboToBoxLeft):
             turn, dist = go_to_xy(minLeft,goAroundDist)
             print("going between box ", goAroundID, " and ", leftBoxID)
             return (turn-goAroundAng, dist)
@@ -103,7 +107,7 @@ def findWay(cam):
         rightBoxID = bRight[index]
         
         #Go for centerbox
-        if goAroundDist < min(distRight):
+        if goAroundDist < min(roboToBoxRight):
             turn, dist = go_to_xy(minRight,goAroundDist)
             print("going between box ", goAroundID, " and ", rightBoxID)
             return (-turn-goAroundAng, dist)
