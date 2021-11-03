@@ -14,8 +14,8 @@ def checkTargetStatus(target, cam):
     boxAngles   = angles[np.where(ids != target)]
     boxDists    = dists[np.where(ids != target)]
     spaces = []
-    for i in boxAngles: 
-        space_between_box_target = math.sin(boxAngles[i])*boxDists
+    for i in range(len(boxAngles)): 
+        space_between_box_target = math.sin(boxAngles[i])*boxDists[i]
         spaces.append(space_between_box_target)
     
     if isinstance(ids, type(None)): 
@@ -25,7 +25,7 @@ def checkTargetStatus(target, cam):
         if len(ids) == 1:     
             return 0 #Target is the only thing seen
         else: 
-            if min(space_between_box_target) > 35: #Enough space
+            if np.min(space_between_box_target) > 35: #Enough space
                 return 0
             else: 
                 return 1 # Routeplan 
