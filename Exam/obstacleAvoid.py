@@ -71,6 +71,7 @@ def obstacle(arlo):
     turn = 0
     # 0 = turn right
     while (not go):
+        sleep(0.2)
         totalTurn = 0
         update_dists(arlo)
         dists_safe()
@@ -94,6 +95,7 @@ def obstacle(arlo):
 
 
 def obstacleAvoidance(particles, arlo):
+    sleep(0.5)
     sum = 0
     distTime = secMeter
     while sum < distTime:
@@ -115,4 +117,5 @@ def obstacleAvoidance(particles, arlo):
         else:
             turn = obstacle(arlo)
             move.turnAllParticles(math.radians(abs(turn)), particles)
+    sleep(0.5)
     return particles
