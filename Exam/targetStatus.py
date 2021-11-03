@@ -24,7 +24,7 @@ def checkTargetStatus(target, cam):
             for i in range(len(boxAngles)): 
                 space_between_box_target = math.sin(boxAngles[i])*boxDists[i]
                 spaces.append(space_between_box_target)
-            if (len(spaces > 0) and (np.min(spaces)): #not enough space
+            if (len(spaces > 0) and (np.min(spaces))): #not enough space
                 print("Not enough space to get to target")
                 return 1
             else: 
