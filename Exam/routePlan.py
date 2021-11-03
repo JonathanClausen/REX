@@ -16,7 +16,7 @@ def go_to_xy(a,b):
 # funktionen her antager at robotten peger i den retning robotten ønker At køre.
 # den vil så returnere (vinkel, lengde)
 # robotten skal dreje og køre for at komme op på siden af kassen
-def findWay(cam):
+def findWay(cam, targetID):
     # tag billede
     frame = cam.get_next_frame()
     # identificer alle kasser
@@ -38,7 +38,7 @@ def findWay(cam):
     goAroundID = objectIDs[goAroundIndex]
     print("avoid object : ", goAroundID)
 
-    if (goAroundID in [1, 2, 3, 4]):
+    if ((goAroundID in [1, 2, 3, 4]) and (goAroundID is not targetID)):
         print("Error in route planning, not trusting current theta")
         return (0,0)
     
@@ -78,7 +78,7 @@ def findWay(cam):
     # og køre en meter ved siden af forhindringen
     distEmpty = 100   # chossing the side with the most space
     if (minLeft >= minRight):
-        if minLeft == 9999999:
+        if ((minLeft == 9999999) and (targetID is not goAroundID)):
             # left is free finding direction next to obstacle
             print("left is clear")
             turn, dist = go_to_xy(distEmpty, goAroundDist)
@@ -87,18 +87,18 @@ def findWay(cam):
         leftBoxID = bLeft[index]
 
         #Go for centerbox
-        if goAroundDist < min(roboToBoxLeft):
+        if ((goAroundDist < min(roboToBoxLeft)) and (targetID is not goAroundID)):
             turn, dist = go_to_xy(minLeft,goAroundDist)
             print("going between box ", goAroundID, " and ", leftBoxID)
             return (turn-goAroundAng, dist)
         #Go for nearest leftbox
         else:
-            turn, dist = go_to_xy(minLeft,dists[np.where(objectIDs == leftBoxID)[0]])
+            turn, dist = go_to_xy(minLeft, distEmpty) #dists[np.where(objectIDs == leftBoxID)[0]])
             print("going between box ",leftBoxID, " and ", goAroundID)
             return (-turn-goAroundAng, dist)
 
     else:
-        if minRight == 9999999:
+        if ((minRight == 9999999) and (targetID is not goAroundID)):
             # left is free finding direction next to obstacle
             print("right is clear")
             turn, dist = go_to_xy(distEmpty,goAroundDist)
@@ -107,13 +107,13 @@ def findWay(cam):
         rightBoxID = bRight[index]
         
         #Go for centerbox
-        if goAroundDist < min(roboToBoxRight):
+        if ((goAroundDist < min(roboToBoxRight)) and (targetID is not goAroundID)):
             turn, dist = go_to_xy(minRight,goAroundDist)
             print("going between box ", goAroundID, " and ", rightBoxID)
             return (-turn-goAroundAng, dist)
         #Go for nearest rightbox 
         else:
-            turn, dist = go_to_xy(minRight,dists[np.where(objectIDs == rightBoxID)[0]])
+            turn, dist = go_to_xy(minRight, distEmpty) # dists[np.where(objectIDs == rightBoxID)[0]])
             print("going between box ", rightBoxID, " and ", goAroundID)
             return (turn-goAroundAng, dist)
 
