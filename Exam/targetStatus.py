@@ -25,7 +25,7 @@ def checkTargetStatus(target, cam):
         if len(ids) == 1:     
             return 0 #Target is the only thing seen
         else: 
-            if min(space_between_box_target) > 35: #Enough space
+            if np.min(space_between_box_target) > 35: #Enough space
                 return 0
             else: 
                 return 1 # Routeplan 
