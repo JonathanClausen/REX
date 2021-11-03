@@ -93,7 +93,7 @@ def findWay(cam, targetID):
             return (turn-goAroundAng, dist)
         #Go for nearest leftbox
         else:
-            turn, dist = go_to_xy(minLeft, dists[np.where(objectIDs == leftBoxID)[0]])
+            turn, dist = go_to_xy(minLeft,  distEmpty) # dists[np.where(objectIDs == leftBoxID)[0]])
             print("going between box ",leftBoxID, " and ", goAroundID)
             return (-turn-goAroundAng, dist)
 
@@ -113,7 +113,7 @@ def findWay(cam, targetID):
             return (-turn-goAroundAng, dist)
         #Go for nearest rightbox 
         else:
-            turn, dist = go_to_xy(minRight, dists[np.where(objectIDs == rightBoxID)[0]])
+            turn, dist = go_to_xy(minRight, distEmpty) # dists[np.where(objectIDs == rightBoxID)[0]])
             print("going between box ", rightBoxID, " and ", goAroundID)
             return (turn-goAroundAng, dist)
 
