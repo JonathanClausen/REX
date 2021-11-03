@@ -27,12 +27,12 @@ try:
 
     perimiterToTargets = 20
 
-    landmarkIDs = [4,3,2,1]
+    landmarkIDs = [1,2,3,4,1]
     landmarks = {
-            4: (0.0, 0.0),  # Coordinates for landmark 1
-            3: (0.0, 300.0),
-            2: (400.0, 0.0),
-            1: (400.0, 300.0)
+            1: (0.0, 0.0),  # Coordinates for landmark 1
+            2: (0.0, 300.0),
+            3: (400.0, 0.0),
+            4: (400.0, 300.0)
         }
         
     num_particles = 1000
