@@ -20,7 +20,7 @@ def checkTargetStatus(target, cam):
         else: 
             targetAngle = np.abs(angles[np.where(ids == target)])
             boxAngles   = (angles[np.where(ids != target)])
-            boxAngles = [n + targetAngle for n in boxAngles]
+            #boxAngles = [n + targetAngle for n in boxAngles]
             boxDists    = dists[np.where(ids != target)]
             print(boxAngles,boxDists)
             spaces = []
