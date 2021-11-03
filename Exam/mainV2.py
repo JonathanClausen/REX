@@ -100,7 +100,7 @@ try:
             elif ts == 1:
                 print("ROUTEPLANNING")
                 turnRadians, dist = routePlan.findWay(cam)
-                print("DISTTTTT =", dist)
+                
                 if (turnRadians == 0 and dist == 0):
                     particles, isLocalized = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam))
                     hasEmergencyStopped = not isLocalized
@@ -111,7 +111,7 @@ try:
                         move.turnAll(targetOri, particles, arlo)
                 else:
                     move.turnAll(turnRadians, particles, arlo)
-                    hasEmergencyStopped = move.moveAll(dist+2000, particles, arlo)
+                    hasEmergencyStopped = move.moveAll(dist+25, particles, arlo)
                     meanParticle = particle.estimate_pose(particles)
                     vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
                     move.turnAll(targetOri,particles, arlo)
