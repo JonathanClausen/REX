@@ -111,7 +111,7 @@ def findWay(cam):
         else:
             turn, dist = go_to_xy(minRight,dists[np.where(objectIDs == rightBoxID)[0]])
             print("going between box ", rightBoxID, " and ", goAroundID)
-            return (turn-goAroundAng, dist+200)
+            return (turn-goAroundAng, dist)
 
 # for testing
 # try:
