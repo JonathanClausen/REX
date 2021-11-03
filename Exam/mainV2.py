@@ -96,7 +96,7 @@ try:
                     boxCheck,
                     hasEmergencyStopped)
                 #ER VI FOR STRENGE HER? Skal vi bare acceptere?    
-                print("Reached Current Target", reachedCurrentTarget)
+                print("Verification:", reachedCurrentTarget)
             elif ts == 1:
                 print("ROUTEPLANNING")
                 turnRadians, dist = routePlan.findWay(cam)
