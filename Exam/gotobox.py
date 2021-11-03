@@ -32,14 +32,23 @@ def getAng(targetBoxID, cam):
     if ((objectIDs is not None) and (targetBoxID in objectIDs)):
         # Get only target angle and target dist
         print("Object IDs, dists",objectIDs, dists)
-        radiantAngle = angles[np.where(objectIDs == targetBoxID)][0]
+        dist = dists[np.where(objectIDs == targetBoxID)]
+        # Choose shortest path to box
+        if (dist[0] < dist[1]):
+            index = 0
+        else:
+            index = 1
+        
+        dist = dist[index]
+        radiantAngle = angles[np.where(objectIDs == targetBoxID)][index]
+            
         degrees = math.degrees(radiantAngle)
 
         if (radiantAngle < math.pi):
             degrees = -1 * math.degrees(radiantAngle)
 
-        dist = dists[np.where(objectIDs == targetBoxID)][0]
-
+        
+        print("min dist, min angle " )
         return [ round(degrees,5), round(dist,5) ] 
     else:
         return [0.0,0.0]
@@ -116,7 +125,7 @@ def go(targetBoxID, arlo, particles, landmarks, cam):
         sensLeft = arlo.read_left_ping_sensor()
         sensRight = arlo.read_right_ping_sensor()
         distTime = (((min(sensFront, picDist) - stopDist)/1000)*(2/3))*secMeter
-    return [firstTurn, (sum / secMeter) * 100, particles, emStop]
+    return [firstTurn, round((sum / secMeter) * 100, 5), particles, emStop]
 
 
 
