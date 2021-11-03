@@ -48,7 +48,7 @@ def getAng(targetBoxID, cam):
             degrees = -1 * math.degrees(radiantAngle)
 
         
-        print("min dist, min angle " )
+        print("min dist, min angle ", dist, radiantAngle)
         return [ round(degrees,5), round(dist,5) ] 
     else:
         return [0.0,0.0]
@@ -94,7 +94,7 @@ def go(targetBoxID, arlo, particles, landmarks, cam):
     firstTurn = boxAt[0]
     sensLeft = arlo.read_left_ping_sensor()
     sensRight = arlo.read_right_ping_sensor()
-    distTime = (((min(sensFront, picDist) - stopDist)/1000)*0.66)*secMeter
+    distTime = round((((min(sensFront, picDist) - stopDist)/1000)*0.66)*secMeter,5)
     while (distTime > 0.1 and (not emStop)):
         print("time to go", distTime)
         start = perf_counter()
