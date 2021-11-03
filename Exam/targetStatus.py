@@ -30,6 +30,7 @@ def checkTargetStatus(target, cam):
                 print("Not enough space to get to target")
             else: 
                 return 0 # Routeplan 
+                print("enough space")
 
     else:
         return 1 #Do routeplan
