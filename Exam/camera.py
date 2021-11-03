@@ -98,8 +98,11 @@ class Camera(object):
             #       7.0564929862291285e+02, 2.5634470978315028e+02, 0., 0., 1. ], dtype = np.float64)
             #self.intrinsic_matrix = np.asarray([ 6.0727040957659040e+02, 0., 3.0757300398967601e+02, 0.,
             #       6.0768864690145904e+02, 2.8935674612358201e+02, 0., 0., 1. ], dtype = np.float64)
-            self.intrinsic_matrix = np.asarray([500, 0., 3.0757300398967601e+02, 0.,
-                   500, 2.8935674612358201e+02, 0., 0., 1.], dtype = np.float64)
+            # self.intrinsic_matrix = np.asarray([500, 0., 3.0757300398967601e+02, 0.,
+            #        500, 2.8935674612358201e+02, 0., 0., 1.], dtype = np.float64)
+            # self.intrinsic_matrix.shape = (3, 3)
+            self.intrinsic_matrix = np.asarray([506.94, 0., 640/2, 0.,
+                   506.94, 480/2, 0., 0., 1.], dtype = np.float64)
             self.intrinsic_matrix.shape = (3, 3)
             #self.distortion_coeffs = np.asarray([ 1.1911006165076067e-01, -1.0003366233413549e+00,
             #       1.9287903277399834e-02, -2.3728201444308114e-03, -2.8137265581326476e-01 ], dtype = np.float64)
@@ -195,7 +198,7 @@ class Camera(object):
         # Initialize aruco detector
         self.arucoDict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
         # Set the correct physical marker size here
-        self.arucoMarkerLength = 0.15  # [m] actual size of aruco markers (in object coordinate system)
+        self.arucoMarkerLength = 0.145  # [m] actual size of aruco markers (in object coordinate system)
         
         # Initialize worker thread and framebuffer
         if self.useCaptureThread:
