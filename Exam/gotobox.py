@@ -33,11 +33,14 @@ def getAng(targetBoxID, cam):
         # Get only target angle and target dist
         print("Object IDs, dists",objectIDs, dists)
         dist = dists[np.where(objectIDs == targetBoxID)]
-        # Choose shortest path to box
-        if (dist[0] < dist[1]):
+        # Choose shortest path to box if we can see two aruco codes with same id.
+        if (len(dist) > 1):
+            if (dist[0] < dist[1]):
+                index = 0
+            else:
+                index = 1
+        else: 
             index = 0
-        else:
-            index = 1
         
         dist = dist[index]
         radiantAngle = angles[np.where(objectIDs == targetBoxID)][index]
@@ -48,7 +51,7 @@ def getAng(targetBoxID, cam):
             degrees = -1 * math.degrees(radiantAngle)
 
         
-        print("min dist, min angle " )
+        print("min dist, min angle ", dist, radiantAngle)
         return [ round(degrees,5), round(dist,5) ] 
     else:
         return [0.0,0.0]
@@ -94,7 +97,7 @@ def go(targetBoxID, arlo, particles, landmarks, cam):
     firstTurn = boxAt[0]
     sensLeft = arlo.read_left_ping_sensor()
     sensRight = arlo.read_right_ping_sensor()
-    distTime = (((min(sensFront, picDist) - stopDist)/1000)*0.66)*secMeter
+    distTime = round((((min(sensFront, picDist) - stopDist)/1000)*0.66)*secMeter,5)
     while (distTime > 0.1 and (not emStop)):
         print("time to go", distTime)
         start = perf_counter()
