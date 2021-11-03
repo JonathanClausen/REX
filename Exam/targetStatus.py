@@ -26,11 +26,11 @@ def checkTargetStatus(target, cam):
             return 0 #Target is the only thing seen
         else: 
             if np.min(spaces) < 35: #not enough space
-                return 1
                 print("Not enough space to get to target")
+                return 1
             else: 
-                return 0 # Routeplan 
                 print("enough space")
+                return 0 # Routeplan 
 
     else:
         return 1 #Do routeplan
