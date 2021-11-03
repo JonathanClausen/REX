@@ -30,7 +30,7 @@ def findWay(cam):
     distRight = []
 
     # find the center box, the box that is in the way
-    goAroundIndex = np.argmin(np.abs(angles)) #min(enumerate(angles), key=lambda x: abs(x[1]))
+    goAroundIndex = np.argmin(np.multiply((np.abs(angles)+1),dists)) #min(enumerate(angles), key=lambda x: abs(x[1]))
     goAroundDist = dists[goAroundIndex]
     goAroundAng = angles[goAroundIndex]
     goAroundID = objectIDs[goAroundIndex]
