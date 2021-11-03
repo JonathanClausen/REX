@@ -31,8 +31,9 @@ def getAng(targetBoxID, cam):
 
     if ((objectIDs is not None) and (targetBoxID in objectIDs)):
         # Get only target angle and target dist
-        print("Object IDs, dists",objectIDs, dists)
+        objectIDs = objectIDs[np.where(objectIDs == targetBoxID)]
         dist = dists[np.where(objectIDs == targetBoxID)]
+        print("Filtered Object IDs, dists",objectIDs, dist)
         # Choose shortest path to box if we can see two aruco codes with same id.
         if (len(dist) > 1):
             if (dist[0] < dist[1]):
