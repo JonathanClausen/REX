@@ -38,7 +38,7 @@ def findWay(cam, targetID):
     goAroundID = objectIDs[goAroundIndex]
     print("avoid object : ", goAroundID)
 
-    if ((goAroundID in [1, 2, 3, 4]) and (goAroundID is not targetID)):
+    if ((goAroundID in [1, 2, 3, 4]) and (goAroundID != targetID)):
         print("Error in route planning, not trusting current theta")
         return (0,0)
     
