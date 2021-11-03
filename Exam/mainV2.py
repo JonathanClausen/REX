@@ -103,7 +103,7 @@ try:
                 if (turnRadians == 0 and dist == 0):
                     particles, isLocalized = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam))
                     hasEmergencyStopped = not isLocalized
-                    if (localized):
+                    if (isLocalized):
                         targetPerimiter = findlocation.adjusted_target(meanParticle, target, perimiterToTargets)
                         meanParticle = particle.estimate_pose(particles)
                         vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
