@@ -19,7 +19,8 @@ def checkTargetStatus(target, cam):
             return 0 #Target is the only thing seen
         else: 
             targetAngle = np.abs(angles[np.where(ids == target)])
-            boxAngles   = (angles[np.where(ids != target)])+targetAngle
+            boxAngles   = (angles[np.where(ids != target)])
+            boxAngles = [n + targetAngle for n in boxAngles]
             boxDists    = dists[np.where(ids != target)]
             spaces = []
             for i in range(len(boxAngles)): 
