@@ -34,7 +34,7 @@ def getAng(targetBoxID, cam):
         print("Object IDs, dists",objectIDs, dists)
         dist = dists[np.where(objectIDs == targetBoxID)]
         # Choose shortest path to box if we can see two aruco codes with same id.
-        if (len(objectIDs) > 1):
+        if (len(dist) > 1):
             if (dist[0] < dist[1]):
                 index = 0
             else:
