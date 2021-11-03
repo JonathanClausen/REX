@@ -111,6 +111,8 @@ try:
                 else:
                     move.turnAll(turnRadians, particles, arlo)
                     hasEmergencyStopped = move.moveAll(dist, particles, arlo)
+                    meanParticle = particle.estimate_pose(particles)
+                    vecLength, targetOri = findlocation.estimate_target(targetPerimiter[0], targetPerimiter[1], meanParticle)
                     move.turnAll(targetOri,particles, arlo)
 
             elif ts == 2:
