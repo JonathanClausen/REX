@@ -83,12 +83,12 @@ try:
                     arlo.read_left_ping_sensor(),
                     arlo.read_right_ping_sensor())
                 boxCheck = verification.checkGoToBox(distToTarget, distTraveled)
+                print("\n")
                 print("VERIFICATION:")
-                print("parameters for verify: ")
-                print("meanCheck = ", meanCheck)
-                print("closestPing = ", closestPing)
-                print("boxCheck = ", boxCheck)
-                print("emergencyStop = ", hasEmergencyStopped) 
+                print("Total dist to travel: ", distToTarget)
+                print("Acual dist traveled : ", distTraveled)
+                print("Result: ", boxCheck)
+                print("\n")
 
                 reachedCurrentTarget = verification.verify(
                     meanCheck,
