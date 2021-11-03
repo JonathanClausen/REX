@@ -33,7 +33,7 @@ def getAng(targetBoxID, cam):
         # Get only target angle and target dist
         angles = angles[np.where(objectIDs == targetBoxID)]
         dists = dists[np.where(objectIDs == targetBoxID)]
-        print("Filtered Object IDs, dists",objectIDs, dists)
+        #print("Filtered Object IDs, dists",objectIDs, dists)
         # Choose shortest path to box if we can see two aruco codes with same id.
         if (len(dists) > 1):
             if (dists[0] < dists[1]):
@@ -52,7 +52,7 @@ def getAng(targetBoxID, cam):
             degrees = -1 * math.degrees(radiantAngle)
 
         
-        print("min dist, min angle ", dist, radiantAngle)
+        #print("min dist, min angle ", dist, radiantAngle)
         return [ round(degrees,5), round(dist,5) ] 
     else:
         return [0.0,0.0]
@@ -66,17 +66,17 @@ def turn(deg, arlo):
     global LeftSpeed
     global degSec
     isRight = deg > 0
-    print("isRight", isRight, "Degrees to turn ", deg)
-    print("Turning to box")
+    #print("isRight", isRight, "Degrees to turn ", deg)
+    #print("Turning to box")
     if (not isRight):
-        print("Adjusting to left deg")
+        #print("Adjusting to left deg")
         deg = deg * (-1)
         arlo.go_diff(leftSpeed, rightSpeed, 0, 1)
     else:
         arlo.go_diff(leftSpeed, rightSpeed, 1, 0)
     sleep(round(deg * degSec, 5))
     arlo.stop()
-    print("amount of degrees to go", deg * degSec)
+    #print("amount of degrees to go", deg * degSec)
 
 
 
