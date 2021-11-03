@@ -15,14 +15,16 @@ def checkTargetStatus(target, cam):
         return 2 #Nothing is seen at all    
 
     elif target in ids:
-        if len(ids) == 1:     
+        if len(ids) == 1:
+            print("targetStatus: Only seen target")     
             return 0 #Target is the only thing seen
-        else: 
+        else:   
+            print("targetStatus: Seen target and more")
             targetAngle = np.abs(angles[np.where(ids == target)])
             boxAngles   = (angles[np.where(ids != target)])
             #boxAngles = [n + targetAngle for n in boxAngles]
             boxDists    = dists[np.where(ids != target)]
-            print(boxAngles,boxDists)
+            print("!!!!!boxAngle, boxDists = !!!!!!", boxAngles, boxDists)
             spaces = []
             for i in range(len(boxAngles)): 
                 space_between_box_target = math.sin(boxAngles[i])*boxDists[i]
