@@ -111,7 +111,7 @@ try:
                 # print("Verification:", reachedCurrentTarget)
             elif ts == 1:
                 print("ROUTEPLANNING")
-                turnRadians, dist = routePlan.findWay(cam)
+                turnRadians, dist = routePlan.findWay(cam, nextLandmark)
                 
                 if (turnRadians == 0 and dist == 0):
                     particles, isLocalized = copy.deepcopy(findlocation.localization_turn(particles, arlo, landmarks, cam))
