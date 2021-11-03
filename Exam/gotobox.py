@@ -33,11 +33,14 @@ def getAng(targetBoxID, cam):
         # Get only target angle and target dist
         print("Object IDs, dists",objectIDs, dists)
         dist = dists[np.where(objectIDs == targetBoxID)]
-        # Choose shortest path to box
-        if (dist[0] < dist[1]):
+        # Choose shortest path to box if we can see to aruco codes s
+        if (len(objectIDs) > 1):
+            if (dist[0] < dist[1]):
+                index = 0
+            else:
+                index = 1
+        else: 
             index = 0
-        else:
-            index = 1
         
         dist = dist[index]
         radiantAngle = angles[np.where(objectIDs == targetBoxID)][index]
