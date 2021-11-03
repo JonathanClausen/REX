@@ -22,6 +22,7 @@ def checkTargetStatus(target, cam):
             boxAngles   = (angles[np.where(ids != target)])
             boxAngles = [n + targetAngle for n in boxAngles]
             boxDists    = dists[np.where(ids != target)]
+            print(boxAngles,boxDists)
             spaces = []
             for i in range(len(boxAngles)): 
                 space_between_box_target = math.sin(boxAngles[i])*boxDists[i]
