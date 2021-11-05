@@ -62,16 +62,16 @@ def findWay(cam, targetID):
         if space > 25000:
             print("ignoring due to distance over 2.5 m")
         elif angles[i] > 0:
-            print(objectIDs[i] ," to my left")
             bLeft.append(objectIDs[i])
             distLeft.append(space)
             roboToBoxLeft.append(dists[i])
+            
         else:
-            print(objectIDs[i] ," to my right")
             bRight.append(objectIDs[i])
             distRight.append(space)   # find de to nærmeste kasser til højre og venstre
             roboToBoxRight.append(dists[i])
-
+    print(roboToBoxRight ," to my right")
+    print(roboToBoxLeft ," to my right")
 
     minLeft  = min(distLeft , default=9999999) # default hvis listen er tom
     minRight = min(distRight, default=9999999)   # hvis der er frit til en af siderne vælger den denne
