@@ -24,17 +24,17 @@ def checkTargetStatus(target, cam):
             boxAngles   = (angles[np.where(ids != target)])
             #boxAngles = [n + targetAngle for n in boxAngles]
             boxDists    = dists[np.where(ids != target)]
-            print("!!!!!boxAngle, boxDists = !!!!!!", boxAngles, boxDists)
+            #print("!!!!!boxAngle, boxDists = !!!!!!", boxAngles, boxDists)
             spaces = []
             for i in range(len(boxAngles)): 
                 space_between_box_target = math.sin(np.abs(boxAngles[i]))*boxDists[i]
                 spaces.append(space_between_box_target)
-                print("minSpaces = ", np.min(spaces))
+                #print("minSpaces = ", np.min(spaces))
             if ((len(spaces) > 0) and (np.min(spaces) < 35)): #not enough space
-                print("Not enough space to get to target")
+                print("Not enough space - Routeplan")
                 return 1
             else: 
-                print("enough space")
+                print("Enough space - Goto target")
                 return 0 # go to target  
 
     else:
