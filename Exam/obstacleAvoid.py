@@ -77,10 +77,10 @@ def obstacle(arlo):
         dists_safe()
         if (not frontClear):
             if turn:
-                totalTurn -= 30
+                totalTurn -= 45
             else:
-                totalTurn += 30
-            turn_x_degree(30, turn, arlo)
+                totalTurn += 45
+            turn_x_degree(45, turn, arlo)
         elif (not left45Clear):
             turn = 0
             totalTurn += 10
