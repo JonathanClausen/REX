@@ -71,16 +71,16 @@ def obstacle(arlo):
     turn = 0
     # 0 = turn right
     while (not go):
-        sleep(0.2)
+        sleep(0.1)
         totalTurn = 0
         update_dists(arlo)
         dists_safe()
         if (not frontClear):
             if turn:
-                totalTurn -= 10
+                totalTurn -= 30
             else:
-                totalTurn += 10
-            turn_x_degree(10,turn, arlo)
+                totalTurn += 30
+            turn_x_degree(30, turn, arlo)
         elif (not left45Clear):
             turn = 0
             totalTurn += 10
