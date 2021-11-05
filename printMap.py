@@ -13,4 +13,5 @@ def printMap(list):
     print(startLine)
     print()
 
-printMap(np.array([[4,4,4],[3,3,3]]))
+
+    printMap(np.array([[4,4,4],[3,3,3]]))

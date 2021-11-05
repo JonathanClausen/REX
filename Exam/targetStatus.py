@@ -30,7 +30,7 @@ def checkTargetStatus(target, cam):
                 space_between_box_target = math.sin(np.abs(boxAngles[i]))*boxDists[i]
                 spaces.append(space_between_box_target)
                 print("minSpaces = ", np.min(spaces))
-            if ((len(spaces) > 0) and (np.min(spaces) < 40)): #not enough space
+            if ((len(spaces) > 0) and (np.min(spaces) < 35)): #not enough space
                 print("Not enough space to get to target")
                 return 1
             else: 
@@ -39,4 +39,3 @@ def checkTargetStatus(target, cam):
 
     else:
         return 1 #Do routeplan
-  

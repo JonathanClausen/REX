@@ -95,6 +95,8 @@ def go(targetBoxID, arlo, particles, landmarks, cam, stopDist):
     emStop = False
     sensFront = arlo.read_front_ping_sensor()
     boxAt = getAng(targetBoxID, cam)
+    if (boxAt == [0.0, 0.0]):
+        return [0, 0, particles, True]
     picDist = boxAt[1]*10
     print("picDist ", picDist)
     firstTurn = boxAt[0]
