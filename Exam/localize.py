@@ -121,7 +121,8 @@ def localize(numResample, particles, debug, landmarks, cam):
                     a = random.uniform(0.0, 1.0)
                     i = chooseSample(cumNormWeights, a)
                     newParticles[p] = copy.deepcopy(particles[i])
-                particle.add_uncertainty(newParticles, varPos, varOri)
+                # vi ligger støj til npr vi kører i stedet
+                # particle.add_uncertainty(newParticles, varPos, varOri)
                 particles = copy.deepcopy(newParticles)
                 #randomizer(particles,0.5)
 
