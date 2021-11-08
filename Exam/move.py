@@ -22,7 +22,7 @@ stopDistSide  = 200
 def go_straight(length, arlo):
     emStop = False
     sensFront = arlo.read_front_ping_sensor()
-    ensLeft = arlo.read_left_ping_sensor()
+    sensLeft = arlo.read_left_ping_sensor()
     sensRight = arlo.read_right_ping_sensor()
     distTime = round((length/100)*secMeter,5)
     while (distTime > 0.1 and (not emStop)):
@@ -45,7 +45,7 @@ def go_straight(length, arlo):
                 break
             t = perf_counter()
         arlo.stop()
-        distTime -= (t-start)
+        distTime = round(distTime-(t-start),5)
     return emStop
 
 def goTurn(deg, arlo):
@@ -80,3 +80,10 @@ def moveAll(length, particles, arlo):
 def turnAll(delta_theta, particles, arlo):
     goTurn(math.degrees(delta_theta), arlo)
     turnAllParticles(delta_theta, particles)
+
+def reverse(dist, arlo):
+    dist = round((dist/100) * secMeter,5)
+    arlo.go_diff(leftSpeed, rightSpeed, 0, 0)
+    sleep(dist)
+    print("Reversing for " + str(dist) + " seconds")
+    arlo.stop()
