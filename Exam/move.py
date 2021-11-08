@@ -34,9 +34,9 @@ def go_straight(length, arlo):
             sensFront = arlo.read_front_ping_sensor()
             sensLeft = arlo.read_left_ping_sensor()
             sensRight = arlo.read_right_ping_sensor()
-            if (sensFront < safeDist or
-                sensRight < safeDistSide or
-                sensLeft  < safeDistSide):
+            if ((sensFront < safeDist) or
+                (sensRight < safeDistSide) or
+                (sensLeft  < safeDistSide)):
                 print("Emercency stop!!! sensors :\nR ", sensRight,
                       ",\n L ", sensLeft,
                       ",\n F ", sensFront,
