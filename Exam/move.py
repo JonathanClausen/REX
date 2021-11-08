@@ -80,3 +80,10 @@ def moveAll(length, particles, arlo):
 def turnAll(delta_theta, particles, arlo):
     goTurn(math.degrees(delta_theta), arlo)
     turnAllParticles(delta_theta, particles)
+
+def reverse(dist, arlo):
+    dist = round((dist/100) * secMeter,5)
+    arlo.go_diff(leftSpeed, rightSpeed, 0, 0)
+    sleep(dist)
+    print("Reversing for " + str(dist) + " seconds")
+    arlo.stop()
