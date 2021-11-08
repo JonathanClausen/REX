@@ -90,6 +90,16 @@ try:
                     move.turnAllParticles(math.radians(abs(turn)), particles)
                     move.moveAllParticles(distTraveled, particles)
                     reachedCurrentTarget = True
+
+                else:
+                    move.reverse(50, arlo)
+                    move.moveAllParticles(-50, particles)
+                    colour = cam.get_next_frame()
+                    objectIDs, dists, angles = cam.detect_aruco_objects(colour)
+                    if not isinstance(objectIDs, type(None)):
+                        if (nextLandmark in objectIDs):
+                            reachedCurrentTarget = True
+                
                 # meanCheck = verification.checkMean(meanParticle, target)
                 # closestPing = min(arlo.read_front_ping_sensor(),
                 #     arlo.read_left_ping_sensor(),
