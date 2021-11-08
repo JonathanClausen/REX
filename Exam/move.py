@@ -46,7 +46,7 @@ def go_straight(length, arlo):
             t = perf_counter()
         arlo.stop()
         distTime -= (t-start)
-    return
+    return emStop
 
 def goTurn(deg, arlo):
     degSec = 0.008
@@ -73,9 +73,9 @@ def turnAllParticles(delta_theta, particles):
         p.setTheta(p.getTheta()+delta_theta)
 
 def moveAll(length, particles, arlo):
-    go_straight(length, arlo)
+    emStop = go_straight(length, arlo)
     moveAllParticles(length, particles)
-
+    return emStop
 
 def turnAll(delta_theta, particles, arlo):
     goTurn(math.degrees(delta_theta), arlo)
