@@ -100,7 +100,8 @@ try:
                     sleep(0.5)
                     if not isinstance(objectIDs, type(None)):
                         if (nextLandmark in objectIDs):
-                            reachedCurrentTarget = True
+                            if (dists[min(np.where(objectIDs == nextLandmark))] < 90):
+                                reachedCurrentTarget = True
                 
                 # meanCheck = verification.checkMean(meanParticle, target)
                 # closestPing = min(arlo.read_front_ping_sensor(),
