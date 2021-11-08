@@ -68,12 +68,12 @@ def moveAllParticles(length, particles):
         x = math.cos(p.getTheta())*length
         y = math.sin(p.getTheta())*length
         particle.move_particle(p,x,y,0)
-    #particle.add_uncertainty(particles,length*0.05,0) 
+    particle.add_uncertainty(particles,length*0.05,0) 
 
 def turnAllParticles(delta_theta, particles):
     for p in particles: 
         p.setTheta(p.getTheta()+delta_theta)
-    #particle.add_uncertainty(particles,0,length*0.1,0) 
+    particle.add_uncertainty(particles, delta_theta*0.1,0) 
 
 def moveAll(length, particles, arlo):
     go_straight(length, arlo)
