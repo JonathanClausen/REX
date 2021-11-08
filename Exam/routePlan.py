@@ -44,7 +44,7 @@ def findWay(cam, targetID):
         return (0,0)
 
     # is the robot pointing to a box? else fail
-    if (math.degrees(np.abs(goAroundAng)) > 15):
+    if (math.degrees(np.abs(goAroundAng) and goAroundDist > 15000) > 15):
         print("Error in route planning (not pointing directly to a box), not trusting current theta")
         return (0,0)
 
