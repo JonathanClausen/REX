@@ -93,7 +93,7 @@ def findWay(cam,targetID):
         
 
         #Go for centerbox
-        if ((goAroundDist < min(roboToBoxLeft)) and (targetID != goAroundID)):
+        if ((targetID != goAroundID) and (goAroundDist < min(roboToBoxLeft))):
             index = distLeft.index(minLeft)
             leftBoxID = bLeft[index]
             turn, dist = go_to_xy(minLeft,goAroundDist)
@@ -120,7 +120,7 @@ def findWay(cam,targetID):
             return (0-(turn-goAroundAng), dist)
         
         #Go for centerbox
-        if ((goAroundDist < min(roboToBoxRight)) and (targetID != goAroundID)):
+        if ((targetID != goAroundID) and (goAroundDist < min(roboToBoxRight))):
             index = distRight.index(minRight)
             rightBoxID = bRight[index]
     
