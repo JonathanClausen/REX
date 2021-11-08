@@ -100,7 +100,7 @@ try:
                     sleep(0.5)
                     if not isinstance(objectIDs, type(None)):
                         if (nextLandmark in objectIDs):
-                            if (dists[min(np.where(objectIDs == nextLandmark))] < 90):
+                            if (dists[np.where(objectIDs == nextLandmark)[0]] < 90):
                                 reachedCurrentTarget = True
                 
                 # meanCheck = verification.checkMean(meanParticle, target)
