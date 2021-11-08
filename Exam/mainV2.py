@@ -39,9 +39,9 @@ try:
     particles = localize.initialize_particles(num_particles)
 
     isLocalized = False
-    hasEmergencyStopped = False
     #RUNNING UNTIL ALL ARE FOUND
     for nextLandmark in landmarkIDs:
+        hasEmergencyStopped = False
         reachedCurrentTarget = False 
         #Checking if we can localize ourself. If not, Random via obstacle() 
         while not isLocalized:

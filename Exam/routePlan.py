@@ -104,7 +104,7 @@ def findWay(cam,targetID):
             # find vinkelen til kassen du skal Køre op på siden af
             index = distRight.index(minRight)
             rightBoxID = bRight[index]
-            avioldBoxAng = angles[np.where(objectIDs == rightBoxID)[0]]
+            avioldBoxAng = min(angles[np.where(objectIDs == rightBoxID)[0]])
             print("TJEK HER", dists[np.where(objectIDs == rightBoxID)[0]])
             turn, dist = go_to_xy(minRight, min(dists[np.where(objectIDs == rightBoxID)[0]]))
             print("avoiding ",rightBoxID, " to get closer to ", goAroundID)
@@ -132,7 +132,7 @@ def findWay(cam,targetID):
         else:
             index = distLeft.index(minLeft)
             leftBoxID = bLeft[index]
-            avioldBoxAng = angles[np.where(objectIDs == leftBoxID)[0]]
+            avioldBoxAng = min(angles[np.where(objectIDs == leftBoxID)[0]])
             turn, dist = go_to_xy(minLeft, min(dists[np.where(objectIDs == leftBoxID)[0]]))
             print("avoiding ", leftBoxID, " to get closer to ", goAroundID)
             if (avioldBoxAng < turn):
