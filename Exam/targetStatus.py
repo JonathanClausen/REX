@@ -19,7 +19,7 @@ def checkTargetStatus(target, cam):
             print("targetStatus: Only seen target")     
             return 0 #Target is the only thing seen
         else:   
-            print("targetStatus: Seen target and more")
+            print("targetStatus: Seen target + others")
             targetAngle = np.abs(angles[np.where(ids == target)])
             boxAngles   = (angles[np.where(ids != target)])
             #boxAngles = [n + targetAngle for n in boxAngles]
