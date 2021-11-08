@@ -94,8 +94,10 @@ try:
                 else:
                     move.reverse(50, arlo)
                     move.moveAllParticles(-50, particles)
+                    sleep(0.5)
                     colour = cam.get_next_frame()
                     objectIDs, dists, angles = cam.detect_aruco_objects(colour)
+                    sleep(0.5)
                     if not isinstance(objectIDs, type(None)):
                         if (nextLandmark in objectIDs):
                             reachedCurrentTarget = True
